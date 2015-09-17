@@ -76,12 +76,12 @@ public class Escritorio extends JFrame {
 			
 			JLabel lblBlancas = new JLabel("Blancas:");
 			lblBlancas.setFont(new Font("Arial", Font.BOLD, 12));
-			lblBlancas.setBounds(48, 39, 81, 14);
+			lblBlancas.setBounds(22, 51, 81, 14);
 			contentPane.add(lblBlancas);
 			
 			JLabel lblNgras = new JLabel("Negras\r\n:");
 			lblNgras.setFont(new Font("Arial", Font.BOLD, 12));
-			lblNgras.setBounds(48, 83, 81, 14);
+			lblNgras.setBounds(22, 95, 81, 14);
 			contentPane.add(lblNgras);
 			
 			
@@ -100,7 +100,7 @@ public class Escritorio extends JFrame {
 			
 				}
 			});
-			btnJugar.setBounds(340, 52, 147, 23);
+			btnJugar.setBounds(476, 50, 147, 23);
 			contentPane.add(btnJugar);
 			
 			JButton btnGuardar = new JButton("Guardar Partida");
@@ -113,27 +113,27 @@ public class Escritorio extends JFrame {
 				
 			});
 			btnGuardar.setFont(new Font("Arial", Font.BOLD, 12));
-			btnGuardar.setBounds(279, 390, 147, 23);
+			btnGuardar.setBounds(476, 98, 147, 23);
 			contentPane.add(btnGuardar);
 			
 			JLabel lblTurno = new JLabel("Turno ");
 			lblTurno.setFont(new Font("Arial", Font.BOLD, 12));
-			lblTurno.setBounds(22, 131, 46, 14);
+			lblTurno.setBounds(22, 187, 46, 14);
 			contentPane.add(lblTurno);
 			
 			JLabel Blancas = new JLabel("Blancas");
 			Blancas.setFont(new Font("Arial", Font.BOLD, 12));
-			Blancas.setBounds(22, 168, 81, 14);
+			Blancas.setBounds(22, 222, 81, 14);
 			contentPane.add(Blancas);
 			
 			JLabel lblOrigen = new JLabel("Origen");
 			lblOrigen.setFont(new Font("Arial", Font.BOLD, 12));
-			lblOrigen.setBounds(234, 235, 46, 14);
+			lblOrigen.setBounds(252, 238, 46, 14);
 			contentPane.add(lblOrigen);
 			
 			JLabel lblDestino = new JLabel("Destino");
 			lblDestino.setFont(new Font("Arial", Font.BOLD, 12));
-			lblDestino.setBounds(234, 273, 46, 14);
+			lblDestino.setBounds(252, 294, 46, 14);
 			contentPane.add(lblDestino);
 			
 			JButton btnMover = new JButton("Mover");
@@ -149,7 +149,7 @@ public class Escritorio extends JFrame {
 					mover();
 				}
 			});
-			btnMover.setBounds(279, 356, 147, 23);
+			btnMover.setBounds(252, 359, 147, 23);
 			contentPane.add(btnMover);
 			
 			JLabel lblNewLabel = new JLabel("");
@@ -158,28 +158,27 @@ public class Escritorio extends JFrame {
 			contentPane.add(lblNewLabel);
 			
 			text_Turno = new JTextField();
-			text_Turno.setBounds(70, 128, 86, 20);
+			text_Turno.setEnabled(false);
+			text_Turno.setBounds(73, 185, 128, 20);
 			contentPane.add(text_Turno);
 			text_Turno.setColumns(10);
 			
 			JLabel lblNewLabel_1 = new JLabel("Negras");
 			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
-			lblNewLabel_1.setBounds(136, 168, 46, 14);
+			lblNewLabel_1.setBounds(113, 222, 46, 14);
 			contentPane.add(lblNewLabel_1);
 			
 			text_dniB = new JTextField();
-			text_dniB.setText("Ingresar Dni");
 			text_dniB.setHorizontalAlignment(SwingConstants.CENTER);
 			text_dniB.setFont(new Font("Arial", Font.ITALIC, 10));
-			text_dniB.setBounds(113, 37, 167, 20);
+			text_dniB.setBounds(113, 50, 167, 20);
 			contentPane.add(text_dniB);
 			text_dniB.setColumns(10);
 			
 			text_dniN = new JTextField();
-			text_dniN.setText("Ingresar Dni");
 			text_dniN.setFont(new Font("Arial", Font.PLAIN, 10));
-			text_dniN.setHorizontalAlignment(SwingConstants.CENTER);
-			text_dniN.setBounds(113, 81, 167, 20);
+			text_dniN.setHorizontalAlignment(SwingConstants.LEFT);
+			text_dniN.setBounds(113, 94, 167, 20);
 			contentPane.add(text_dniN);
 			text_dniN.setColumns(10);
 			
@@ -187,7 +186,7 @@ public class Escritorio extends JFrame {
 			text_origen.setText("Posici\u00F3n origen");
 			text_origen.setHorizontalAlignment(SwingConstants.CENTER);
 			text_origen.setFont(new Font("Arial", Font.ITALIC, 10));
-			text_origen.setBounds(279, 233, 147, 20);
+			text_origen.setBounds(252, 263, 147, 20);
 			contentPane.add(text_origen);
 			text_origen.setColumns(10);
 			
@@ -195,19 +194,24 @@ public class Escritorio extends JFrame {
 			text_Destino.setHorizontalAlignment(SwingConstants.CENTER);
 			text_Destino.setText("Posici\u00F3n destino");
 			text_Destino.setFont(new Font("Arial", Font.ITALIC, 10));
-			text_Destino.setBounds(279, 271, 147, 20);
+			text_Destino.setBounds(252, 319, 147, 20);
 			contentPane.add(text_Destino);
 			text_Destino.setColumns(10);
 			
 			text_b = new JTextField();
-			text_b.setBounds(17, 187, 81, 192);
+			text_b.setBounds(22, 247, 81, 192);
 			contentPane.add(text_b);
 			text_b.setColumns(10);
 			
 			text_n = new JTextField();
-			text_n.setBounds(113, 185, 86, 192);
+			text_n.setBounds(113, 247, 86, 192);
 			contentPane.add(text_n);
 			text_n.setColumns(10);
+			
+			JLabel lblIngreseDniPara = new JLabel("Ingrese Dni para Jugar");
+			lblIngreseDniPara.setFont(new Font("Arial Black", Font.PLAIN, 11));
+			lblIngreseDniPara.setBounds(22, 11, 209, 14);
+			contentPane.add(lblIngreseDniPara);
 			
 
 			
@@ -285,5 +289,4 @@ private void guardarPartida() {
 	finalizarJugo();
 	
 }
-
 }

@@ -55,7 +55,7 @@ public void setPartida(Partida partida) {
 		Pieza p;
 		boolean resp;
 		p=cat.buscarFicha(color,text);
-		resp=p.validarMovimiento();
+		resp=p.validarMovimiento(text, text2, color);
 		return resp;
 		
 	}

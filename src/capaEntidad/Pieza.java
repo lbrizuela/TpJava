@@ -2,21 +2,13 @@ package capaEntidad;
 
 public abstract class Pieza {
 	
-	Partida p;
 	String id_pieza;
 	String color;
 	String nombre;
 	String posicion;
 	
-	
-	public Partida getP() {
-		return p;
-	}
 
 
-	public void setP(Partida p) {
-		this.p = p;
-	}
 
 
 	public String getId_pieza() {
@@ -56,6 +48,12 @@ public abstract class Pieza {
 
 	public void setPosicion(String posicion) {
 		this.posicion = posicion;
+	}
+	
+	public void quePieza(String nombre, String Color)
+	{
+	
+	
 	}
 
 

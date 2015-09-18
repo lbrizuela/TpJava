@@ -230,7 +230,7 @@ public class Escritorio extends JFrame {
 			String negras=null;
 			String turno=ctrol.getPartida().getTurno();
 			for (Pieza p : pieza) {
-			  if(p.getColor().equals("blanco"))
+			  if(p.getColor().equals("blanco"))     ///If que pregunte si posicion es null, si lo es no la guardo en String DAVID
 				  blancas=p.getPosicion()+"-"+p.getNombre()+"\n";
 			  else
 				  negras=p.getPosicion()+"-"+p.getNombre()+"\n";
@@ -253,11 +253,11 @@ public class Escritorio extends JFrame {
 			while(respuesta==false)
 			{
 				respuesta=ctrol.realizarMovimiento(text_Turno.getText(), text_origen.getText(), text_Destino.getText());
-				/// debe mandar el turno este metodo, asi se valida en las capas superiores
-				/// este metodo debe devolver un booleano, si no es correcto itera, deberia mostrar un msj pero no se como se hace.
 				
+				//hace un msj que la respuesta no es correcta, qe el movimiento no es valido. DAVID
 			}
 			p.addAll(ctrol.modificarPiezas(text_Turno.getText(), text_origen.getText(), text_Destino.getText()));
+			///ACA SE PODRIA MOSTRAR SI LA PIEZA FUE COMIDA. 
 			if(p==null)
 				finalizarJugo();
 			else
@@ -275,7 +275,7 @@ public class Escritorio extends JFrame {
 		}
 
 	private void finalizarJugo() {
-			// TODO Auto-generated method stub
+			// DAVID
 			
 		}
 	

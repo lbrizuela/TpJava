@@ -51,7 +51,42 @@ public class Peon extends Pieza {
 		
 	}
 	}
+}
+
+/*
+ * public class Peon extends Pieza {
+private boolean esPeon=true;
+	public Peon(String posicion, String color) {
+		super(posicion, color);
+		// TODO Auto-generated constructor stub
+	}
+public boolean esPeon()
+{
+	return esPeon;
+}
+	@Override
+	public boolean esvalidoMovimiento(String a, String b,String color) {
+		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
+		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
+	
+	int distancia = color.contentEquals("negra")? (c-d) : (d-c);  //Hago la pregunta de que color es
+	if(distancia==1)                                               //el calculo de la distancia dependera de que color sea,esto se debe
+		                                                             // a como avanzan las fichas blancas y las negras entonces sera 
+		                                                             // un movimiento valido si la distancia entre que recorre es 1 
+		                                                             // si la distancia es negativa recorreria hacia atras y no es valido
+	{
+		return true;
+	}
+	else
+	{
+	return false;
+	}
+	}
+	
 
 }
+
+ */
+ 
 
 

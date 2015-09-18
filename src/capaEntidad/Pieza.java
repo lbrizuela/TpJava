@@ -59,7 +59,7 @@ public abstract class Pieza {
 	}
 
 
-	public abstract boolean validarMovimiento();
+	public abstract boolean validarMovimiento(String a, String b, String color);
 	public abstract void inicializarPiezas(String id,String col);
 	
 

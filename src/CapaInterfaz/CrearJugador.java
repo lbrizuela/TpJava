@@ -1,6 +1,7 @@
 package CapaInterfaz;
 
 import java.awt.BorderLayout;
+import capaEntidad.*;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,6 +12,8 @@ import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class CrearJugador extends JFrame {
 
@@ -80,7 +83,16 @@ public class CrearJugador extends JFrame {
 		textField_2.setColumns(10);
 		
 		JButton btnGuardar = new JButton("Guardar");
+		btnGuardar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				guardarJugador();
+				
+			}
+		});
 		btnGuardar.setBounds(207, 206, 89, 23);
 		contentPane.add(btnGuardar);
 	}
+	
+	public  Jugador guardarJugador(){ return null;} /// Me tiene que devolver el jugador para que mari lo guarde en la base de dato. DAVId
 }

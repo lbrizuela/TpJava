@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 import capaEntidad.*;
 public class CatalogoPiezas {
-private static ArrayList<Pieza> piezas;
+ 
 
 
 public ArrayList<Pieza> iniciarJugo( String dni_b, String dni_n)
 {
-	piezas = new ArrayList<Pieza>();
+	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
 	iniciarPiezas("blancas");
 	iniciarPiezas("negras");
 	agregarPiezas(dni_b, dni_n);
@@ -31,7 +31,7 @@ public ArrayList<Pieza> iniciarJugo( String dni_b, String dni_n)
 public void iniciarPiezas(String a)
 {
 
-  
+  ArrayList<Pieza> piezas = new ArrayList<Pieza>();
   Pieza p;
   p= new Rey();
   p.inicializarPiezas("r1",a);
@@ -82,7 +82,9 @@ public void iniciarPiezas(String a)
 
 private void agregarPiezas(String dni_b, String dni_n) {
 	
+	
 	PreparedStatement stmt= null;
+	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
 	for (Pieza pieza : piezas) {
 		try{
 	
@@ -118,6 +120,7 @@ private void agregarPiezas(String dni_b, String dni_n) {
 
 public ArrayList<Pieza> colecPiezas(String dni_b, String dni_n)
 {
+	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
 	PreparedStatement stmt= null;
 	ResultSet rst= null;
 	
@@ -162,7 +165,9 @@ public ArrayList<Pieza> colecPiezas(String dni_b, String dni_n)
 
 
 public Pieza buscarFicha(String color,String pos)
+
 {
+	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
 	for(Pieza i:piezas)
 	{
 		if(i.getPosicion().equals(pos))
@@ -195,6 +200,8 @@ public boolean borrarFicha(String color,String destino)
 
 public ArrayList<Pieza> moverFicha(String color,String origen,String destino)
 {
+	/// ACA hay que modificarlo por que  hay que arreglarlo
+	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
 	this.buscarFicha(color,origen).setPosicion(destino);
 	
 	

@@ -81,8 +81,7 @@ public void setPartida(Partida partida) {
 		{
 			piezas.addAll(cat.colecPiezas(dni_b,dni_n));
 		}
-		// aca iria el posiociones pero me parece que es mejor enviarlo la intefaz y dividirla 
-		// en blancas y ngeras sino les gusta, ahi los deje comentado
+		
 		partida.setPiezas(piezas);
 		return piezas;
 	

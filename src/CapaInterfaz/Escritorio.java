@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -19,17 +20,25 @@ import javax.swing.border.EmptyBorder;
 
 import capaEntidad.*;
 import CapaNegocio.*;
+
 import javax.swing.JTextPane;
 import javax.swing.JList;
 import javax.swing.DropMode;
+
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.border.TitledBorder;
+
+import java.awt.Color;
+
 
 public class Escritorio extends JFrame {
-	ControladorJuego ctrol=new ControladorJuego();;
+	
 
 	private JPanel contentPane;
 	private JTextField text_Turno;
@@ -39,10 +48,8 @@ public class Escritorio extends JFrame {
 	private JTextField text_Destino;
 	private JTextField text_b;
 	private JTextField text_n;
-
-	/**
-	 * Launch the application.
-	 */
+	private ControladorJuego controlador;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -62,6 +69,7 @@ public class Escritorio extends JFrame {
 	/**
 	 * 
 	 */
+
 	public Escritorio() {
 	
 			
@@ -73,48 +81,6 @@ public class Escritorio extends JFrame {
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
-			
-			JLabel lblBlancas = new JLabel("Blancas:");
-			lblBlancas.setFont(new Font("Arial", Font.BOLD, 12));
-			lblBlancas.setBounds(22, 51, 81, 14);
-			contentPane.add(lblBlancas);
-			
-			JLabel lblNgras = new JLabel("Negras\r\n:");
-			lblNgras.setFont(new Font("Arial", Font.BOLD, 12));
-			lblNgras.setBounds(22, 95, 81, 14);
-			contentPane.add(lblNgras);
-			
-			
-			JButton btnJugar = new JButton("Jugar");
-			btnJugar.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					validarDni();
-				}
-			});
-			btnJugar.setFont(new Font("Arial", Font.BOLD, 12));
-			btnJugar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					validarDni();
-				
-			
-				}
-			});
-			btnJugar.setBounds(476, 50, 147, 23);
-			contentPane.add(btnJugar);
-			
-			JButton btnGuardar = new JButton("Guardar Partida");
-			btnGuardar.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					guardarPartida();
-				}
-
-				
-			});
-			btnGuardar.setFont(new Font("Arial", Font.BOLD, 12));
-			btnGuardar.setBounds(476, 98, 147, 23);
-			contentPane.add(btnGuardar);
 			
 			JLabel lblTurno = new JLabel("Turno ");
 			lblTurno.setFont(new Font("Arial", Font.BOLD, 12));
@@ -137,18 +103,7 @@ public class Escritorio extends JFrame {
 			contentPane.add(lblDestino);
 			
 			JButton btnMover = new JButton("Mover");
-			btnMover.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					mover();
-				}
-			});
 			btnMover.setFont(new Font("Arial", Font.BOLD, 12));
-			btnMover.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					mover();
-				}
-			});
 			btnMover.setBounds(252, 359, 147, 23);
 			contentPane.add(btnMover);
 			
@@ -167,20 +122,6 @@ public class Escritorio extends JFrame {
 			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
 			lblNewLabel_1.setBounds(113, 222, 46, 14);
 			contentPane.add(lblNewLabel_1);
-			
-			text_dniB = new JTextField();
-			text_dniB.setHorizontalAlignment(SwingConstants.CENTER);
-			text_dniB.setFont(new Font("Arial", Font.ITALIC, 10));
-			text_dniB.setBounds(113, 50, 167, 20);
-			contentPane.add(text_dniB);
-			text_dniB.setColumns(10);
-			
-			text_dniN = new JTextField();
-			text_dniN.setFont(new Font("Arial", Font.PLAIN, 10));
-			text_dniN.setHorizontalAlignment(SwingConstants.LEFT);
-			text_dniN.setBounds(113, 94, 167, 20);
-			contentPane.add(text_dniN);
-			text_dniN.setColumns(10);
 			
 			text_origen = new JTextField();
 			text_origen.setText("Posici\u00F3n origen");
@@ -208,27 +149,127 @@ public class Escritorio extends JFrame {
 			contentPane.add(text_n);
 			text_n.setColumns(10);
 			
-			JLabel lblIngreseDniPara = new JLabel("Ingrese Dni para Jugar");
-			lblIngreseDniPara.setFont(new Font("Arial Black", Font.PLAIN, 11));
-			lblIngreseDniPara.setBounds(22, 11, 209, 14);
-			contentPane.add(lblIngreseDniPara);
+			JPanel panel = new JPanel();
+			panel.setBorder(new TitledBorder(null, "Ingrese Dni para Jugar", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
+			panel.setBounds(22, 11, 705, 116);
+			contentPane.add(panel);
+			panel.setLayout(null);
 			
+			JLabel lblBlancas = new JLabel("Blancas:");
+			lblBlancas.setBounds(10, 34, 81, 14);
+			panel.add(lblBlancas);
+			lblBlancas.setFont(new Font("Arial", Font.BOLD, 12));
+			
+			JLabel lblNgras = new JLabel("Negras\r\n:");
+			lblNgras.setBounds(10, 78, 81, 14);
+			panel.add(lblNgras);
+			lblNgras.setFont(new Font("Arial", Font.BOLD, 12));
+			
+			text_dniB = new JTextField();
+			text_dniB.setBounds(171, 33, 167, 20);
+			panel.add(text_dniB);
+			text_dniB.setFont(new Font("Arial", Font.PLAIN, 12));
+			text_dniB.setColumns(10);
+			
+			text_dniN = new JTextField();
+			text_dniN.setBounds(171, 77, 167, 20);
+			panel.add(text_dniN);
+			text_dniN.setFont(new Font("Arial", Font.PLAIN, 12));
+			text_dniN.setColumns(10);
+			
+			JButton btnJugar = new JButton("Jugar");
+			btnJugar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					validarDni();
+				}
+			});
+			btnJugar.setBounds(544, 45, 107, 23);
+			panel.add(btnJugar);
+	
+	}
+
+	public void validarDni() {
+		// TODO Auto-generated method stub
+		controlador= new ControladorJuego();
+		try{
+			
+			Jugador jugB=controlador.validarExistencia(text_dniB.getText());
+			
+			if (jugB== null){
+				JOptionPane.showMessageDialog(null, "Jugador blanco no esta registrado. Debes registrarte para jugar", "Informe", JOptionPane.INFORMATION_MESSAGE);
+				CrearJugador cj= new CrearJugador();
+				cj.setVisible(true);
+				this.setVisible(false);
+			
+			}else{
+				try{
+					Jugador jugN= controlador.validarExistencia(text_dniN.getText());
+					if(jugN== null){
+						JOptionPane.showMessageDialog(null, "Jugador Negro no esta registrado. Debes registrarte para jugar", "Informe", JOptionPane.INFORMATION_MESSAGE);
+						CrearJugador cj= new CrearJugador();
+						cj.setVisible(true);
+						}else{
+							if((jugB != null) && (jugN!=null)){
+								JOptionPane.showMessageDialog(null, "Ya estan registrados", "Informe", JOptionPane.INFORMATION_MESSAGE);
+								//
+								//tengo que verificar si los jugadores tienen partidas pendientes
+								//
+								Partida part= controlador.verificarPartidaExistente(text_dniB.getText(),text_dniN.getText());
+								if (part==null){
+									//ESTE MESAJE NO IRIA SOLO VERIFICA QUE NO TIENEN PARTIDAS Y SI NO TIENEN LA CREO ENTONCES LA CREO 
+									JOptionPane.showMessageDialog(null, "no hay partidas pendientes", "Informe", JOptionPane.INFORMATION_MESSAGE);
+									crearNuevaPartida(text_dniB.getText(),text_dniN.getText());
+								}else {
+									JOptionPane.showMessageDialog(null, "existe una partidas pendientes", "Informe", JOptionPane.INFORMATION_MESSAGE);
+									// SI TIENEN UNA PARTIDA PREGUNTAR SI QUIEREN CONTINUAR LA PARTIDA ANTERIOR O HACER UNA NUEVA.
+									/// SI HACEN LA ANTERIOR SE TRAE DE LA BASE.
+									//// SI QUIEREN UNA NUEVA 
+									/* SE ACTUALIZA LA ANTERIOR POR ESTA Y LLAMA AL METODO CREAR PARTIDA) */ 
+								}
+					
+						
+						}
+				}
+			}catch(Exception e){
+				
+			}
+			
+		}
+	}catch(Exception e){
+		
+	}
+	}
+
+	private void crearNuevaPartida(String dniB, String dniN) {
+		// TODO Auto-generated method stub
+		controlador.crearNuevaPartida(dniB,dniN);
+		
+	}
+
+
+	}
+
+
 
 			
 		
 			
-		}
-		private void validarDni() {
-			
+		
+	
+
+	
+		
+			/*
+			 
 			ArrayList<Pieza> p= new ArrayList<Pieza>();
+			
 			
 			p.addAll(ctrol.validarJugador(text_dniB.getText(),text_dniN.getText())); // Este metodo si no los encuentras los inicializa ya esta hecho
 			
 			mostrarPiezas(p);
 		
-				
 		
-		}
+		
 		private void mostrarPiezas(ArrayList<Pieza>  pieza) {
 			String blancas=null;
 			String negras=null;
@@ -290,3 +331,4 @@ private void guardarPartida() {
 	
 }
 }
+*/

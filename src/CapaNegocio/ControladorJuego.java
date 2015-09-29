@@ -1,11 +1,14 @@
 package CapaNegocio;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
 import capaEntidad.*;
+import CapaDatos.CatalogoJugador;
 import CapaDatos.CatalogoPartidas;
 import CapaDatos.CatalogoPiezas;
 import CapaInterfaz.CrearJugador;
@@ -13,27 +16,69 @@ import CapaInterfaz.Escritorio;
 import Excepciones.appException;
 
 
-/**
- * @author Luisina
- *
- */
 public class ControladorJuego {
 CatalogoPiezas cat;
-CatalogoPartidas cj;
+CatalogoPartidas catalogoP;
 Partida partida;
-
+CatalogoJugador catalogoJ;
+/*
+ * ver esto despues
+ 
 public ControladorJuego()
 {
 	partida=new Partida();
 	cat=new CatalogoPiezas();
 	cj=new CatalogoPartidas();
 }
+*/
 
 
 
+public Jugador validarExistencia(String dni) {
+	// TODO Auto-generated method stub
+	 catalogoJ= new CatalogoJugador();
+	try{
+		return catalogoJ.buscarExistencia(dni);
+		
+	}catch(Exception e){
+		
+	}
+	return null;
+}
+
+
+
+public void save(Jugador j) {
+	// TODO Auto-generated method stub
+		catalogoJ= new CatalogoJugador();
+		catalogoJ.add(j);
+	
+}
+
+
+
+public Partida verificarPartidaExistente(String dnib, String dnin) {
+	// TODO Auto-generated method stub
+	catalogoP= new CatalogoPartidas();
+	Partida parEncontrada= catalogoP.buscarJugadorPorDni(dnib, dnin);
+	return parEncontrada;
+}
+
+
+
+public void crearNuevaPartida(String dniB, String dniN) {
+	// TODO Auto-generated method stub
+	catalogoP= new CatalogoPartidas();
+	catalogoP.agregarJugadores(dniB,dniN);
+	System.out.println("Se ha agregado una nueva partida");
+}
+
+
+
+}
 	
 	
-	
+	/*
 	public Partida getPartida() {
 	return partida;
 }
@@ -63,7 +108,7 @@ public void setPartida(Partida partida) {
 		
 		String s=cat.Lista(piezas);
 		return s;
-	}*/
+	}
 	
 	
 	public ArrayList<Pieza> validarJugador(String dni_b, String dni_n){
@@ -117,8 +162,20 @@ public void setPartida(Partida partida) {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+
+
+
+	public Jugador validarJugador(String dni) {
+		// TODO Auto-generated method stub
+		Jugador j= catJug.buscarExistencia(dni);
 	
+		return j;
+	}
 	
+	*/
 	
 	
 	/*
@@ -171,4 +228,4 @@ public void setPartida(Partida partida) {
 		}*/
 		
 	
-}
+

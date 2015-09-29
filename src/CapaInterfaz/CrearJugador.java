@@ -1,30 +1,53 @@
 package CapaInterfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Panel;
+
+import CapaNegocio.ControladorJuego;
+
 import capaEntidad.*;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
+
 import java.awt.Toolkit;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.border.TitledBorder;
+
+import java.awt.Color;
+
+import javax.swing.UIManager;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class CrearJugador extends JFrame {
 
+
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtRdni;
+	private JTextField txtRnombre;
+	private JTextField txtRapellido;
+	private ControladorJuego controlador;
+	
 
 	/**
 	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,7 +59,7 @@ public class CrearJugador extends JFrame {
 				}
 			}
 		});
-	}
+	} */
 
 	/**
 	 * Create the frame.
@@ -45,54 +68,74 @@ public class CrearJugador extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CrearJugador.class.getResource("/Imagenes/icon.jpg")));
 		setTitle("Registrar Jugador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 322, 282);
+		setBounds(100, 100, 461, 228);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblRegistrarJugador = new JLabel("Registrar Jugador");
-		lblRegistrarJugador.setBounds(10, 30, 90, 14);
-		contentPane.add(lblRegistrarJugador);
+		JPanel nuevoJugador = new JPanel();
+		nuevoJugador.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Registrar nuevo jugador:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		nuevoJugador.setBounds(10, 11, 425, 160);
+		contentPane.add(nuevoJugador);
+		nuevoJugador.setLayout(null);
 		
+
 		JLabel lblDni = new JLabel("Dni:");
-		lblDni.setBounds(10, 68, 99, 14);
-		contentPane.add(lblDni);
-		
-		textField = new JTextField();
-		textField.setBounds(127, 65, 172, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		lblDni.setBounds(10, 44, 46, 14);
+		nuevoJugador.add(lblDni);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(10, 112, 99, 14);
-		contentPane.add(lblNombre);
+		lblNombre.setBounds(10, 85, 46, 14);
+		nuevoJugador.add(lblNombre);
 		
 		JLabel lblApellido = new JLabel("Apellido:");
-		lblApellido.setBounds(10, 158, 99, 14);
-		contentPane.add(lblApellido);
+		lblApellido.setBounds(10, 124, 46, 14);
+		nuevoJugador.add(lblApellido);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(127, 109, 172, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtRdni = new JTextField();
+		txtRdni.setBounds(109, 41, 116, 20);
+		nuevoJugador.add(txtRdni);
+		txtRdni.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(127, 155, 172, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtRnombre = new JTextField();
+		txtRnombre.setBounds(109, 82, 116, 20);
+		nuevoJugador.add(txtRnombre);
+		txtRnombre.setColumns(10);
 		
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				guardarJugador();
-				
+		txtRapellido = new JTextField();
+		txtRapellido.setColumns(10);
+		txtRapellido.setBounds(109, 121, 116, 20);
+		nuevoJugador.add(txtRapellido);
+		
+		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				registrarj();
 			}
 		});
-		btnGuardar.setBounds(207, 206, 89, 23);
-		contentPane.add(btnGuardar);
+		btnRegistrar.setBounds(299, 67, 89, 23);
+		nuevoJugador.add(btnRegistrar);
 	}
-	
-	public  Jugador guardarJugador(){ return null;} /// Me tiene que devolver el jugador para que mari lo guarde en la base de dato. DAVId
+
+	protected void registrarj() {
+		// TODO Auto-generated method stub
+		controlador =new ControladorJuego();
+		Jugador j =this.mapearDeDatos();
+		controlador.save(j);
+		JOptionPane.showMessageDialog(null, "Se ha registrado con éxito", "Informe", JOptionPane.INFORMATION_MESSAGE);
+		Escritorio esc= new Escritorio();
+		esc.setVisible(true);
+		this.setVisible(false);
+		
+	}
+
+	private Jugador mapearDeDatos() {
+		// TODO Auto-generated method stub
+		Jugador j = new Jugador();
+		j.setDni(txtRdni.getText());
+		j.setNombre(txtRnombre.getText());
+		j.setApellido(txtRapellido.getText());
+		return j;
+	}
 }

@@ -9,14 +9,88 @@ import capaEntidad.*;
 
 public class CatalogoPartidas {
 	
-
+	
 	public Partida buscarJugadorPorDni(String dni_b, String dni_n) {
 		Partida partida=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		
 		try {
-		stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from partida where dni_j1 = ? and dni_j2=?");
+		stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from partida where dniB = ? and dniN=?");
+		stmt.setString(1,dni_b);
+		stmt.setString(2,dni_n);
+		rs= stmt.executeQuery();
+		if(rs !=null && rs.next()){
+		partida=new Partida();
+		partida.setDnb(rs.getString("dniB"));
+		partida.setDnb(rs.getString("dniN"));
+		partida.setTurno(rs.getString("turno"));
+		}
+		
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	finally
+	{
+		try {
+			if(rs!=null)rs.close();
+			if(stmt!=null) stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		FactoryConexion.getInstancia().releaseConn();
+	}
+	return partida;
+}
+
+	public void agregarJugadores(String dniB, String dniN) {
+		// TODO Auto-generated method stub
+		PreparedStatement stmt=null;
+		try {
+			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into Partida(dniB, dniN, Turno) values (?,?,?)");
+			stmt.setString(1, dniB);
+			stmt.setString(2, dniN);
+			stmt.setString(3, "blanco");
+			 stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+			
+				if(stmt!=null) stmt.close();
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			FactoryConexion.getInstancia().releaseConn();
+		}
+	
+	  
+
+	
+	}
+	}
+	
+	
+		
+	
+
+
+/*
+	public Partida buscarJugadorPorDni(String dni_b, String dni_n) {
+		Partida partida=null;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		
+		try {
+		stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from partida where dniB = ? and dniN=?");
 			stmt.setString(1, dni_b);
 			stmt.setString(2, dni_n);
 			rs = stmt.executeQuery();
@@ -25,8 +99,8 @@ public class CatalogoPartidas {
 				j_b=buscarPersona(rs.getString("dni_j1"));
 				j_n=buscarPersona(rs.getString("dni_j2"));
 				partida=new Partida();
-				partida.setJ_b(j_b);
-				partida.setJ_n(j_n);
+				partida.setDnib();;
+				partida.setDnin(dnin);
 				partida.setTurno(rs.getString("turno"));
 				
 			}
@@ -187,5 +261,6 @@ public class CatalogoPartidas {
 			FactoryConexion.getInstancia().releaseConn();
 		}
 	}
+*/
+	
 
-}

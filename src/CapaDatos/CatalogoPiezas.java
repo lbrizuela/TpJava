@@ -23,7 +23,7 @@ public ArrayList<Pieza> iniciarJugo( String dni_b, String dni_n)
 	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
 	iniciarPiezas("blancas");
 	iniciarPiezas("negras");
-	agregarPiezas(dni_b, dni_n);
+	agregarPiezas(dni_b, dni_n,piezas);
 	return piezas;
 	
 }
@@ -80,21 +80,21 @@ public void iniciarPiezas(String a)
 
 
 
-private void agregarPiezas(String dni_b, String dni_n) {
+private void agregarPiezas(String dni_b, String dni_n, ArrayList<Pieza> piezas) {
 	
 	
 	PreparedStatement stmt= null;
-	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
+	
 	for (Pieza pieza : piezas) {
 		try{
 	
-	stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into pieza(dni_j1, dni_j2, id_pieza, nombre, color, posicion) values (?,?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+	stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into posicion(dni_j1, dni_j2, colYfila, Pieza, color) values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 	stmt.setString(1, dni_b);
 	stmt.setString(2, dni_n);
-	stmt.setString(3, pieza.getId_pieza());
-	stmt.setString(4, pieza.getNombre());
+	stmt.setString(3, pieza.getPosicion());
+	stmt.setString(4, pieza.getId_pieza());
 	stmt.setString(5, pieza.getColor());
-	stmt.setString(6, pieza.getPosicion());
+	
 	stmt.execute();
 	}
 		catch (SQLException e) {
@@ -106,43 +106,63 @@ private void agregarPiezas(String dni_b, String dni_n) {
 	
 	
 }
-
-/*public String Lista(ArrayList<Pieza> p)
-{
-	String resultado=null;
-	for(Pieza i:p)
-	{
-	
-	resultado+=i.getNombre()+" "+i.getColor()+" "+i.getPosicion()+"\n";
-	}
-	return resultado;
-}*/
-
 public ArrayList<Pieza> colecPiezas(String dni_b, String dni_n)
 {
 	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
+	Pieza p=null;
 	PreparedStatement stmt= null;
 	ResultSet rst= null;
 	
 	try {
-		stmt= FactoryConexion.getInstancia().getConn().prepareStatement("Select * from pieza where dni_j1=? and dni_j2=?");
+		stmt= FactoryConexion.getInstancia().getConn().prepareStatement("Select * from posicion where dniB=? and dniN=?");
 
 	stmt.setString(1,dni_b);
 	stmt.setString(2, dni_n);
 	rst= stmt.executeQuery();
-	if(rst!= null && rst.next()){
-	for (Pieza pieza : piezas) {
-		pieza.setId_pieza(rst.getString("id_pieza"));
-		pieza.setNombre(rst.getString("nombre"));
-		pieza.setColor(rst.getString("color"));
-		pieza.setPosicion(rst.getString("posicion"));
-		////No se como si ya sabe de que clase es???
-		piezas.add(pieza);
+	while(rst!= null && rst.next())
+	{
+		switch( rst.getString("Pieza"))
+		{
+		case "r":
+		{ 
+			p=new Rey();
+			break;
+		}
+		case "d":
+		{
+			p=new Dama();
+			break;
+		}
+		case "t":
+		{
+			p=new Torre();
+			break;
+		}
+		case "p":
+		{
+			p= new Peon();
+			break;
+		}
+		case "c":
+		{
+			p= new Caballo();
+			break;
+		}
+		case "a":
+		{
+			p=new Alfil();
+			break;
+		}
+	}	
+		p.setPosicion(rst.getString("colYfila"));
+		p.setColor(rst.getString("color"));
+		p.setId_pieza(rst.getString("Pieza"));
+		piezas.add(p);
 		rst.next();
 		
 	}
 	
-	}
+	
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -164,10 +184,11 @@ public ArrayList<Pieza> colecPiezas(String dni_b, String dni_n)
 }
 
 
-public Pieza buscarFicha(String color,String pos)
+
+public Pieza buscarFicha(ArrayList<Pieza> piezas,String color,String pos)
 
 {
-	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
+
 	for(Pieza i:piezas)
 	{
 		if(i.getPosicion().equals(pos))
@@ -179,30 +200,40 @@ public Pieza buscarFicha(String color,String pos)
 	return null;
 
 }
-public boolean borrarFicha(String color,String destino)
+public ArrayList<Pieza> borrarFicha(ArrayList<Pieza> piezas,String color,String destino)
 {
-	boolean resp;
-	Pieza p;
+
+
 	if(color=="blanco")
-		p=this.buscarFicha("negro", destino);
+		{this.buscarFicha(piezas,"negro", destino).setPosicion(null);}
 	else
-		p=this.buscarFicha("blanco", destino);
-	
-	if(p.getClass().equals("Rey"))
-		resp=false;
-	else 
-		resp=true;
-	return resp;
+		{this.buscarFicha(piezas,"blanco", destino).setPosicion(null);}
+
+	return piezas;
 	
 	
 }
+public boolean reyNulo(ArrayList<Pieza> piezas)
+{ 
+	
+	for (Pieza pieza : piezas) {
+		if(pieza.getClass().equals("Rey"))
+			if(pieza.getPosicion()== null)
+			{
+				return true;
+			}
+			
+			
+	}
+	return false;
+}
 
 
-public ArrayList<Pieza> moverFicha(String color,String origen,String destino)
+public ArrayList<Pieza> moverFicha(ArrayList<Pieza> piezas,String color,String origen,String destino)
 {
-	/// ACA hay que modificarlo por que  hay que arreglarlo
-	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
-	this.buscarFicha(color,origen).setPosicion(destino);
+	
+	
+	this.buscarFicha(piezas,color,origen).setPosicion(destino);
 	
 	
 	
@@ -216,9 +247,11 @@ public void UpFichas(ArrayList<Pieza> pie, String dni_b, String dni_n)
 	for (Pieza pieza : pie) {
 		try{
 	
-	stmt= FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE Pieza SET posicion= ? where dni_j1=? and dni_j2=?");
+	stmt= FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE posicion SET posicion= ? where dniB=? and dniN=? and Pieza=? and color=?");
 	stmt.setString(2, dni_b);
 	stmt.setString(3, dni_n);
+	stmt.setString(4, pieza.getId_pieza());
+	stmt.setString(5, pieza.getColor());
 	stmt.setString(1, pieza.getPosicion());
 	stmt.execute();
 	}

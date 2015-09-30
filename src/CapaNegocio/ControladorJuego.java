@@ -1,8 +1,6 @@
 package CapaNegocio;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -16,116 +14,37 @@ import CapaInterfaz.Escritorio;
 import Excepciones.appException;
 
 
+
 public class ControladorJuego {
 CatalogoPiezas cat;
-CatalogoPartidas catalogoP;
+CatalogoPartidas cj;
 Partida partida;
-CatalogoJugador catalogoJ;
-/*
- * ver esto despues
- 
+CatalogoJugador catJug;
+
 public ControladorJuego()
 {
 	partida=new Partida();
 	cat=new CatalogoPiezas();
 	cj=new CatalogoPartidas();
-}
-*/
-
-
-
-public Jugador validarExistencia(String dni) {
-	// TODO Auto-generated method stub
-	 catalogoJ= new CatalogoJugador();
-	try{
-		return catalogoJ.buscarExistencia(dni);
-		
-	}catch(Exception e){
-		
-	}
-	return null;
+	catJug= new CatalogoJugador();
 }
 
 
-
-public void save(Jugador j) {
-	// TODO Auto-generated method stub
-		catalogoJ= new CatalogoJugador();
-		catalogoJ.add(j);
 	
-}
 
 
-
-public Partida verificarPartidaExistente(String dnib, String dnin) {
-	// TODO Auto-generated method stub
-	catalogoP= new CatalogoPartidas();
-	Partida parEncontrada= catalogoP.buscarJugadorPorDni(dnib, dnin);
-	return parEncontrada;
-}
-
-
-
-public void crearNuevaPartida(String dniB, String dniN) {
-	// TODO Auto-generated method stub
-	catalogoP= new CatalogoPartidas();
-	catalogoP.agregarJugadores(dniB,dniN);
-	System.out.println("Se ha agregado una nueva partida");
-}
-
-
-
-}
-	
-	
-	/*
-	public Partida getPartida() {
-	return partida;
-}
-public void setPartida(Partida partida) {
-	this.partida = partida;
-}
-	public ArrayList<Pieza> IniciarJuego(Jugador ju_b, Jugador ju_n) {
-		ArrayList<Pieza> pieza= new ArrayList<Pieza>();
+public ArrayList<Pieza> validarJugador(String dni_b, String dni_n){
 		
-		pieza.addAll(cat.iniciarJugo(ju_b.getDni(), ju_n.getDni()));
-		partida=cj.agregarJugadores(ju_b, ju_n,pieza);
-	
-		
-		return pieza;
-		
-		
-	}
-	public boolean realizarMovimiento(String color,String text, String text2) {
-		Pieza p;
-		boolean resp;
-		p=cat.buscarFicha(color,text);
-		resp=p.validarMovimiento(text, text2, color);
-		return resp;
-		
-	}
-/*	public String posiciones( ArrayList<Pieza> piezas) {
-		
-		String s=cat.Lista(piezas);
-		return s;
-	}
-	
-	
-	public ArrayList<Pieza> validarJugador(String dni_b, String dni_n){
-		
-		partida=cj. buscarJugadorPorDni(dni_b, dni_n);
+		partida=cj. buscarPartida(dni_b, dni_n);
 		ArrayList<Pieza> piezas= new ArrayList<Pieza>();
 		if(partida==null)
 		{
-			Jugador jug_b=null, jug_n=null;
-			//Aca deberia llamar a la interfaz que tiene el metodo guardar dos veces,
-			// primero guardo jug_b y lugeo vuelvo hacer lo mismo para jug_n
-			piezas.addAll(IniciarJuego(jug_b, jug_n));
+	
+	
+		piezas.addAll(IniciarJuego(dni_b, dni_n));
 		}
-		else 
-		{
-			piezas.addAll(cat.colecPiezas(dni_b,dni_n));
-		}
+		
+		piezas.addAll(cat.colecPiezas(dni_b,dni_n));
 		
 		partida.setPiezas(piezas);
 		return piezas;
@@ -136,22 +55,24 @@ public void setPartida(Partida partida) {
 	}
 	public ArrayList<Pieza> modificarPiezas(String color,String text, String text2) {
 
-	     ArrayList<Pieza> p= new ArrayList<Pieza>();
-	     p.addAll(cat.moverFicha(color,text, text2));
-	     boolean resp=cat.borrarFicha(color, text2);
+	     
+	     partida.setPiezas(cat.moverFicha(partida.getPiezas(),color,text, text2));
+	     partida.setPiezas(cat.borrarFicha(partida.getPiezas(),color, text2));
+	     boolean resp= cat.reyNulo(partida.getPiezas());
 	     if(resp)
-	        {
-	    	 partida.setPiezas(p);
+	     {
+	    	 partida.setPiezas(null);
+	     }
+	       
+	     else
+	     {
 	    	 if(color.equals("blanco"))
 	    		 partida.setTurno("negro");
 	    	 else
 	    		 partida.setTurno("blanco");
-	    	 }
-	     else
-	    	 p=null;
-	    
+	    }
 	     
-	     return p;
+	     return partida.getPiezas();
 		
 	}
 	public void UpPartida() {
@@ -162,70 +83,53 @@ public void setPartida(Partida partida) {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
-
-
-
-	public Jugador validarJugador(String dni) {
-		// TODO Auto-generated method stub
-		Jugador j= catJug.buscarExistencia(dni);
 	
-		return j;
-	}
-	
-	*/
-	
-	
-	/*
-	public void realizarMovimiento  (String origen,String destino) throws appException
-	{
+	public Partida getPartida() {
+	return partida;
+}
+public void setPartida(Partida partida) {
+	this.partida = partida;
+}
+	public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
 		
-		cat.Lista();
-		try{
-		Pieza PiezaOrigen = cat.buscarFicha(origen);
-		Pieza PiezaDestino = cat.buscarFicha(destino);
-		 if(PiezaOrigen.esvalidoMovimiento(origen, destino, PiezaOrigen.getColor()))
-	     {
-	    	 if(PiezaDestino==null)
-	    	 {
-	    		 cat.moverFicha(origen, destino);
-	    	 }
-	    	 else
-	    		if(PiezaOrigen.getColor()!=PiezaDestino.getColor())
-	    			 cat.borrarFicha(origen, destino);
-	    		else
-	    			JOptionPane.showMessageDialog( null,"No se pueden eliminar piezas de un mismo color", "Error", JOptionPane.NO_OPTION);
-	     }
-	     else 
-	    	 JOptionPane.showMessageDialog( null,"El movimiento es invalido para la pieza", "Error", JOptionPane.NO_OPTION);
+		Jugador jug_b= catJug.buscarExistencia(dni_b);
+		if(jug_b==null){
+			// llamar a la interfaz guardarlo en variable jugador 
+			catJug.add(jug_b);
+			
 		}
-		catch(NullPointerException e)
-		{
-			throw new appException("No hay ningna pieza en la posicion",e);
-		}
-	   
+	
+		Jugador jug_n= catJug.buscarExistencia(dni_n);
+				if(jug_n==null){
+					//llama a la interfaz de nuevo  guardalo en variable jugador
+					catJug.add(jug_n);
+				
+				}
+		
+		setPartida(cj.agregarPartida(jug_b, jug_n));
+	
+		
+		return partida.getPiezas();
+		
+		
+	}
+	public boolean realizarMovimiento(String color,String text, String text2) {
+		Pieza p;
+		boolean resp;
+		p=cat.buscarFicha(partida.getPiezas(),color,text);
+		if(p==null)
+			{
+			resp=p.validarMovimiento(text, text2, color);
+			}
+		else
+			{
+			resp= false;
+			}
+		return resp;
+		
 	}
 	
-	public String posiciones()
-	{
-		return cat.Lista();
-	}
-	*/
 	
-
-/*	//VALIDA SI EL CAMPO ESTA VACIO;
-	private void validarCampo(Jugador jugador) throws Exception {
-		if(jugador.getDni() == null) {
-			throw new Exception("DEBE INGRESAR UN DNI PARA VALIDAR");
-		}
-		
 	
-	}
-	private void buscarJugadorPorDni(Jugador jugador) {
-		
-		}*/
-		
 	
-
+}

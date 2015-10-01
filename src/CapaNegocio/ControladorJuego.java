@@ -16,49 +16,61 @@ import Excepciones.appException;
 
 
 public class ControladorJuego {
-CatalogoPiezas cat;
-CatalogoPartidas cj;
+CatalogoPiezas catPieza;
+CatalogoPartidas catPartida;
 Partida partida;
-CatalogoJugador catJug;
+CatalogoJugador catJugador;
 
 public ControladorJuego()
 {
 	partida=new Partida();
-	cat=new CatalogoPiezas();
-	cj=new CatalogoPartidas();
-	catJug= new CatalogoJugador();
+	catPieza=new CatalogoPiezas();
+	catPartida=new CatalogoPartidas();
+	catJugador= new CatalogoJugador();
+}
+
+
+public Partida getPartida() {
+	return partida;
+}
+
+
+
+
+public void setPartida(Partida partida) {
+	this.partida = partida;
 }
 
 
 	
 
 
-public ArrayList<Pieza> validarJugador(String dni_b, String dni_n){
-		
-		partida=cj. buscarPartida(dni_b, dni_n);
+public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
+		/// Este metodo valida que la partida exista
+		partida=catPartida. buscarPartida(dni_b, dni_n);
 		ArrayList<Pieza> piezas= new ArrayList<Pieza>();
 		if(partida==null)
 		{
-	
-	
+	// Si la partida no existe la inicializa
 		piezas.addAll(IniciarJuego(dni_b, dni_n));
 		}
-		
-		piezas.addAll(cat.colecPiezas(dni_b,dni_n));
+		//Si la partida existe la muestra 
+		piezas.addAll(catPieza.buscarPiezas(dni_b,dni_n));
 		
 		partida.setPiezas(piezas);
 		return piezas;
-	
-	
-	
-		
-	}
-	public ArrayList<Pieza> modificarPiezas(String color,String text, String text2) {
+}
 
-	     
-	     partida.setPiezas(cat.moverFicha(partida.getPiezas(),color,text, text2));
-	     partida.setPiezas(cat.borrarFicha(partida.getPiezas(),color, text2));
-	     boolean resp= cat.reyNulo(partida.getPiezas());
+
+
+
+
+public ArrayList<Pieza> realizarMovimiento(String color,String text, String text2) {
+
+	     //Este metodo realiza el movimiento si ya fue correcto
+	     partida.setPiezas(catPieza.moverFicha(partida.getPiezas(),color,text, text2));
+	     partida.setPiezas(catPieza.borrarFicha(partida.getPiezas(),color, text2));
+	     boolean resp= catPieza.reyNulo(partida.getPiezas());
 	     if(resp)
 	     {
 	    	 partida.setPiezas(null);
@@ -67,59 +79,74 @@ public ArrayList<Pieza> validarJugador(String dni_b, String dni_n){
 	     else
 	     {
 	    	 if(color.equals("blanco"))
+	    	 {
 	    		 partida.setTurno("negro");
+	    	 }
 	    	 else
+	    	 {
 	    		 partida.setTurno("blanco");
+	    	 }
 	    }
 	     
-	     return partida.getPiezas();
+	     return partida.getPiezas();		
+}
+
+
+
+
+public void UpPartida() {
+	///Este metodo actualiza los datos en la base 
 		
-	}
-	public void UpPartida() {
-		
-		cj.UpPatida(getPartida());
-		cat.UpFichas(getPartida().getPiezas(), getPartida().getJ_b().getDni(), getPartida().getJ_n().getDni());
-		
-		// TODO Auto-generated method stub
-		
-	}
+		catPartida.UpPatida(getPartida());
+		catPieza.UpFichas(getPartida().getPiezas(), getPartida().getJ_b().getDni(), getPartida().getJ_n().getDni());
 	
-	public Partida getPartida() {
-	return partida;
-}
-public void setPartida(Partida partida) {
-	this.partida = partida;
-}
-	public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
 		
-		Jugador jug_b= catJug.buscarExistencia(dni_b);
-		CrearJugador jg = new CrearJugador();
-		if(jug_b==null){
-			// llamar a la interfaz guardarlo en variable jugador 
-			jg.setVisible(true);
-			catJug.add(jug_b);
+}
+	
+
+
+
+public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
+		/// Este metodo busca a los jugadores si existen y lo agregan a una nueva partida
+		
+	Jugador jug_b= catJugador.buscarExistencia(dni_b);
+	CrearJugador jg = new CrearJugador();
+	
+	if(jug_b==null){
 			
-		}
-	
-		Jugador jug_n= catJug.buscarExistencia(dni_n);
-				if(jug_n==null){
-					//llama a la interfaz de nuevo  guardalo en variable jugador
-					jg.setVisible(true);
-					catJug.add(jug_n);
-				 // ni idea esto che te dejo el setvisible y un me gusta
-				}
-		
-		setPartida(cj.agregarPartida(jug_b, jug_n));
-	
-		
-		return partida.getPiezas();
-		
-		
+			jg.setVisible(true);
+			catJugador.add(jug_b);
+			
 	}
-	public boolean realizarMovimiento(String color,String text, String text2) {
+	
+	Jugador jug_n= catJugador.buscarExistencia(dni_n);
+	
+	if(jug_n==null){
+	//llama a la interfaz de nuevo  guardalo en variable jugador
+	jg.setVisible(true);
+	catJugador.add(jug_n);
+	 // ni idea esto che te dejo el setvisible y un me gusta
+	}
+		
+	setPartida(catPartida.agregarPartida(jug_b, jug_n));
+	
+		
+	return partida.getPiezas();
+}
+
+
+
+
+
+
+
+
+
+public boolean validarMovimiento(String color,String text, String text2) {
+		// Este metodo valida si el moviento es valido, si lo es devuelve un true
 		Pieza p;
 		boolean resp;
-		p=cat.buscarFicha(partida.getPiezas(),color,text);
+		p=catPieza.buscarFicha(partida.getPiezas(),color,text);
 		if(p==null)
 			{
 			resp=p.validarMovimiento(text, text2, color);
@@ -129,6 +156,18 @@ public void setPartida(Partida partida) {
 			resp= false;
 			}
 		return resp;
+}
+
+
+
+
+
+public void borrarPartida() {
+		//Este metodo borra la partida al finalizar el juego cuando fue ganado
+	catPieza.borrarPiezas(partida.getJ_b().getDni(), partida.getJ_n().getDni());
+	catPartida.borrarPartida(partida.getJ_b().getDni(), partida.getJ_n().getDni());
+	partida=null;
+		
 		
 	}
 	

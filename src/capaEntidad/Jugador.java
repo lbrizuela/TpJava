@@ -5,13 +5,8 @@ public class Jugador {
 	String dni;
 	String nombre;
 	String apellido;
-	public String getColor() {
-		return color;
-	}
-	public void setColor(String color) {
-		this.color = color;
-	}
-	String color;
+	
+	
 
 	public String getDni() {
 		return dni;

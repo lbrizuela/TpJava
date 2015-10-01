@@ -11,8 +11,8 @@ import capaEntidad.Jugador;
 
 public class CatalogoJugador {
 
-	public Jugador buscarExistencia(String dni) {
-		// TODO Auto-generated method stub
+public Jugador buscarExistencia(String dni) {
+		// Este metodo busca un jugador en BD
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		Jugador j=null;
@@ -45,10 +45,10 @@ public class CatalogoJugador {
 			FactoryConexion.getInstancia().releaseConn();
 		}
 		return j;
-	}
+}
 
-	public void add(Jugador j) {
-		// TODO Auto-generated method stub
+public void add(Jugador j) {
+		// Este metodo agrega un jugador en la BD
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
 		
@@ -82,6 +82,6 @@ public class CatalogoJugador {
 			FactoryConexion.getInstancia().releaseConn();
 		}
 	}
-	}
+}
 		
 

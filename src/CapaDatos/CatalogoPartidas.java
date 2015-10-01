@@ -11,7 +11,10 @@ public class CatalogoPartidas {
 	CatalogoJugador cj;
 	CatalogoPiezas cp;
 
-	public Partida buscarPartida(String dni_b, String dni_n) {
+public Partida buscarPartida(String dni_b, String dni_n) {
+		//Este metodo busca una partida en la BD, si no la encuentra devuelve nuull
+		
+		
 		Partida partida=null;
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
@@ -50,24 +53,31 @@ public class CatalogoPartidas {
 		return partida;
 		
 		
-	}
+}
 
 	
 
-	public Partida agregarPartida(Jugador ju_b, Jugador ju_n) {
+public Partida agregarPartida(Jugador ju_b, Jugador ju_n) {
+		//Este metodo solo crea un objeto partida y llama a el metodo que lo agrega a la base
+		
 		Partida p= new Partida();
-		agregoPartida(ju_n.getDni(), ju_n.getDni());
+		addPartida(ju_n.getDni(), ju_n.getDni());
 		ArrayList<Pieza> pieza= new ArrayList<Pieza>();
-		pieza.addAll(cp.iniciarJugo(ju_b.getDni(), ju_n.getDni()));
+		pieza.addAll(cp.iniciarPiezas(ju_b.getDni(), ju_n.getDni()));
 		p.setJ_b(ju_b);
 		p.setJ_n(ju_n);
 		p.setPiezas(pieza);
 		p.setTurno("blanco");
 		return p;
 		
-	}
+}
 
-	private void agregoPartida(String dni, String dni2) {
+
+
+
+private void addPartida(String dni, String dni2) {
+		//Este metodo crea una partida a DB
+		
 		PreparedStatement stmt=null;
 		try {
 			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into Partida(dniN, dniB, turno) values (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
@@ -96,12 +106,16 @@ public class CatalogoPartidas {
 	  
 
 	
-	}
+}
+
+
+
+
 
 	
+public void UpPatida(Partida p){
+	///Este metodo actualiza una partida.
 	
-	public void UpPatida(Partida p)
-	{
 		PreparedStatement stmt=null;
 		
 		try {
@@ -126,6 +140,39 @@ public class CatalogoPartidas {
 			}
 			FactoryConexion.getInstancia().releaseConn();
 		}
+}
+
+
+
+
+
+
+
+public void borrarPartida(String dni, String dni2) {
+		// Este metodo borra una partida
+		PreparedStatement stmt=null;
+				
+			try {
+				stmt=FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM partida WHERE dniB=? and dniN=? ");
+				stmt.setString(1, dni);
+				stmt.setString(2, dni2);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			finally
+			{
+				try {
+					
+					if(stmt!=null) stmt.close();
+				}
+				catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				FactoryConexion.getInstancia().releaseConn();
+			}
+		
 	}
 
 }

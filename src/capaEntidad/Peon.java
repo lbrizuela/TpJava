@@ -1,23 +1,66 @@
 package capaEntidad;
 
+import CapaDatos.CatalogoPiezas;
+
+
 public class Peon extends Pieza {
 	boolean primerMovimiento;
+	CatalogoPiezas cp=new CatalogoPiezas();
+	Partida partida=new Partida();
 	public  boolean validarMovimiento(String a, String b,String color) {
+		
+	
 		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
 	
 	int distancia = color.contentEquals("negra")? (c-d) : (d-c);  //Hago la pregunta de que color es
-	if(distancia==1)                                               //el calculo de la distancia dependera de que color sea,esto se debe
-		                                                             // a como avanzan las fichas blancas y las negras entonces sera 
-		                                                             // un movimiento valido si la distancia entre que recorre es 1 
-		                                                             // si la distancia es negativa recorreria hacia atras y no es valido
+	if(distancia==1)                                               //el calculo de la distancia dependera de que color sea,esto se debe	                                                             // a como avanzan las fichas blancas y las negras entonces sera 	                                                             // un movimiento valido si la distancia entre que recorre es 	                                                             // si la distancia es negativa recorreria hacia atras y no es valido
 	{
-		return true;
+		if(a.substring(0)!= b.substring(0))
+		{
+			if(cp.buscarFicha(partida.getPiezas(), colorInverso() , b)!=null)
+			{
+			return true;
+			}
+			else
+			{
+			return false;
+			}
+		}
+		else 
+		{
+			return true;
+		}
+		
 	}
 	else
 	{
-	return false;
-	}
+		if(distancia==2){
+			if(primerMovimiento){
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}		
+}	
+	
+	
+	public String colorInverso()
+	{
+		//Este metodo devuelve el color
+		if(getColor()=="blanco")
+		{
+			return "negro";
+		}
+		else 
+		{
+			return"blanco";
+		}
 	}
 	
 
@@ -25,6 +68,7 @@ public class Peon extends Pieza {
 	public  void inicializarPiezas(String id, String col)
 	{
 		id_pieza=id;
+		primerMovimiento=true;
 		nombre="Peon";
 		color=col;
 		if(color=="blanco")

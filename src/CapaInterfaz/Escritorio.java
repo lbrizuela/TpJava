@@ -33,6 +33,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
 import java.awt.Color;
 
@@ -40,6 +41,8 @@ import java.awt.Color;
 public class Escritorio extends JFrame {
 	
 
+	
+    ControladorJuego ctrol;
 	private JPanel contentPane;
 	private JTextField text_Turno;
 	private JTextField text_dniB;
@@ -48,7 +51,6 @@ public class Escritorio extends JFrame {
 	private JTextField text_Destino;
 	private JTextField text_b;
 	private JTextField text_n;
-	private ControladorJuego controlador;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -103,6 +105,12 @@ public class Escritorio extends JFrame {
 			contentPane.add(lblDestino);
 			
 			JButton btnMover = new JButton("Mover");
+			btnMover.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					mover();
+				}
+			});
 			btnMover.setFont(new Font("Arial", Font.BOLD, 12));
 			btnMover.setBounds(252, 359, 147, 23);
 			contentPane.add(btnMover);
@@ -180,15 +188,29 @@ public class Escritorio extends JFrame {
 			JButton btnJugar = new JButton("Jugar");
 			btnJugar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					validarDni();
+					validarPartida();
 				}
 			});
 			btnJugar.setBounds(544, 45, 107, 23);
 			panel.add(btnJugar);
+			
+			JButton bnt_Guardar = new JButton("Guardar Partida");
+			bnt_Guardar.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					guardarPartida();
+				}
+			});
+			bnt_Guardar.setFont(new Font("Arial", Font.BOLD, 12));
+			bnt_Guardar.setBounds(252, 402, 147, 23);
+			contentPane.add(bnt_Guardar);
 	
 	}
 
-	public void validarDni() {
+	/**
+	 * 
+	 */
+/*	public void validarDni() {
 		// TODO Auto-generated method stub
 		controlador= new ControladorJuego();
 		try{
@@ -224,7 +246,7 @@ public class Escritorio extends JFrame {
 									// SI TIENEN UNA PARTIDA PREGUNTAR SI QUIEREN CONTINUAR LA PARTIDA ANTERIOR O HACER UNA NUEVA.
 									/// SI HACEN LA ANTERIOR SE TRAE DE LA BASE.
 									//// SI QUIEREN UNA NUEVA 
-									/* SE ACTUALIZA LA ANTERIOR POR ESTA Y LLAMA AL METODO CREAR PARTIDA) */ 
+									 SE ACTUALIZA LA ANTERIOR POR ESTA Y LLAMA AL METODO CREAR PARTIDA)  
 								}
 					
 						
@@ -249,7 +271,7 @@ public class Escritorio extends JFrame {
 
 	}
 
-
+*/
 
 			
 		
@@ -259,27 +281,31 @@ public class Escritorio extends JFrame {
 
 	
 		
-			/*
-			 
+public void validarPartida() {
+	
+	///Valida si existe una partida, si no existe la agrega
 			ArrayList<Pieza> p= new ArrayList<Pieza>();
-			
-			
-			p.addAll(ctrol.validarJugador(text_dniB.getText(),text_dniN.getText())); // Este metodo si no los encuentras los inicializa ya esta hecho
-			
+			ctrol= new ControladorJuego();
+			p.addAll(ctrol.validarPartida(text_dniB.getText(),text_dniN.getText())); // Este metodo si no los encuentras los inicializa ya esta hecho
 			mostrarPiezas(p);
+}
 		
 		
 		
 		private void mostrarPiezas(ArrayList<Pieza>  pieza) {
+			// Este metodo muestra las Piezas por patalla
 			String blancas=null;
 			String negras=null;
 			String turno=ctrol.getPartida().getTurno();
 			for (Pieza p : pieza) {
-			  if(p.getColor().equals("blanco"))     ///If que pregunte si posicion es null, si lo es no la guardo en String DAVID
+			  if(p.getColor().equals("blanco")){     
+				  if(p.getPosicion()!=null)
 				  blancas=p.getPosicion()+"-"+p.getNombre()+"\n";
-			  else
+			  }
+			  else{
+				  if(p.getPosicion()!=null)
 				  negras=p.getPosicion()+"-"+p.getNombre()+"\n";
-				  
+			  }  
 			
 			}
 			text_b.setText(blancas);
@@ -291,18 +317,21 @@ public class Escritorio extends JFrame {
 		
 
 		public void mover()
+		
 		{
+			//Este metodo mueve la ficha
 			
 			ArrayList<Pieza> p= new ArrayList<Pieza>();
 			boolean respuesta=false;
-			while(respuesta==false)
+			while(respuesta==false)   // Hace una iteracion hasta que no ingrese un movimiento valido
 			{
-				respuesta=ctrol.realizarMovimiento(text_Turno.getText(), text_origen.getText(), text_Destino.getText());
-				
-				//hace un msj que la respuesta no es correcta, qe el movimiento no es valido. DAVID
+				respuesta=ctrol.validarMovimiento(text_Turno.getText(), text_origen.getText(), text_Destino.getText()); // Llama a realizarmoviemito para que lo valide
+				if(respuesta)
+				JOptionPane.showMessageDialog(null,"Movimiento Correcto");
+				else 
+					JOptionPane.showMessageDialog(null, "Movimiento Incorrecto");
 			}
-			p.addAll(ctrol.modificarPiezas(text_Turno.getText(), text_origen.getText(), text_Destino.getText()));
-			///ACA SE PODRIA MOSTRAR SI LA PIEZA FUE COMIDA. 
+			p.addAll(ctrol.realizarMovimiento(text_Turno.getText(), text_origen.getText(), text_Destino.getText())); //// este metodo realiza el movimiento
 			if(p==null)
 				finalizarJugo();
 			else
@@ -314,21 +343,29 @@ public class Escritorio extends JFrame {
 		}
 
 	private void limpiar() {
+		//Este metodo limpia la interfaz
 			text_origen.setText(null);
 			text_Destino.setText(null);
+			text_b.setText(null);
+			text_n.setText(null);
+			text_Turno.setText(null);
+			
 			
 		}
 
 	private void finalizarJugo() {
-			// DAVID
+		//Este metodo muestra que un jugador gano, y borra la partida llamando al controlador
+		    JOptionPane.showMessageDialog(null, "Gano el jugador: "+ctrol.getPartida().getTurno());
+		    limpiar();
+			ctrol.borrarPartida();
+			
 			
 		}
 	
 private void guardarPartida() {
-	
+	//Este metodo llama al controlador para Guardar todos los datos.
 	ctrol.UpPartida();
-	finalizarJugo();
+	
 	
 }
 }
-*/

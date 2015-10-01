@@ -57,8 +57,8 @@ public abstract class Pieza {
 	}
 
 
-	public abstract boolean validarMovimiento(String a, String b, String color);
-	public abstract void inicializarPiezas(String id,String col);
+	public abstract boolean validarMovimiento(String a, String b, String color);// Este metodo valida el movieminto de la pieza
+	public abstract void inicializarPiezas(String id,String col); // Este metodo incializa las piezas
 	
 
 }

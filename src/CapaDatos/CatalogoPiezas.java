@@ -13,23 +13,31 @@ import java.util.ArrayList;
 
 
 
+
+
+
+
 import capaEntidad.*;
 public class CatalogoPiezas {
  
 
 
-public ArrayList<Pieza> iniciarJugo( String dni_b, String dni_n)
-{
+public ArrayList<Pieza> iniciarPiezas( String dni_b, String dni_n){
+	//Este metodo es llama los metodos para agregar las piezas al juego y la bd
+	
 	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
-	iniciarPiezas("blancas");
-	iniciarPiezas("negras");
-	agregarPiezas(dni_b, dni_n,piezas);
+	crearPiezas("blancas");
+	crearPiezas("negras");
+	addPiezas(dni_b, dni_n,piezas);
 	return piezas;
 	
 }
-	
-public void iniciarPiezas(String a)
-{
+
+
+
+
+public void crearPiezas(String a){
+//Este metodo devulve las piezas en su posicion inicial
 
   ArrayList<Pieza> piezas = new ArrayList<Pieza>();
   Pieza p;
@@ -73,15 +81,16 @@ public void iniciarPiezas(String a)
 	  piezas.add(p);
   }
   
- 
- 
-  
 }
 
 
 
-private void agregarPiezas(String dni_b, String dni_n, ArrayList<Pieza> piezas) {
+
+
+
+private void addPiezas(String dni_b, String dni_n, ArrayList<Pieza> piezas) {
 	
+/// Este metodo crea las piezas en la Bd
 	
 	PreparedStatement stmt= null;
 	
@@ -101,13 +110,30 @@ private void agregarPiezas(String dni_b, String dni_n, ArrayList<Pieza> piezas) 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
+		finally
+		{
+			try {
+				
+				if(stmt!=null) stmt.close();
+			}
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			FactoryConexion.getInstancia().releaseConn();
+		}
 	}
-	FactoryConexion.getInstancia().releaseConn();
-	
-	
+		
 }
-public ArrayList<Pieza> colecPiezas(String dni_b, String dni_n)
+
+
+
+
+
+public ArrayList<Pieza> buscarPiezas(String dni_b, String dni_n)
 {
+	//Este metodo busca las piezas en la DB y devuelve el arreglo de piezas inicializadas
+	
 	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
 	Pieza p=null;
 	PreparedStatement stmt= null;
@@ -173,6 +199,7 @@ public ArrayList<Pieza> colecPiezas(String dni_b, String dni_n)
 		try {
 			
 			if(stmt!=null) stmt.close();
+			if(rst!=null) rst.close();
 		}
 		catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -185,11 +212,15 @@ public ArrayList<Pieza> colecPiezas(String dni_b, String dni_n)
 
 
 
-public Pieza buscarFicha(ArrayList<Pieza> piezas,String color,String pos)
 
-{
 
-	for(Pieza i:piezas)
+
+
+public Pieza buscarFicha(ArrayList<Pieza> piezas,String color,String pos){
+// Este metodo busca una ficha del un arreglo 
+	
+	
+for(Pieza i:piezas)
 	{
 		if(i.getPosicion().equals(pos))
 			if(i.getColor().equals(color))
@@ -200,22 +231,34 @@ public Pieza buscarFicha(ArrayList<Pieza> piezas,String color,String pos)
 	return null;
 
 }
+
+
+
+
+
+
+
 public ArrayList<Pieza> borrarFicha(ArrayList<Pieza> piezas,String color,String destino)
 {
-
+//Este metodo borra(pone en null su posicion) a una ficha comida 
 
 	if(color=="blanco")
 		{this.buscarFicha(piezas,"negro", destino).setPosicion(null);}
 	else
 		{this.buscarFicha(piezas,"blanco", destino).setPosicion(null);}
 
-	return piezas;
-	
-	
+	return piezas;	
 }
-public boolean reyNulo(ArrayList<Pieza> piezas)
-{ 
-	
+
+
+
+
+
+
+
+public boolean reyNulo(ArrayList<Pieza> piezas){ 
+	//Este metodo verifica si el rey es nulo
+
 	for (Pieza pieza : piezas) {
 		if(pieza.getClass().equals("Rey"))
 			if(pieza.getPosicion()== null)
@@ -229,24 +272,29 @@ public boolean reyNulo(ArrayList<Pieza> piezas)
 }
 
 
-public ArrayList<Pieza> moverFicha(ArrayList<Pieza> piezas,String color,String origen,String destino)
-{
-	
+
+
+
+
+public ArrayList<Pieza> moverFicha(ArrayList<Pieza> piezas,String color,String origen,String destino){
+	//Este metodo mueve las fichas
 	
 	this.buscarFicha(piezas,color,origen).setPosicion(destino);
-	
-	
-	
-	
 	return piezas;
 }
 
+
+
+
+
+
 public void UpFichas(ArrayList<Pieza> pie, String dni_b, String dni_n)
 {
+	//Este metodo actualizas las posiciones de la ficha
+
 	PreparedStatement stmt= null;
 	for (Pieza pieza : pie) {
 		try{
-	
 	stmt= FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE posicion SET posicion= ? where dniB=? and dniN=? and Pieza=? and color=?");
 	stmt.setString(2, dni_b);
 	stmt.setString(3, dni_n);
@@ -259,11 +307,56 @@ public void UpFichas(ArrayList<Pieza> pie, String dni_b, String dni_n)
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}
+	
+	finally
+	{
+		try {
+			
+			if(stmt!=null) stmt.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		FactoryConexion.getInstancia().releaseConn();
 	}
-	FactoryConexion.getInstancia().releaseConn();
-	//No se si tengo que cerrar en todas las iteraciones la base.
+}
+}
 
 
+
+
+
+
+
+
+public void borrarPiezas(String dni, String dni2) {
+	
+	//Este metodo borra las Piezas
+	PreparedStatement stmt=null;
+	try {
+		stmt=FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM posicion WHERE dniB=? and dniN=? ");
+	
+	stmt.setString(1, dni);
+	stmt.setString(2, dni2);
+	stmt.execute();
+	
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	finally
+	{
+		try {
+			
+			if(stmt!=null) stmt.close();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		FactoryConexion.getInstancia().releaseConn();
+	}
 }
 }
 

@@ -44,26 +44,6 @@ public class CrearJugador extends JFrame {
 	private JTextField txtRapellido;
 	private ControladorJuego controlador;
 	
-
-	/**
-	 * Launch the application.
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CrearJugador frame = new CrearJugador();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	} */
-
-	/**
-	 * Create the frame.
-	 */
 	public CrearJugador() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CrearJugador.class.getResource("/Imagenes/icon.jpg")));
 		setTitle("Registrar Jugador");
@@ -124,8 +104,6 @@ public class CrearJugador extends JFrame {
 		Jugador j =this.mapearDeDatos();
 		controlador.save(j);
 		JOptionPane.showMessageDialog(null, "Se ha registrado con éxito", "Informe", JOptionPane.INFORMATION_MESSAGE);
-		Escritorio esc= new Escritorio();
-		esc.setVisible(true);
 		this.setVisible(false);
 	
 		

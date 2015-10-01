@@ -35,19 +35,88 @@ public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
 		/// Este metodo valida que la partida exista
 		partida=catPartida. buscarPartida(dni_b, dni_n);
 		ArrayList<Pieza> piezas= new ArrayList<Pieza>();
-		if(partida==null)
+		if(partida==null)// Si la partida no existe la inicializa\
 		{
-	// Si la partida no existe la inicializa
-		piezas.addAll(IniciarJuego(dni_b, dni_n));
-		}
+	
+			JOptionPane.showMessageDialog(null, "No tienen partidas entre los jugadores");
+			piezas.addAll(IniciarJuego(dni_b, dni_n));
+			}
+		/* ACA ESTARIA LA PREGUNTA DE QUE SI LA PARTIDA NO ES NULA PREGUNTA SI 
+		 * QYUERE HACER UNA NUEVA O CONTINUAR CON LA ANTERIOR
+		 
+		 */
 		//Si la partida existe la muestra 
 		piezas.addAll(catPieza.buscarPiezas(dni_b,dni_n));
-		
 		partida.setPiezas(piezas);
 		return piezas;
 }
 
 
+public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
+		/// Este metodo busca a los jugadores si existen y lo agregan a una nueva partida
+	CrearJugador crearJug = new CrearJugador();	
+	Jugador jug_b= catJugador.buscarExistencia(dni_b);
+	
+	
+	if(jug_b==null){
+		JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse para jugar");
+		crearJug.setVisible(true);
+			
+			
+			
+			}
+	
+	Jugador jug_n= catJugador.buscarExistencia(dni_n);
+	
+	if(jug_n==null){
+	//llama a la interfaz de nuevo  guardalo en variable jugador
+		crearJug.setVisible(true);
+	//catJugador.add(jug_n);
+	 // ni idea esto che te dejo el setvisible y un me gusta
+	}
+		
+	setPartida(catPartida.agregarPartida(jug_b, jug_n));
+	
+		
+	return partida.getPiezas();
+}
+
+
+public boolean validarMovimiento(String color,String text, String text2) {
+		// Este metodo valida si el moviento es valido, si lo es devuelve un true
+		Pieza p;
+		boolean resp;
+		p=catPieza.buscarFicha(partida.getPiezas(),color,text);
+		if(p==null)
+			{
+			resp=p.validarMovimiento(text, text2, color);
+			}
+		else
+			{
+			resp= false;
+			}
+		return resp;
+}
+
+
+
+
+
+public void borrarPartida() {
+		//Este metodo borra la partida al finalizar el juego cuando fue ganado
+	catPieza.borrarPiezas(partida.getJ_b().getDni(), partida.getJ_n().getDni());
+	catPartida.borrarPartida(partida.getJ_b().getDni(), partida.getJ_n().getDni());
+	partida=null;
+		
+		
+	}
+
+
+public void save(Jugador j) {
+	// TODO Auto-generated method stub
+	catJugador.add(j);
+}
+	
 public Partida getPartida() {
 	return partida;
 }
@@ -96,82 +165,6 @@ public void UpPartida() {
 	
 		
 }
-	
-
-
-
-public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
-		/// Este metodo busca a los jugadores si existen y lo agregan a una nueva partida
-		
-	Jugador jug_b= catJugador.buscarExistencia(dni_b);
-	CrearJugador jg = new CrearJugador();
-	
-	if(jug_b==null){
-			
-			jg.setVisible(true);
-			catJugador.add(jug_b);
-			
-	}
-	
-	Jugador jug_n= catJugador.buscarExistencia(dni_n);
-	
-	if(jug_n==null){
-	//llama a la interfaz de nuevo  guardalo en variable jugador
-	jg.setVisible(true);
-	catJugador.add(jug_n);
-	 // ni idea esto che te dejo el setvisible y un me gusta
-	}
-		
-	setPartida(catPartida.agregarPartida(jug_b, jug_n));
-	
-		
-	return partida.getPiezas();
-}
-
-
-
-
-
-
-
-
-
-public boolean validarMovimiento(String color,String text, String text2) {
-		// Este metodo valida si el moviento es valido, si lo es devuelve un true
-		Pieza p;
-		boolean resp;
-		p=catPieza.buscarFicha(partida.getPiezas(),color,text);
-		if(p==null)
-			{
-			resp=p.validarMovimiento(text, text2, color);
-			}
-		else
-			{
-			resp= false;
-			}
-		return resp;
-}
-
-
-
-
-
-public void borrarPartida() {
-		//Este metodo borra la partida al finalizar el juego cuando fue ganado
-	catPieza.borrarPiezas(partida.getJ_b().getDni(), partida.getJ_n().getDni());
-	catPartida.borrarPartida(partida.getJ_b().getDni(), partida.getJ_n().getDni());
-	partida=null;
-		
-		
-	}
-
-
-public void save(Jugador j) {
-	// TODO Auto-generated method stub
-	
-}
-	
-	
 	
 	
 }

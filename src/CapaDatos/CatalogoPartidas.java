@@ -26,8 +26,8 @@ public Partida buscarPartida(String dni_b, String dni_n) {
 			rs = stmt.executeQuery();
 			if(rs !=null && rs.next()){
 				Jugador j_b, j_n;
-				j_b=cj.buscarExistencia(rs.getString("dniB"));
-				j_n=cj.buscarExistencia(rs.getString("dniN"));
+				j_b=cj.buscarExistencia(dni_b);
+				j_n=cj.buscarExistencia(dni_n);
 				partida=new Partida();
 				partida.setJ_b(j_b);
 				partida.setJ_n(j_n);
@@ -46,6 +46,7 @@ public Partida buscarPartida(String dni_b, String dni_n) {
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block
+				System.out.println("Error en catalogo partidas");
 				e.printStackTrace();
 			}
 			FactoryConexion.getInstancia().releaseConn();

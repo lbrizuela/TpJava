@@ -47,23 +47,18 @@ public Jugador buscarExistencia(String dni) {
 		return j;
 }
 
-public void add(Jugador j) {
+public void add(Jugador jug) {
 		// Este metodo agrega un jugador en la BD
 		ResultSet rs=null;
 		PreparedStatement stmt=null;
-		
 	
 		try {
-			stmt = FactoryConexion.getInstancia().getConn().prepareStatement(
-					"insert into jugador(dni, nombre, apellido) values (?,?,?)"
-				   );
-			stmt.setString(1, j.getDni());
-			stmt.setString(2, j.getNombre());
-			stmt.setString(3, j.getApellido());
-			stmt.execute();
-
+			stmt = FactoryConexion.getInstancia().getConn().prepareStatement("insert into jugador(dni, nombre, apellido) values (?,?,?)");
 			
-
+			stmt.setString(1, jug.getDni());
+			stmt.setString(2, jug.getNombre());
+			stmt.setString(3, jug.getApellido());
+			stmt.execute();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

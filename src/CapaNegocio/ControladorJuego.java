@@ -30,20 +30,6 @@ public ControladorJuego()
 }
 
 
-public Partida getPartida() {
-	return partida;
-}
-
-
-
-
-public void setPartida(Partida partida) {
-	this.partida = partida;
-}
-
-
-	
-
 
 public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
 		/// Este metodo valida que la partida exista
@@ -62,6 +48,14 @@ public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
 }
 
 
+public Partida getPartida() {
+	return partida;
+}
+
+
+public void setPartida(Partida partida) {
+	this.partida = partida;
+}
 
 
 
@@ -170,6 +164,12 @@ public void borrarPartida() {
 		
 		
 	}
+
+
+public void save(Jugador j) {
+	// TODO Auto-generated method stub
+	
+}
 	
 	
 	

@@ -62,7 +62,7 @@ public Partida agregarPartida(Jugador ju_b, Jugador ju_n) {
 		//Este metodo solo crea un objeto partida y llama a el metodo que lo agrega a la base
 		
 		Partida p= new Partida();
-		addPartida(ju_n.getDni(), ju_n.getDni());
+		addPartida(ju_b.getDni(), ju_n.getDni());
 		ArrayList<Pieza> pieza= new ArrayList<Pieza>();
 		pieza.addAll(cp.iniciarPiezas(ju_b.getDni(), ju_n.getDni()));
 		p.setJ_b(ju_b);
@@ -76,14 +76,14 @@ public Partida agregarPartida(Jugador ju_b, Jugador ju_n) {
 
 
 
-private void addPartida(String dni, String dni2) {
+private void addPartida(String dniB, String dniN) {
 		//Este metodo crea una partida a DB
 		
 		PreparedStatement stmt=null;
 		try {
-			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into Partida(dniN, dniB, turno) values (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, dni);
-			stmt.setString(2, dni2);
+			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into Partida(dniB, dniN, turno) values (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, dniB);
+			stmt.setString(2, dniN);
 			stmt.setString(3, "blanco");
 			stmt.execute();
 			

@@ -67,12 +67,9 @@ public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
 			}
 	
 	Jugador jug_n= catJugador.buscarExistencia(dni_n);
-	
 	if(jug_n==null){
-	//llama a la interfaz de nuevo  guardalo en variable jugador
+		JOptionPane.showMessageDialog(null, "Jugador Negro debe registrarse para jugar");
 		crearJug.setVisible(true);
-	//catJugador.add(jug_n);
-	 // ni idea esto che te dejo el setvisible y un me gusta
 	}
 		
 	setPartida(catPartida.agregarPartida(jug_b, jug_n));

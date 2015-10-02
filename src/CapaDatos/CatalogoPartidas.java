@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import capaEntidad.*;
 
 public class CatalogoPartidas {
-	CatalogoJugador cj;
-	CatalogoPiezas cp;
+	CatalogoJugador cj= new CatalogoJugador();
+	CatalogoPiezas cp =new CatalogoPiezas() ;
 
 public Partida buscarPartida(String dni_b, String dni_n) {
 		//Este metodo busca una partida en la BD, si no la encuentra devuelve nuull

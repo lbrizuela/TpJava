@@ -1,0 +1,71 @@
+# SQL Manager Lite for MySQL 5.3.0.2
+# ---------------------------------------
+# Host     : localhost
+# Port     : 3306
+# Database : JuegoAjedrez
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES latin1 */;
+
+SET FOREIGN_KEY_CHECKS=0;
+
+CREATE DATABASE `JuegoAjedrez`
+    CHARACTER SET 'latin1'
+    COLLATE 'latin1_swedish_ci';
+
+USE `juegoajedrez`;
+
+#
+# Structure for the `jugador` table : 
+#
+
+CREATE TABLE `jugador` (
+  `dni` VARCHAR(20) COLLATE latin1_swedish_ci NOT NULL,
+  `nombre` VARCHAR(20) COLLATE latin1_swedish_ci NOT NULL,
+  `apellido` VARCHAR(20) COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY USING BTREE (`dni`)
+)ENGINE=InnoDB
+CHARACTER SET 'latin1' COLLATE 'latin1_swedish_ci'
+COMMENT='InnoDB free: 4096 kB';
+
+#
+# Structure for the `partida` table : 
+#
+
+CREATE TABLE `partida` (
+  `dniB` VARCHAR(20) COLLATE latin1_swedish_ci NOT NULL,
+  `dniN` VARCHAR(20) COLLATE latin1_swedish_ci NOT NULL,
+  `Turno` VARCHAR(20) COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY USING BTREE (`dniB`, `dniN`),
+   INDEX `dniB` USING BTREE (`dniB`),
+   INDEX `dniN` USING BTREE (`dniN`),
+  CONSTRAINT `partida_fk2` FOREIGN KEY (`dniN`) REFERENCES `jugador` (`dni`),
+  CONSTRAINT `partida_fk1` FOREIGN KEY (`dniB`) REFERENCES `jugador` (`dni`)
+)ENGINE=InnoDB
+CHARACTER SET 'latin1' COLLATE 'latin1_swedish_ci'
+COMMENT='InnoDB free: 4096 kB; (`dniN`) REFER `juegoajedrez/jugador`(`dni`); (`dniB`) REF';
+
+#
+# Structure for the `posicion` table : 
+#
+
+CREATE TABLE `posicion` (
+  `dniB` VARCHAR(20) COLLATE latin1_swedish_ci NOT NULL,
+  `dniN` VARCHAR(20) COLLATE latin1_swedish_ci NOT NULL,
+  `colYfila` VARCHAR(20) COLLATE latin1_swedish_ci DEFAULT NULL,
+  `Pieza` CHAR(20) COLLATE latin1_swedish_ci DEFAULT NULL,
+  `color` VARCHAR(20) COLLATE latin1_swedish_ci DEFAULT NULL,
+   INDEX `posicion_idx1` USING BTREE (`dniB`, `dniN`),
+  CONSTRAINT `posicion_fk1` FOREIGN KEY (`dniB`, `dniN`) REFERENCES `partida` (`dniB`, `dniN`)
+)ENGINE=InnoDB
+CHARACTER SET 'latin1' COLLATE 'latin1_swedish_ci'
+COMMENT='InnoDB free: 4096 kB; (`dniB` `dniN`) REFER `juegoajedrez/partida`(`dniB` `dniN`';
+
+
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

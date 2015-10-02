@@ -120,13 +120,14 @@ public class CrearJugador extends JFrame {
 
 	protected void registrarj() {
 		// TODO Auto-generated method stub
-		controlador =new ControladorJuego();
+		controlador = new ControladorJuego();
 		Jugador j =this.mapearDeDatos();
 		controlador.save(j);
 		JOptionPane.showMessageDialog(null, "Se ha registrado con éxito", "Informe", JOptionPane.INFORMATION_MESSAGE);
 		Escritorio esc= new Escritorio();
 		esc.setVisible(true);
 		this.setVisible(false);
+	
 		
 	}
 

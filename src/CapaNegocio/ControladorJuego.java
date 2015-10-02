@@ -93,8 +93,10 @@ public void setPartida(Partida partida) {
 	public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
 		
 		Jugador jug_b= catJug.buscarExistencia(dni_b);
+		CrearJugador jg = new CrearJugador();
 		if(jug_b==null){
 			// llamar a la interfaz guardarlo en variable jugador 
+			jg.setVisible(true);
 			catJug.add(jug_b);
 			
 		}
@@ -102,8 +104,9 @@ public void setPartida(Partida partida) {
 		Jugador jug_n= catJug.buscarExistencia(dni_n);
 				if(jug_n==null){
 					//llama a la interfaz de nuevo  guardalo en variable jugador
+					jg.setVisible(true);
 					catJug.add(jug_n);
-				
+				 // ni idea esto che te dejo el setvisible y un me gusta
 				}
 		
 		setPartida(cj.agregarPartida(jug_b, jug_n));

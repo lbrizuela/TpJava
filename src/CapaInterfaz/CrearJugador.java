@@ -37,7 +37,8 @@ import java.awt.event.ActionEvent;
 
 public class CrearJugador extends JFrame {
 
-
+///Luisina
+//Alfo
 	private JPanel contentPane;
 	private JTextField txtRdni;
 	private JTextField txtRnombre;

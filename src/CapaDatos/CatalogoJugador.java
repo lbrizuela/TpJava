@@ -27,8 +27,8 @@ public Jugador buscarExistencia(String dni) {
 				j.setDni(rs.getString("dni"));
 				j.setNombre(rs.getString("nombre"));
 				j.setApellido(rs.getString("apellido"));
-										
-			}
+								
+			}	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

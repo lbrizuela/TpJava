@@ -54,13 +54,15 @@ public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
 
 public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
 		/// Este metodo busca a los jugadores si existen y lo agregan a una nueva partida
-	CrearJugador crearJug = new CrearJugador();	
+	CrearJugador crearJug = new CrearJugador();
+	
 	Jugador jug_b= catJugador.buscarExistencia(dni_b);
 	
 	
 	if(jug_b==null){
 		JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse para jugar");
 		crearJug.setVisible(true);
+		
 			
 			
 			
@@ -70,6 +72,7 @@ public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
 	if(jug_n==null){
 		JOptionPane.showMessageDialog(null, "Jugador Negro debe registrarse para jugar");
 		crearJug.setVisible(true);
+		/*crearJug.showDialog();*/
 	}
 		
 	setPartida(catPartida.agregarPartida(jug_b, jug_n));

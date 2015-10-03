@@ -3,10 +3,10 @@ package CapaInterfaz;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Dialog;
 import java.awt.Panel;
 
 import CapaNegocio.ControladorJuego;
-
 import capaEntidad.*;
 
 import java.awt.EventQueue;
@@ -18,6 +18,7 @@ import javax.swing.JList;
 
 import java.awt.Toolkit;
 
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -102,6 +103,15 @@ public class CrearJugador extends JFrame {
 		nuevoJugador.add(btnRegistrar);
 	}
 
+	public void showDialog() 
+	{
+
+	    JDialog dialog = new JDialog(this, Dialog.ModalityType.APPLICATION_MODAL);
+	    dialog.setBounds(100, 100, 461, 228);
+	    
+	    dialog.setVisible(true);
+	}
+	
 	protected void registrarj() {
 		// TODO Auto-generated method stub
 		controlador = new ControladorJuego();

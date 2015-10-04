@@ -36,7 +36,7 @@ import javax.swing.UIManager;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CrearJugador extends JFrame {
+public class CrearJugador12 extends JFrame {
 
 
 ///Luisina
@@ -49,8 +49,8 @@ public class CrearJugador extends JFrame {
 	private JTextField txtRapellido;
 	private ControladorJuego controlador;
 	
-	public CrearJugador() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(CrearJugador.class.getResource("/Imagenes/icon.jpg")));
+	public CrearJugador12() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CrearJugador12.class.getResource("/Imagenes/icon.jpg")));
 		setTitle("Registrar Jugador");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 461, 228);

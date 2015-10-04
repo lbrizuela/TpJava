@@ -23,6 +23,7 @@ public Partida buscarPartida(String dni_b, String dni_n) {
 		stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from partida where dniB = ? and dniN=?");
 			stmt.setString(1, dni_b);
 			stmt.setString(2, dni_n);
+			
 			rs = stmt.executeQuery();
 			if(rs !=null && rs.next()){
 				Jugador j_b, j_n;

@@ -9,7 +9,7 @@ import capaEntidad.*;
 import CapaDatos.CatalogoJugador;
 import CapaDatos.CatalogoPartidas;
 import CapaDatos.CatalogoPiezas;
-import CapaInterfaz.CrearJugador;
+import CapaInterfaz.CrearJugador12;
 import CapaInterfaz.Escritorio;
 import Excepciones.appException;
 
@@ -46,32 +46,38 @@ public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
 		 
 		 */
 		//Si la partida existe la muestra 
-		piezas.addAll(catPieza.buscarPiezas(dni_b,dni_n));
-		partida.setPiezas(piezas);
-		return piezas;
+		int codigo=JOptionPane.showConfirmDialog(null, "¿Quieren realizar una nueva partida?", "Existe partida pendiente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (codigo==JOptionPane.YES_OPTION){
+            System.out.println("Has pulsado en SI");
+            piezas.addAll(catPieza.buscarPiezas(dni_b,dni_n));
+    		partida.setPiezas(piezas);
+    		
+        }else if(codigo==JOptionPane.NO_OPTION){
+        	// crea una nueva partida
+            System.out.println("Has pulsado en NO");
+            piezas.addAll(IniciarJuego(dni_b, dni_n));
+            
+        }
+
+        return piezas;
 }
 
 
 public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
 		/// Este metodo busca a los jugadores si existen y lo agregan a una nueva partida
-	CrearJugador crearJug = new CrearJugador();
+	CrearJugador12 crearJug = new CrearJugador12();
 	
 	Jugador jug_b= catJugador.buscarExistencia(dni_b);
-	
-	
 	if(jug_b==null){
 		JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse para jugar");
 		crearJug.setVisible(true);
-		
-			
-			
-			
-			}
+		}
 	
 	Jugador jug_n= catJugador.buscarExistencia(dni_n);
 	if(jug_n==null){
 		JOptionPane.showMessageDialog(null, "Jugador Negro debe registrarse para jugar");
 		crearJug.setVisible(true);
+		
 		/*crearJug.showDialog();*/
 	}
 		

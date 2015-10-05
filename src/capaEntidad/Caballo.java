@@ -16,6 +16,7 @@ public class Caballo extends Pieza{
 	}
 	public  void inicializarPiezas(String id, String col)
 	{
+	
 		id_pieza=id;
 		nombre="Caballo";
 		color=col;

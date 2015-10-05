@@ -85,28 +85,28 @@ public class Peon extends Pieza {
 		
 	switch(Integer.parseInt(indexOf)){
 		case 1:
-			posicion= "a"+indexOf;
+			posicion= "a"+i;
 			break;
 		case 2:
-			posicion="b"+ indexOf;
+			posicion="b"+ i;
 			break;
 		case 3:
-			posicion="c"+ indexOf;
+			posicion="c"+ i;
 			break;
 		case 4:
-			posicion="d"+ indexOf;
+			posicion="d"+ i;
 			break;
 		case 5:
-			posicion="e"+ indexOf;
+			posicion="e"+ i;
 			break;
 		case 6:
-			posicion="f"+ indexOf;
+			posicion="f"+ i;
 			break;
 		case 7:
-			posicion="g"+ indexOf;
+			posicion="g"+ i;
 			break;
 		case 8:
-			posicion="b"+ indexOf;
+			posicion="h"+ i;
 			break;
 		
 		

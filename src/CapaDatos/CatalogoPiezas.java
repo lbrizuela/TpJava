@@ -26,8 +26,8 @@ public ArrayList<Pieza> iniciarPiezas( String dni_b, String dni_n){
 	//Este metodo es llama los metodos para agregar las piezas al juego y la bd
 	
 	ArrayList<Pieza> piezas = new ArrayList<Pieza>();
-	crearPiezas("blancas");
-	crearPiezas("negras");
+	piezas.addAll(crearPiezas("blanco"));
+	piezas.addAll(crearPiezas("negro"));
 	addPiezas(dni_b, dni_n,piezas);
 	return piezas;
 	
@@ -36,7 +36,7 @@ public ArrayList<Pieza> iniciarPiezas( String dni_b, String dni_n){
 
 
 
-public void crearPiezas(String a){
+public ArrayList<Pieza>  crearPiezas(String a){
 //Este metodo devulve las piezas en su posicion inicial
 
   ArrayList<Pieza> piezas = new ArrayList<Pieza>();
@@ -47,39 +47,39 @@ public void crearPiezas(String a){
   piezas.add(p);
   p=new Dama();
   p.inicializarPiezas("d1",a);
- 
   piezas.add(p);
+  
   p=new Alfil();
   p.inicializarPiezas("a1",a);
- 
   piezas.add(p);
+  
   p=new Alfil();
   p.inicializarPiezas("a2",a);
-
   piezas.add(p);
+  
   p=new Caballo();
   p.inicializarPiezas("c1",a);
-
   piezas.add(p);
+  
   p=new Caballo();
   p.inicializarPiezas("c2",a);
-
   piezas.add(p);
+  
   p=new Torre();
   p.inicializarPiezas("t1",a);
-  
   piezas.add(p);
+  
   p=new Torre();
   p.inicializarPiezas("t2",a);
- 
   piezas.add(p);
+  
   for(int i=1; i<9;i++)
   {
 	  p=new Peon();
-	  p.inicializarPiezas("p"+ Integer.toString(i),a);
-	  
+	  p.inicializarPiezas("p"+ Integer.toString(i),a);	  
 	  piezas.add(p);
   }
+  return piezas;
   
 }
 
@@ -92,12 +92,13 @@ private void addPiezas(String dni_b, String dni_n, ArrayList<Pieza> piezas) {
 	
 /// Este metodo crea las piezas en la Bd
 	
-	PreparedStatement stmt= null;
-	
+
 	for (Pieza pieza : piezas) {
+		PreparedStatement stmt= null;
+		
 		try{
 	
-	stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into posicion(dni_j1, dni_j2, colYfila, Pieza, color) values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+	stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into posicion(dniB, dniN, colYfila, Pieza, color) values (?,?,?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 	stmt.setString(1, dni_b);
 	stmt.setString(2, dni_n);
 	stmt.setString(3, pieza.getPosicion());
@@ -140,56 +141,65 @@ public ArrayList<Pieza> buscarPiezas(String dni_b, String dni_n)
 	ResultSet rst= null;
 	
 	try {
-		stmt= FactoryConexion.getInstancia().getConn().prepareStatement("Select * from posicion where dniB=? and dniN=?");
+		stmt= FactoryConexion.getInstancia().getConn().prepareStatement("select Pieza, colYfila, color from posicion where dniB=? and dniN=?");
 
 	stmt.setString(1,dni_b);
 	stmt.setString(2, dni_n);
 	rst= stmt.executeQuery();
 	while(rst!= null && rst.next())
-	{
-		switch( rst.getString("Pieza"))
+	{ 
+		
+		switch((rst.getString("Pieza")).substring(0, 1))
 		{
 		case "r":
 		{ 
 			p=new Rey();
+			p.setNombre("Rey");
 			break;
 		}
 		case "d":
 		{
 			p=new Dama();
+			p.setNombre("Dama");
 			break;
 		}
 		case "t":
 		{
 			p=new Torre();
+			p.setNombre("Torre");
 			break;
 		}
 		case "p":
 		{
 			p= new Peon();
+			p.setNombre("Peon");
 			break;
 		}
 		case "c":
 		{
 			p= new Caballo();
+			p.setNombre("Caballo");
 			break;
 		}
 		case "a":
 		{
 			p=new Alfil();
+			p.setNombre("Alfil");
 			break;
 		}
-	}	
+		}
+		p.setId_pieza(rst.getString("Pieza"));
 		p.setPosicion(rst.getString("colYfila"));
 		p.setColor(rst.getString("color"));
 		p.setId_pieza(rst.getString("Pieza"));
 		piezas.add(p);
-		rst.next();
+	
 		
 	}
 	
 	
-	} catch (SQLException e) {
+	} 
+	catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
@@ -260,7 +270,7 @@ public boolean reyNulo(ArrayList<Pieza> piezas){
 	//Este metodo verifica si el rey es nulo
 
 	for (Pieza pieza : piezas) {
-		if(pieza.getClass().equals("Rey"))
+		if(pieza.getNombre().equals("Rey"))
 			if(pieza.getPosicion()== null)
 			{
 				return true;

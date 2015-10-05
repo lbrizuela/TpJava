@@ -221,17 +221,19 @@ public void validarPartida() {
 		
 		private void mostrarPiezas(ArrayList<Pieza>  pieza) {
 			// Este metodo muestra las Piezas por patalla
-			String blancas=null;
-			String negras=null;
+			String blancas="";
+			String negras="";
 			String turno=ctrol.getPartida().getTurno();
 			for (Pieza p : pieza) {
 			  if(p.getColor().equals("blanco")){     
 				  if(p.getPosicion()!=null)
-				  blancas=p.getPosicion()+"-"+p.getNombre()+"\n";
+				  blancas=blancas+p.getPosicion()+"-"+p.getNombre()+" \n";
+				  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
 			  }
 			  else{
 				  if(p.getPosicion()!=null)
-				  negras=p.getPosicion()+"-"+p.getNombre()+"\n";
+				  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n";
+				  //// Aca no se por que mierda no me hace el salto de linea 
 			  }  
 			
 			}
@@ -257,6 +259,8 @@ public void validarPartida() {
 				JOptionPane.showMessageDialog(null,"Movimiento Correcto");
 				else 
 					JOptionPane.showMessageDialog(null, "Movimiento Incorrecto");
+				text_origen.setText(null);
+				text_Destino.setText(null);
 			}
 			p.addAll(ctrol.realizarMovimiento(text_Turno.getText(), text_origen.getText(), text_Destino.getText())); //// este metodo realiza el movimiento
 			if(p==null)

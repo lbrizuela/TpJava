@@ -5,11 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import CapaDatos.FactoryConexion;
 import capaEntidad.*;
 
 public class CatalogoPartidas {
-	CatalogoJugador cj= new CatalogoJugador();
-	CatalogoPiezas cp =new CatalogoPiezas() ;
+	CatalogoJugador cj;
+	CatalogoPiezas cp;
+	public CatalogoPartidas(){
+		
+	cj= new CatalogoJugador();
+	cp =new CatalogoPiezas() ;
+	}
 
 public Partida buscarPartida(String dni_b, String dni_n) {
 		//Este metodo busca una partida en la BD, si no la encuentra devuelve nuull
@@ -20,39 +26,42 @@ public Partida buscarPartida(String dni_b, String dni_n) {
 		ResultSet rs=null;
 		
 		try {
-		stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from partida where dniB = ? and dniN=?");
+		stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select dniB, dniN, Turno from Partida where dniB like ? and dniN like ?");
 			stmt.setString(1, dni_b);
 			stmt.setString(2, dni_n);
+			rs=stmt.executeQuery();
 			
-			rs = stmt.executeQuery();
-			if(rs !=null && rs.next()){
-				Jugador j_b, j_n;
+			if(rs!=null && rs.next()){
+				Jugador j_b= new Jugador();
+				Jugador j_n=new Jugador();
+				partida=new Partida();
+				partida.setTurno(rs.getString("Turno"));
 				j_b=cj.buscarExistencia(dni_b);
 				j_n=cj.buscarExistencia(dni_n);
-				partida=new Partida();
 				partida.setJ_b(j_b);
 				partida.setJ_n(j_n);
-				partida.setTurno(rs.getString("Turno"));
-				
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally
 		{
+			
 			try {
 				if(rs!=null)rs.close();
 				if(stmt!=null) stmt.close();
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Error en catalogo partidas");
 				e.printStackTrace();
 			}
-			FactoryConexion.getInstancia().releaseConn();
+			FactoryConexion.getInstancia().releaseConn();	
+			
 		}
 		return partida;
+		
 		
 		
 }
@@ -64,11 +73,10 @@ public Partida agregarPartida(Jugador ju_b, Jugador ju_n) {
 		
 		Partida p= new Partida();
 		addPartida(ju_b.getDni(), ju_n.getDni());
-		ArrayList<Pieza> pieza= new ArrayList<Pieza>();
-		pieza.addAll(cp.iniciarPiezas(ju_b.getDni(), ju_n.getDni()));
+
 		p.setJ_b(ju_b);
 		p.setJ_n(ju_n);
-		p.setPiezas(pieza);
+		p.setPiezas(cp.iniciarPiezas(ju_b.getDni(), ju_n.getDni()));
 		p.setTurno("blanco");
 		return p;
 		
@@ -95,8 +103,7 @@ private void addPartida(String dniB, String dniN) {
 		finally
 		{
 			try {
-			
-				if(stmt!=null) stmt.close();
+			stmt.close();
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -133,8 +140,7 @@ public void UpPatida(Partida p){
 		finally
 		{
 			try {
-				
-				if(stmt!=null) stmt.close();
+				stmt.close();
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -166,7 +172,7 @@ public void borrarPartida(String dni, String dni2) {
 			{
 				try {
 					
-					if(stmt!=null) stmt.close();
+					 stmt.close();
 				}
 				catch (SQLException e) {
 					// TODO Auto-generated catch block

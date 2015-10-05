@@ -10,7 +10,6 @@ public abstract class Pieza {
 
 
 
-
 	public String getId_pieza() {
 		return id_pieza;
 	}

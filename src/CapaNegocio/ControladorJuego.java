@@ -47,18 +47,16 @@ public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
 		else
 		{
 			partida.setPiezas(catPieza.buscarPiezas(dni_b,dni_n));
-			int codigo=JOptionPane.showConfirmDialog(null, "¿Quieren realizar una nueva partida?", "Existe partida pendiente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-	        if (codigo==JOptionPane.YES_OPTION){
+			int codigo=JOptionPane.showConfirmDialog(null, "¿Quieres realizar una nueva partida?", "Existe partida pendiente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+	        if (codigo==JOptionPane.YES_OPTION){   /// Esto estaba al revez.
 	            System.out.println("Has pulsado en SI");
-	            borrarPartida();
-	           
+	            borrarPartida();/// debe borar la partida anterior para inicializar otra.
 	            IniciarJuego(dni_b, dni_n);
-	        
-	    
-	    		
+	  	
 	        }
 	        else if(codigo==JOptionPane.NO_OPTION){
-	        	// crea una nueva partida
+	        	// esto esta de mas, por que tiene que buscar las piezas por si quiere borrar la partida anterior, entonces debe
+	        	// crear una nueva partida con sus nuevas piezas, lo deje para que lo vean.
 	            System.out.println("Has pulsado en NO");
 	            
 	          
@@ -96,14 +94,14 @@ public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
 }
 
 
-public boolean validarMovimiento(String color,String text, String text2) {
+public boolean validarMovimiento(String text, String text2) {
 		// Este metodo valida si el moviento es valido, si lo es devuelve un true
-		Pieza p=null;
+		Pieza p;
 		boolean resp;
-		p=catPieza.buscarFicha(partida.getPiezas(),color,text);
-		if(p==null)
+		p=catPieza.buscarFicha(partida.getPiezas(),partida.getTurno(),text);
+		if(p!=null)
 			{
-			resp=p.validarMovimiento(text, text2, color);
+			resp=p.validarMovimiento(text, text2,partida.getTurno());
 			}
 		else
 			{
@@ -142,20 +140,22 @@ public void setPartida(Partida partida) {
 
 
 
-public ArrayList<Pieza> realizarMovimiento(String color,String text, String text2) {
+public ArrayList<Pieza> realizarMovimiento(String text, String text2) {
 
 	     //Este metodo realiza el movimiento si ya fue correcto
-	     partida.setPiezas(catPieza.moverFicha(partida.getPiezas(),color,text, text2));
-	     partida.setPiezas(catPieza.borrarFicha(partida.getPiezas(),color, text2));
+	    
+	     catPieza.borrarFicha(partida.getPiezas(),partida.getTurno(), text2);/// Primero tengo que borrar la ficha que come, por si primero hacemos el moviento y dsps borramos
+	                                                                         /// cuando querramos borrar va a encontrar 2 fichas en la misma posicion.. Este esta OK
+	     catPieza.moverFicha(partida.getPiezas(),partida.getTurno(),text, text2);//// Este metodo esta mal.. no me enceuntra la ficha, y no encuentro cual es el error.
 	     boolean resp= catPieza.reyNulo(partida.getPiezas());
 	     if(resp)
 	     {
 	    	 partida.setPiezas(null);
 	     }
-	       
+	      
 	     else
 	     {
-	    	 if(color.equals("blanco"))
+	    	 if(partida.getTurno().equals("blanco"))
 	    	 {
 	    		 partida.setTurno("negro");
 	    	 }
@@ -173,7 +173,6 @@ public ArrayList<Pieza> realizarMovimiento(String color,String text, String text
 
 public void UpPartida() {
 	///Este metodo actualiza los datos en la base 
-		
 		catPartida.UpPatida(getPartida());
 		catPieza.UpFichas(getPartida().getPiezas(), getPartida().getJ_b().getDni(), getPartida().getJ_n().getDni());
 	

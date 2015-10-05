@@ -248,16 +248,27 @@ for(Pieza i:piezas)
 
 
 
-public ArrayList<Pieza> borrarFicha(ArrayList<Pieza> piezas,String color,String destino)
+public void borrarFicha(ArrayList<Pieza> piezas,String color,String destino)
 {
 //Este metodo borra(pone en null su posicion) a una ficha comida 
+    
+	Pieza p;
 
 	if(color=="blanco")
-		{this.buscarFicha(piezas,"negro", destino).setPosicion(null);}
+		{
+		p=buscarFicha(piezas,"negro", destino);
+		if(p!=null){
+		p.setPosicion(null);}
+		}
 	else
-		{this.buscarFicha(piezas,"blanco", destino).setPosicion(null);}
+		{
+		p=buscarFicha(piezas,"blanco", destino);
+		if(p!=null){
+		p.setPosicion(null);}
+		}
+	
 
-	return piezas;	
+	
 }
 
 
@@ -286,11 +297,13 @@ public boolean reyNulo(ArrayList<Pieza> piezas){
 
 
 
-public ArrayList<Pieza> moverFicha(ArrayList<Pieza> piezas,String color,String origen,String destino){
+public void  moverFicha(ArrayList<Pieza> piezas,String color,String origen,String destino){
 	//Este metodo mueve las fichas
-	
-	this.buscarFicha(piezas,color,origen).setPosicion(destino);
-	return piezas;
+	Pieza p;
+	p=buscarFicha(piezas,color,origen);
+	if(p!=null)
+	p.setPosicion(destino);
+
 }
 
 
@@ -345,7 +358,7 @@ public void borrarPiezas(String dni, String dni2) {
 	//Este metodo borra las Piezas
 	PreparedStatement stmt=null;
 	try {
-		stmt=FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM posicion WHERE dniB=? and dniN=? ");
+		stmt=FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM Posicion WHERE dniB=? and dniN=? ");
 	
 	stmt.setString(1, dni);
 	stmt.setString(2, dni2);

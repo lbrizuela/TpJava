@@ -35,10 +35,10 @@ public Partida buscarPartida(String dni_b, String dni_n) {
 				Jugador j_b= new Jugador();
 				Jugador j_n=new Jugador();
 				partida=new Partida();
-				partida.setTurno(rs.getString("Turno"));
-				j_b=cj.buscarExistencia(dni_b);
-				j_n=cj.buscarExistencia(dni_n);
-				partida.setJ_b(j_b);
+				partida.setTurno(rs.getString("Turno"));   // Marcaba Error por que al buscar los jugadores en la base se
+				j_b=cj.buscarExistencia(dni_b);            // cerraba el resultset, entonces cuando queria guardar el turno
+				j_n=cj.buscarExistencia(dni_n);            // el resultset estaba cerrado, por eso primero debe guardar el 
+				partida.setJ_b(j_b);                       // turno y despues buscar los jugadores
 				partida.setJ_n(j_n);
 			}
 			
@@ -72,10 +72,8 @@ public Partida agregarPartida(Jugador ju_b, Jugador ju_n) {
 		//Este metodo solo crea un objeto partida y llama a el metodo que lo agrega a la base
 		
 		Partida p= new Partida();
-		addPartida(ju_b.getDni(), ju_n.getDni());
-
-		p.setJ_b(ju_b);
-		p.setJ_n(ju_n);
+		addPartida(ju_b.getDni(), ju_n.getDni()); // Por BD primero debe agragar las partidas y dsps las piezas.
+		p.setJ_n(ju_n); 
 		p.setPiezas(cp.iniciarPiezas(ju_b.getDni(), ju_n.getDni()));
 		p.setTurno("blanco");
 		return p;
@@ -90,7 +88,7 @@ private void addPartida(String dniB, String dniN) {
 		
 		PreparedStatement stmt=null;
 		try {
-			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into Partida(dniB, dniN, turno) values (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into Partida(dniB, dniN, Turno) values (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dniB);
 			stmt.setString(2, dniN);
 			stmt.setString(3, "blanco");
@@ -161,9 +159,10 @@ public void borrarPartida(String dni, String dni2) {
 		PreparedStatement stmt=null;
 				
 			try {
-				stmt=FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM partida WHERE dniB=? and dniN=? ");
+				stmt=FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM Partida WHERE dniB=? and dniN=? ");
 				stmt.setString(1, dni);
 				stmt.setString(2, dni2);
+				stmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -9,7 +9,7 @@ public class Partida {
 		return piezas;
 	}
 	public void setPiezas(ArrayList<Pieza> piezas) {
-		this.piezas = piezas;
+		this.piezas.addAll(piezas);
 	}
 	public Jugador getJ_b() {
 		return j_b;

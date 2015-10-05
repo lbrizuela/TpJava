@@ -9,46 +9,49 @@ public class Peon extends Pieza {
 	Partida partida=new Partida();
 	public  boolean validarMovimiento(String a, String b,String color) {
 		
-	
+	   boolean reps=true;
 		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
 	
 	int distancia = color.contentEquals("negra")? (c-d) : (d-c);  //Hago la pregunta de que color es
-	if(distancia==1)                                               //el calculo de la distancia dependera de que color sea,esto se debe	                                                             // a como avanzan las fichas blancas y las negras entonces sera 	                                                             // un movimiento valido si la distancia entre que recorre es 	                                                             // si la distancia es negativa recorreria hacia atras y no es valido
+	switch (distancia)                                           //el calculo de la distancia dependera de que color sea,esto se debe	                                                             // a como avanzan las fichas blancas y las negras entonces sera 	                                                             // un movimiento valido si la distancia entre que recorre es 	                                                             // si la distancia es negativa recorreria hacia atras y no es valido
 	{
-		if(a.substring(0)!= b.substring(0))
+	case 1:
+	{
+		if(a.substring(0,1)!= b.substring(0,1))
 		{
 			if(cp.buscarFicha(partida.getPiezas(), colorInverso() , b)!=null)
 			{
-			return true;
+			reps=true;
 			}
 			else
 			{
-			return false;
+			reps=false;
 			}
 		}
 		else 
 		{
-			return true;
+			reps=true;
 		}
+		break;
 		
 	}
-	else
+	case 2:
 	{
-		if(distancia==2){
-			if(primerMovimiento){
-				return true;
+		
+		if(primerMovimiento){
+			reps=true;
 			}
-			else {
-				return false;
-			}
-		}
-		else{
-			return false;
-		}
-	}		
-}	
+		else {
+			reps=false;
+				}
+		
+		break;
+	}	
 	
+	}
+	return reps;
+	}
 	
 	public String colorInverso()
 	{
@@ -85,28 +88,28 @@ public class Peon extends Pieza {
 		
 	switch(Integer.parseInt(indexOf)){
 		case 1:
-			posicion= "a"+indexOf;
+			posicion= "a"+i;
 			break;
 		case 2:
-			posicion="b"+ indexOf;
+			posicion="b"+ i;
 			break;
 		case 3:
-			posicion="c"+ indexOf;
+			posicion="c"+ i;
 			break;
 		case 4:
-			posicion="d"+ indexOf;
+			posicion="d"+ i;
 			break;
 		case 5:
-			posicion="e"+ indexOf;
+			posicion="e"+ i;
 			break;
 		case 6:
-			posicion="f"+ indexOf;
+			posicion="f"+ i;
 			break;
 		case 7:
-			posicion="g"+ indexOf;
+			posicion="g"+ i;
 			break;
 		case 8:
-			posicion="b"+ indexOf;
+			posicion="h"+ i;
 			break;
 		
 		

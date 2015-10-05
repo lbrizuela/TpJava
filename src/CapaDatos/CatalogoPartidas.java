@@ -5,11 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import CapaDatos.FactoryConexion;
 import capaEntidad.*;
 
 public class CatalogoPartidas {
-	CatalogoJugador cj= new CatalogoJugador();
-	CatalogoPiezas cp =new CatalogoPiezas() ;
+	CatalogoJugador cj;
+	CatalogoPiezas cp;
+	public CatalogoPartidas(){
+		
+	cj= new CatalogoJugador();
+	cp =new CatalogoPiezas() ;
+	}
 
 public Partida buscarPartida(String dni_b, String dni_n) {
 		//Este metodo busca una partida en la BD, si no la encuentra devuelve nuull
@@ -20,39 +26,42 @@ public Partida buscarPartida(String dni_b, String dni_n) {
 		ResultSet rs=null;
 		
 		try {
-		stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select * from partida where dniB = ? and dniN=?");
+		stmt = FactoryConexion.getInstancia().getConn().prepareStatement("select dniB, dniN, Turno from Partida where dniB like ? and dniN like ?");
 			stmt.setString(1, dni_b);
 			stmt.setString(2, dni_n);
+			rs=stmt.executeQuery();
 			
-			rs = stmt.executeQuery();
-			if(rs !=null && rs.next()){
-				Jugador j_b, j_n;
-				j_b=cj.buscarExistencia(dni_b);
-				j_n=cj.buscarExistencia(dni_n);
+			if(rs!=null && rs.next()){
+				Jugador j_b= new Jugador();
+				Jugador j_n=new Jugador();
 				partida=new Partida();
-				partida.setJ_b(j_b);
+				partida.setTurno(rs.getString("Turno"));   // Marcaba Error por que al buscar los jugadores en la base se
+				j_b=cj.buscarExistencia(dni_b);            // cerraba el resultset, entonces cuando queria guardar el turno
+				j_n=cj.buscarExistencia(dni_n);            // el resultset estaba cerrado, por eso primero debe guardar el 
+				partida.setJ_b(j_b);                       // turno y despues buscar los jugadores
 				partida.setJ_n(j_n);
-				partida.setTurno(rs.getString("Turno"));
-				
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally
 		{
+			
 			try {
 				if(rs!=null)rs.close();
 				if(stmt!=null) stmt.close();
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Error en catalogo partidas");
 				e.printStackTrace();
 			}
-			FactoryConexion.getInstancia().releaseConn();
+			FactoryConexion.getInstancia().releaseConn();	
+			
 		}
 		return partida;
+		
 		
 		
 }
@@ -63,12 +72,9 @@ public Partida agregarPartida(Jugador ju_b, Jugador ju_n) {
 		//Este metodo solo crea un objeto partida y llama a el metodo que lo agrega a la base
 		
 		Partida p= new Partida();
-		addPartida(ju_b.getDni(), ju_n.getDni());
-		ArrayList<Pieza> pieza= new ArrayList<Pieza>();
-		pieza.addAll(cp.iniciarPiezas(ju_b.getDni(), ju_n.getDni()));
-		p.setJ_b(ju_b);
-		p.setJ_n(ju_n);
-		p.setPiezas(pieza);
+		addPartida(ju_b.getDni(), ju_n.getDni()); // Por BD primero debe agragar las partidas y dsps las piezas.
+		p.setJ_n(ju_n); 
+		p.setPiezas(cp.iniciarPiezas(ju_b.getDni(), ju_n.getDni()));
 		p.setTurno("blanco");
 		return p;
 		
@@ -82,7 +88,7 @@ private void addPartida(String dniB, String dniN) {
 		
 		PreparedStatement stmt=null;
 		try {
-			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into Partida(dniB, dniN, turno) values (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("insert into Partida(dniB, dniN, Turno) values (?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, dniB);
 			stmt.setString(2, dniN);
 			stmt.setString(3, "blanco");
@@ -95,8 +101,7 @@ private void addPartida(String dniB, String dniN) {
 		finally
 		{
 			try {
-			
-				if(stmt!=null) stmt.close();
+			stmt.close();
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -133,8 +138,7 @@ public void UpPatida(Partida p){
 		finally
 		{
 			try {
-				
-				if(stmt!=null) stmt.close();
+				stmt.close();
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -155,9 +159,10 @@ public void borrarPartida(String dni, String dni2) {
 		PreparedStatement stmt=null;
 				
 			try {
-				stmt=FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM partida WHERE dniB=? and dniN=? ");
+				stmt=FactoryConexion.getInstancia().getConn().prepareStatement("DELETE FROM Partida WHERE dniB=? and dniN=? ");
 				stmt.setString(1, dni);
 				stmt.setString(2, dni2);
+				stmt.execute();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -166,7 +171,7 @@ public void borrarPartida(String dni, String dni2) {
 			{
 				try {
 					
-					if(stmt!=null) stmt.close();
+					 stmt.close();
 				}
 				catch (SQLException e) {
 					// TODO Auto-generated catch block

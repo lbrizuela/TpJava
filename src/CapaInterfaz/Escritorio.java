@@ -255,12 +255,15 @@ public void validarPartida() {
 			while(respuesta==false)   // Hace una iteracion hasta que no ingrese un movimiento valido
 			{
 				respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText()); // Llama a realizarmoviemito para que lo valide
-				if(respuesta) 
+				if(respuesta) {
 				JOptionPane.showMessageDialog(null,"Movimiento Correcto");
-				else 
-					JOptionPane.showMessageDialog(null, "Movimiento Incorrecto");
-				text_origen.setText(null); //// tengo que borrar los text sino entra en un bucle y no me deja ingresar 
-				text_Destino.setText(null);/// o modificar nada por el las ventanas DIALOGAl
+				}
+				else {
+				JOptionPane.showMessageDialog(null, "Movimiento Incorrecto");
+				limpiar();//// tengo que borrar los text sino entra en un bucle y no me deja ingresar 
+                /// o modificar nada por el las ventanas DIALOGAl... Y hay que dejarlo aca addentro sino dsps da error
+				}
+				
 			}
 			p.addAll(ctrol.realizarMovimiento(text_origen.getText(), text_Destino.getText())); //// este metodo realiza el movimiento
 			if(p==null)
@@ -277,9 +280,7 @@ public void validarPartida() {
 		//Este metodo limpia la interfaz
 			text_origen.setText(null);
 			text_Destino.setText(null);
-			text_b.setText(null);
-			text_n.setText(null);
-			text_Turno.setText(null);
+			
 			
 			
 		}

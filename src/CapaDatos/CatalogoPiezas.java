@@ -226,21 +226,6 @@ public ArrayList<Pieza> buscarPiezas(String dni_b, String dni_n)
 
 
 
-public Pieza buscarFicha(ArrayList<Pieza> piezas,String color,String pos){
-// Este metodo busca una ficha del un arreglo 
-	
-	
-for(Pieza i:piezas)
-	{
-		if(i.getPosicion().equals(pos))
-			if(i.getColor().equals(color))
-			{
-			   return i;
-			}
-	}
-	return null;
-
-}
 
 
 
@@ -254,7 +239,7 @@ public void borrarFicha(ArrayList<Pieza> piezas,String color,String destino)
     
 	Pieza p;
 
-	if(color=="blanco")
+	if(color.equals("blanco"))
 		{
 		p=buscarFicha(piezas,"negro", destino);
 		if(p!=null){
@@ -293,15 +278,29 @@ public boolean reyNulo(ArrayList<Pieza> piezas){
 }
 
 
+public Pieza buscarFicha(ArrayList<Pieza> piezas,String color,String pos){
+	// Este metodo busca una ficha del un arreglo 
+		
+		
+	for(Pieza i:piezas)
+		{
+			if(i.getPosicion().equals(pos))
+				if(i.getColor().equals(color))
+				{
+				   return i;
+				}
+		}
+		return null;
+
+	}
 
 
 
 
 public void  moverFicha(ArrayList<Pieza> piezas,String color,String origen,String destino){
 	//Este metodo mueve las fichas
-	Pieza p;
+	Pieza p= null;
 	p=buscarFicha(piezas,color,origen);
-	if(p!=null)
 	p.setPosicion(destino);
 
 }
@@ -318,7 +317,7 @@ public void UpFichas(ArrayList<Pieza> pie, String dni_b, String dni_n)
 	PreparedStatement stmt= null;
 	for (Pieza pieza : pie) {
 		try{
-	stmt= FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE posicion SET posicion= ? where dniB=? and dniN=? and Pieza=? and color=?");
+	stmt= FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE posicion SET colYfila= ? where dniB=? and dniN=? and Pieza=? and color=?");
 	stmt.setString(2, dni_b);
 	stmt.setString(3, dni_n);
 	stmt.setString(4, pieza.getId_pieza());

@@ -74,6 +74,7 @@ public Partida agregarPartida(Jugador ju_b, Jugador ju_n) {
 		Partida p= new Partida();
 		addPartida(ju_b.getDni(), ju_n.getDni()); // Por BD primero debe agragar las partidas y dsps las piezas.
 		p.setJ_n(ju_n); 
+		p.setJ_b(ju_b);
 		p.setPiezas(cp.iniciarPiezas(ju_b.getDni(), ju_n.getDni()));
 		p.setTurno("blanco");
 		return p;
@@ -129,7 +130,7 @@ public void UpPatida(Partida p){
 			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE Partida SET Turno= ? where dniB=? and dniN=?");
 			stmt.setString(1, p.getTurno());
 			stmt.setString(2, p.getJ_b().getDni());
-			stmt.setString(2, p.getJ_n().getDni());
+			stmt.setString(3, p.getJ_n().getDni());
 			stmt.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

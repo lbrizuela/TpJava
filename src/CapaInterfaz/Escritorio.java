@@ -85,26 +85,27 @@ public class Escritorio extends JFrame {
 			contentPane.setLayout(null);
 			
 			JLabel lblTurno = new JLabel("Turno ");
-			lblTurno.setFont(new Font("Arial", Font.BOLD, 12));
 			lblTurno.setBounds(22, 187, 46, 14);
+			lblTurno.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(lblTurno);
 			
 			JLabel Blancas = new JLabel("Blancas");
-			Blancas.setFont(new Font("Arial", Font.BOLD, 12));
 			Blancas.setBounds(22, 222, 81, 14);
+			Blancas.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(Blancas);
 			
 			JLabel lblOrigen = new JLabel("Origen");
-			lblOrigen.setFont(new Font("Arial", Font.BOLD, 12));
 			lblOrigen.setBounds(252, 238, 46, 14);
+			lblOrigen.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(lblOrigen);
 			
 			JLabel lblDestino = new JLabel("Destino");
-			lblDestino.setFont(new Font("Arial", Font.BOLD, 12));
 			lblDestino.setBounds(252, 294, 46, 14);
+			lblDestino.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(lblDestino);
 			
 			JButton btnMover = new JButton("Mover");
+			btnMover.setBounds(252, 359, 147, 23);
 			btnMover.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
@@ -112,44 +113,43 @@ public class Escritorio extends JFrame {
 				}
 			});
 			btnMover.setFont(new Font("Arial", Font.BOLD, 12));
-			btnMover.setBounds(252, 359, 147, 23);
 			contentPane.add(btnMover);
 			
 			JLabel lblNewLabel = new JLabel("");
-			lblNewLabel.setIcon(new ImageIcon(Escritorio.class.getResource("/Imagenes/ajedrez.jpg")));
 			lblNewLabel.setBounds(449, 187, 278, 297);
+			lblNewLabel.setIcon(new ImageIcon(Escritorio.class.getResource("/Imagenes/ajedrez.jpg")));
 			contentPane.add(lblNewLabel);
 			
 			text_Turno = new JTextField();
-			text_Turno.setEnabled(false);
 			text_Turno.setBounds(73, 185, 128, 20);
+			text_Turno.setEnabled(false);
 			contentPane.add(text_Turno);
 			text_Turno.setColumns(10);
 			
 			JLabel lblNewLabel_1 = new JLabel("Negras");
-			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
 			lblNewLabel_1.setBounds(22, 420, 46, 14);
+			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(lblNewLabel_1);
 			
 			text_origen = new JTextField();
+			text_origen.setBounds(252, 263, 147, 20);
 			text_origen.setText("Posici\u00F3n origen");
 			text_origen.setHorizontalAlignment(SwingConstants.CENTER);
 			text_origen.setFont(new Font("Arial", Font.ITALIC, 10));
-			text_origen.setBounds(252, 263, 147, 20);
 			contentPane.add(text_origen);
 			text_origen.setColumns(10);
 			
 			text_Destino = new JTextField();
+			text_Destino.setBounds(252, 319, 147, 20);
 			text_Destino.setHorizontalAlignment(SwingConstants.CENTER);
 			text_Destino.setText("Posici\u00F3n destino");
 			text_Destino.setFont(new Font("Arial", Font.ITALIC, 10));
-			text_Destino.setBounds(252, 319, 147, 20);
 			contentPane.add(text_Destino);
 			text_Destino.setColumns(10);
 			
 			text_b = new JTextField();
-			text_b.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			text_b.setBounds(22, 247, 208, 162);
+			text_b.setFont(new Font("Tahoma", Font.PLAIN, 11));
 			contentPane.add(text_b);
 			text_b.setColumns(10);
 			
@@ -159,8 +159,8 @@ public class Escritorio extends JFrame {
 			text_n.setColumns(10);
 			
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Ingrese Dni para Jugar", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 			panel.setBounds(22, 11, 705, 116);
+			panel.setBorder(new TitledBorder(null, "Ingrese Dni para Jugar", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLACK));
 			contentPane.add(panel);
 			panel.setLayout(null);
 			
@@ -196,6 +196,7 @@ public class Escritorio extends JFrame {
 			panel.add(btnJugar);
 			
 			JButton bnt_Guardar = new JButton("Guardar Partida");
+			bnt_Guardar.setBounds(252, 402, 147, 23);
 			bnt_Guardar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -203,8 +204,11 @@ public class Escritorio extends JFrame {
 				}
 			});
 			bnt_Guardar.setFont(new Font("Arial", Font.BOLD, 12));
-			bnt_Guardar.setBounds(252, 402, 147, 23);
 			contentPane.add(bnt_Guardar);
+			
+			JTextArea textArea = new JTextArea();
+			textArea.setBounds(22, 247, 208, 162);
+			contentPane.add(textArea);
 	
 	}
 
@@ -259,6 +263,7 @@ public void validarPartida() {
 			  }  
 			
 			}
+			
 			text_b.setText(blancas);
 			text_n.setText(negras);
 			text_Turno.setText(turno);

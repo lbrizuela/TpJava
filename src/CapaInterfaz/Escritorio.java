@@ -228,7 +228,7 @@ public void validarPartida() {
 			for (Pieza p : pieza) {
 			  if(p.getColor().equals("blanco")){     
 				  if(p.getPosicion()!=null)
-				  blancas=blancas+p.getPosicion()+"-"+p.getNombre()+" \n";
+				  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre();
 				  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
 			  }
 			  else{

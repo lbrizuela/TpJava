@@ -36,7 +36,7 @@ public Partida validarPartida(String dni_b, String dni_n){
 		partida=catPartida.buscarPartida(dni_b, dni_n);
 		if(partida==null)// Si la partida no existe la inicializa\
 		{
-			JOptionPane.showMessageDialog(null, "No tienen partidas entre los jugadores");
+			JOptionPane.showMessageDialog(null, "No existe la partida");
 			
 		}
 		/* ACA ESTARIA LA PREGUNTA DE QUE SI LA PARTIDA NO ES NULA PREGUNTA SI 

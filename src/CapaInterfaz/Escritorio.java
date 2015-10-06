@@ -223,12 +223,16 @@ public void validarPartida() {
 				ju_b=ctrol.existeJugador(text_dniB.getText());
 				if(ju_b==null)
 				{
-					
+					JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse");
+					CrearJugador cjn=new CrearJugador(this,true);
+					cjn.setVisible(true);
 				}
 				ju_n=ctrol.existeJugador(text_dniN.getText());
 				if(ju_n==null)
 				{
-					
+					JOptionPane.showMessageDialog(null, "Jugador negro debe registrarse");
+					CrearJugador cjn=new CrearJugador(this,true);
+					cjn.setVisible(true);
 				}
 				p=ctrol.IniciarJuego(text_dniB.getText(),text_dniN.getText());
 			}

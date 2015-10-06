@@ -9,7 +9,7 @@ import capaEntidad.*;
 import CapaDatos.CatalogoJugador;
 import CapaDatos.CatalogoPartidas;
 import CapaDatos.CatalogoPiezas;
-import CapaInterfaz.CrearJugador12;
+
 import CapaInterfaz.Escritorio;
 import Excepciones.appException;
 

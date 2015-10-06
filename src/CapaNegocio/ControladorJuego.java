@@ -10,7 +10,7 @@ import CapaDatos.CatalogoJugador;
 import CapaDatos.CatalogoPartidas;
 import CapaDatos.CatalogoPiezas;
 
-import CapaInterfaz.CrearJugador12;
+
 import CapaInterfaz.Escritorio;
 import Excepciones.appException;
 
@@ -71,7 +71,7 @@ public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
 
 public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
 		/// Este metodo busca a los jugadores si existen y lo agregan a una nueva partida
-	CrearJugador12 crearJug = new CrearJugador12();
+
 	Jugador jug_b= new Jugador();
 	Jugador jug_n= new Jugador();
     jug_b=catJugador.buscarExistencia(dni_b);

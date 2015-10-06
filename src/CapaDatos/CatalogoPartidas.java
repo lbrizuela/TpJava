@@ -74,6 +74,8 @@ public Partida agregarPartida(Jugador ju_b, Jugador ju_n) {
 		Partida p= new Partida();
 		addPartida(ju_b.getDni(), ju_n.getDni()); // Por BD primero debe agragar las partidas y dsps las piezas.
 		p.setJ_n(ju_n); 
+		/*LUISI FIJATE SI ES PORQUE ACA FALTA EL SET BLANCO ENTONCES CUANDO TE LO BUSQUE VA A ESTAR NULL*/
+		p.setJ_b(ju_b);
 		p.setPiezas(cp.iniciarPiezas(ju_b.getDni(), ju_n.getDni()));
 		p.setTurno("blanco");
 		return p;

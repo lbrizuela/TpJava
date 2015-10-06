@@ -9,7 +9,7 @@ import capaEntidad.*;
 import CapaDatos.CatalogoJugador;
 import CapaDatos.CatalogoPartidas;
 import CapaDatos.CatalogoPiezas;
-import CapaInterfaz.CrearJugador;
+
 import CapaInterfaz.CrearJugador12;
 import CapaInterfaz.Escritorio;
 import Excepciones.appException;
@@ -77,18 +77,10 @@ public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
     jug_b=catJugador.buscarExistencia(dni_b);
 	if(jug_b==null){
 		JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse para jugar");
+			
 
-		/*<<<<<<< HEAD
-		
-	
-		
-		
-		//crearJug.setVisible(true);
-		}
-=======
 		crearJug.setVisible(true);}
->>>>>>> branch 'master' of https://github.com/GDJ2015/JavaTp.git
-	*/
+
 	jug_n= catJugador.buscarExistencia(dni_n);
 	if(jug_n==null){
 		JOptionPane.showMessageDialog(null, "Jugador Negro debe registrarse para jugar");

@@ -78,7 +78,7 @@ public class Escritorio extends JFrame {
 			setIconImage(Toolkit.getDefaultToolkit().getImage(Escritorio.class.getResource("/Imagenes/icon.jpg")));
 			setTitle("Juego Ajedrez UTN");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 760, 533);
+			setBounds(100, 100, 760, 714);
 			contentPane = new JPanel();
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
@@ -128,7 +128,7 @@ public class Escritorio extends JFrame {
 			
 			JLabel lblNewLabel_1 = new JLabel("Negras");
 			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
-			lblNewLabel_1.setBounds(113, 222, 46, 14);
+			lblNewLabel_1.setBounds(22, 420, 46, 14);
 			contentPane.add(lblNewLabel_1);
 			
 			text_origen = new JTextField();
@@ -148,12 +148,13 @@ public class Escritorio extends JFrame {
 			text_Destino.setColumns(10);
 			
 			text_b = new JTextField();
-			text_b.setBounds(22, 247, 81, 192);
+			text_b.setFont(new Font("Tahoma", Font.PLAIN, 11));
+			text_b.setBounds(22, 247, 208, 162);
 			contentPane.add(text_b);
 			text_b.setColumns(10);
 			
 			text_n = new JTextField();
-			text_n.setBounds(113, 247, 86, 192);
+			text_n.setBounds(22, 445, 208, 192);
 			contentPane.add(text_n);
 			text_n.setColumns(10);
 			

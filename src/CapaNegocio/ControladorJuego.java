@@ -10,7 +10,6 @@ import CapaDatos.CatalogoJugador;
 import CapaDatos.CatalogoPartidas;
 import CapaDatos.CatalogoPiezas;
 
-
 import CapaInterfaz.Escritorio;
 import Excepciones.appException;
 
@@ -32,13 +31,13 @@ public ControladorJuego()
 
 
 
-public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
+public Partida validarPartida(String dni_b, String dni_n){
 		/// Este metodo valida que la partida exista
 		partida=catPartida.buscarPartida(dni_b, dni_n);
 		if(partida==null)// Si la partida no existe la inicializa\
 		{
 			JOptionPane.showMessageDialog(null, "No tienen partidas entre los jugadores");
-			IniciarJuego(dni_b, dni_n);
+			
 		}
 		/* ACA ESTARIA LA PREGUNTA DE QUE SI LA PARTIDA NO ES NULA PREGUNTA SI 
 		 * QYUERE HACER UNA NUEVA O CONTINUAR CON LA ANTERIOR
@@ -65,37 +64,22 @@ public ArrayList<Pieza> validarPartida(String dni_b, String dni_n){
 		  
         }
 		
-        return partida.getPiezas();
+        return partida;
 }
 
 
-public ArrayList<Pieza> IniciarJuego(String dni_b, String dni_n) {
+public Partida IniciarJuego(String dni_b, String dni_n) {
 		/// Este metodo busca a los jugadores si existen y lo agregan a una nueva partida
 
 	Jugador jug_b= new Jugador();
 	Jugador jug_n= new Jugador();
     jug_b=catJugador.buscarExistencia(dni_b);
-	if(jug_b==null){
-		JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse para jugar");
-			
-
-		crearJug.setVisible(true);}
-
 	jug_n= catJugador.buscarExistencia(dni_n);
-	if(jug_n==null){
-		JOptionPane.showMessageDialog(null, "Jugador Negro debe registrarse para jugar");
-	
-		
-		crearJug.setVisible(true);
-		
-		/*crearJug.showDialog();*/
-	
-	}
-		
+			
 	setPartida(catPartida.agregarPartida(jug_b, jug_n));
 	
 		
-	return getPartida().getPiezas();
+	return partida;
 }
 
 
@@ -182,6 +166,14 @@ public void UpPartida() {
 		catPieza.UpFichas(getPartida().getPiezas(), getPartida().getJ_b().getDni(), getPartida().getJ_n().getDni());
 	
 		
+}
+
+
+
+public Jugador existeJugador(String text) {
+	Jugador jugador= new Jugador();
+    jugador=catJugador.buscarExistencia(text);
+	return jugador;
 }
 	
 	

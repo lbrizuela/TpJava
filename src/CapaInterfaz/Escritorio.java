@@ -212,10 +212,27 @@ public class Escritorio extends JFrame {
 public void validarPartida() {
 	
 	///Valida si existe una partida, si no existe la agrega
-			ArrayList<Pieza> p= new ArrayList<Pieza>();
+			Partida p= new Partida();
 			ctrol= new ControladorJuego();
-			p.addAll(ctrol.validarPartida(text_dniB.getText(),text_dniN.getText())); // Este metodo si no los encuentras los inicializa ya esta hecho
-			mostrarPiezas(p);
+			p =ctrol.validarPartida(text_dniB.getText(),text_dniN.getText());// Este metodo si no los encuentras los inicializa ya esta hecho
+			if(p==null)
+			{
+				
+				Jugador ju_b= new Jugador();
+				Jugador ju_n= new Jugador();
+				ju_b=ctrol.existeJugador(text_dniB.getText());
+				if(ju_b==null)
+				{
+					
+				}
+				ju_n=ctrol.existeJugador(text_dniN.getText());
+				if(ju_n==null)
+				{
+					
+				}
+				p=ctrol.IniciarJuego(text_dniB.getText(),text_dniN.getText());
+			}
+			mostrarPiezas(p.getPiezas());
 }
 		
 		

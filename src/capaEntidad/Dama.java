@@ -7,18 +7,22 @@ public class Dama extends Pieza {
 		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int distanciaNumero=Math.abs(c-d);
 		int distanciaLetra=Math.abs(a.charAt(0)-b.charAt(0));
-		if(c==d && a.substring(0, 1)!= b.substring(0, 1))
+		if(a.substring(0, 1)!= b.substring(0, 1))
 		{
-			respuesta=true;
+			if(c==d){
+				respuesta=true;
+			}
+			if(distanciaNumero==distanciaLetra)
+			{
+				respuesta=true;
+			}
 		}
-		if(a.substring(0, 1)== b.substring(0, 1) && c!=d )
+		else
+		///////if(a.substring(0, 1)== b.substring(0, 1) && c!=d )
 		{
 			respuesta= true;
 		}
-		if(distanciaNumero==distanciaLetra)
-		{
-			respuesta=true;
-		}
+		
 		return respuesta;
 	}
 	

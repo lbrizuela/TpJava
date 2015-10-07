@@ -20,7 +20,7 @@ public class Caballo extends Pieza{
         }
         case 1:
         {
-        	if(distanciaNumero==1)
+        	if(distanciaNumero==2)
         	{
         	respuesta= true;
         	}

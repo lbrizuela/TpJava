@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -36,7 +37,10 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
 import java.awt.Color;
+
 import javax.swing.JScrollBar;
+
+import java.awt.TextArea;
 
 
 public class Escritorio extends JFrame {
@@ -50,8 +54,7 @@ public class Escritorio extends JFrame {
 	private JTextField text_dniN;
 	private JTextField text_origen;
 	private JTextField text_Destino;
-	JTextArea textAreaN;
-	JTextArea textAreaB;
+	private JTextField textField;
 
 	
 	public static void main(String[] args) {
@@ -129,7 +132,7 @@ public class Escritorio extends JFrame {
 			text_Turno.setColumns(10);
 			
 			JLabel lblNewLabel_1 = new JLabel("Negras");
-			lblNewLabel_1.setBounds(22, 420, 46, 14);
+			lblNewLabel_1.setBounds(22, 495, 46, 14);
 			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(lblNewLabel_1);
 			
@@ -198,21 +201,12 @@ public class Escritorio extends JFrame {
 			bnt_Guardar.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(bnt_Guardar);
 			
-			JTextArea textAreaB = new JTextArea();
-			textAreaB.setBounds(22, 247, 208, 162);
-			contentPane.add(textAreaB);
+			textField = new JTextField();
+			textField.setBounds(10, 247, 211, 218);
+			contentPane.add(textField);
+			textField.setColumns(10);
 			
-			JTextArea textAreaN = new JTextArea();
-			textAreaN.setBounds(22, 445, 208, 162);
-			contentPane.add(textAreaN);
 			
-			JScrollBar scrollBar = new JScrollBar();
-			scrollBar.setBounds(213, 247, 17, 162);
-			contentPane.add(scrollBar);
-			
-			JScrollBar scrollBar_1 = new JScrollBar();
-			scrollBar_1.setBounds(213, 445, 17, 162);
-			contentPane.add(scrollBar_1);
 	
 	}
 
@@ -253,38 +247,42 @@ public void validarPartida() {
 	return jugador;
 }
 
+	
 		private void mostrarPiezas(ArrayList<Pieza>  pieza) {
 			// Este metodo muestra las Piezas por patalla
+			JTextArea tarea= new JTextArea();
 			String blancas="";
 			String negras="";
 			String turno=ctrol.getPartida().getTurno();
+		
 			for (Pieza p : pieza) {
-			  if(p.getColor().equals("blanco")){     
-				  if(p.getPosicion()!=null)
-				  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre();
-				  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
-			  }
-			  else{
-				  if(p.getPosicion()!=null)
-				  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n";
-				  //// Aca no se por que mierda no me hace el salto de linea 
-			  }  
+				  if(p.getColor().equals("blanco")){     
+					  if(p.getPosicion()!=null)
+						  System.out.println("Posicion:"+p.getPosicion()+"->"+"Nombre:"+p.getNombre()+""  );
+					  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre();
+					  
+					  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
+				  }
+				  else{
+					  if(p.getPosicion()!=null)
+					  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n";
+					  //// Aca no se por que mierda no me hace el salto de linea 
+				  }  
+				 
+				}
+			
+				
+			
+			System.out.println(blancas);
+			textField.setText(blancas);
+			text_Turno.setText(turno);
 			
 			}
-			System.out.println("blancas");
-			System.out.println("Negras");
-			System.out.println("Turno");
-		/*textAreaB.setText(blancas);
-		textAreaN.setText(negras);
-			text_Turno.setText(turno);*/
 			
-		}
-
 		
 
-		/**
-		 * 
-		 */
+		
+		
 		public void mover()
 		
 		{

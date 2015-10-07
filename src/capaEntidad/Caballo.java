@@ -2,18 +2,35 @@ package capaEntidad;
 
 public class Caballo extends Pieza{
 	public boolean validarMovimiento(String a, String b, String color) {
+		boolean respuesta=false;
 		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
-        int distancia=Math.abs(c-d);
-        if(!a.substring(0,1).equals(b.substring(0,1))& distancia==2)
+        int distanciaNumero=Math.abs(c-d);
+        int distanciaLetra= Math.abs(a.charAt(0)- b.charAt(0));
+        switch(distanciaLetra)
         {
-        	return true;
-        }
-        else
+        case 2:
         {
-        	return false;
+        	if(distanciaNumero==1)
+        	{
+        		respuesta=true;
+        	}
+    
+        	break;
         }
+        case 1:
+        {
+        	if(distanciaNumero==1)
+        	{
+        	respuesta= true;
+        	}
+  
+        break;
+        }
+        }
+        return respuesta;
 	}
+        
 	public  void inicializarPiezas(String id, String col)
 	{
 	

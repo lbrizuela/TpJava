@@ -268,9 +268,11 @@ public void validarPartida() {
 			
 			}
 			System.out.println("blancas");
-		textAreaB.setText(blancas);
+			System.out.println("Negras");
+			System.out.println("Turno");
+		/*textAreaB.setText(blancas);
 		textAreaN.setText(negras);
-			text_Turno.setText(turno);
+			text_Turno.setText(turno);*/
 			
 		}
 

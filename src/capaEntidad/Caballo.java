@@ -39,7 +39,7 @@ public class Caballo extends Pieza{
 		color=col;
 		if(color=="blanco" )
 		{
-			if(id=="a1"){
+			if(id=="c1"){
 				posicion="b8";
 				}
 			else
@@ -48,13 +48,15 @@ public class Caballo extends Pieza{
 			}
 		}
 		else 
-			if(id=="a1"){
+			if(id=="c1"){
 				posicion="b1";
 				}
 			else
 			{
 				posicion="g1";
 			}
+		String pos=posicion;
+		System.out.print(pos);
 	}
 
 }

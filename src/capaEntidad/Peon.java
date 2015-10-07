@@ -7,53 +7,59 @@ public class Peon extends Pieza {
 	boolean primerMovimiento;
 	CatalogoPiezas cp=new CatalogoPiezas();
 	Partida partida=new Partida();
+	
+	
 	public  boolean validarMovimiento(String a, String b,String color) {
 		
 	   boolean respuesta=false;
 		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int distanciaLetra=Math.abs(a.charAt(0)-b.charAt(0));
-	int distancia = color.contentEquals("negro")? (c-d) : (d-c);  //Hago la pregunta de que color es
-	switch (distancia)                                           //el calculo de la distancia dependera de que color sea,esto se debe	                                                             // a como avanzan las fichas blancas y las negras entonces sera 	                                                             // un movimiento valido si la distancia entre que recorre es 	                                                             // si la distancia es negativa recorreria hacia atras y no es valido
-	{
-	case 1:
-	{
-		if(distanciaLetra==1)
-		{
-			if(cp.buscarFicha(partida.getPiezas(), colorInverso() , b)!=null)
-			{
-			respuesta=true;
-			}
-			
-		}
-		else 
-		{
-			if(distanciaLetra==0)
-			respuesta=true;
-		}
-		break;
-		
-	}
-	case 2:
-	{
-		
-		if(primerMovimiento){
-			
-		if(distanciaLetra==0)
-		{
-			respuesta=true;
-		}
-		break;
-	}	
+		int distanciaNumero = color.equals("negro")? (c-d) : (d-c);  //Hago la pregunta de que color es
 	
+		switch (distanciaNumero) {                                        
+		case 1:
+		{
+			if(distanciaLetra==1)
+			{
+				if(cp.buscarFicha(partida.getPiezas(), colorInverso() , b)!=null)
+				{
+					respuesta=true;
+				}
+			}else 
+			{
+				if(distanciaLetra==0)
+				{
+					respuesta=true;
+				}
+			}
+			break;
+		}
+		case 2:
+		{
+			if(primerMovimiento)
+			{
+				if(distanciaLetra==0)
+				{
+					respuesta=true;
+				}
+			}	
+		break;
+		}
 	}
-	}
+		
 	if(primerMovimiento)
 	{
 		primerMovimiento=false;
 	}
+	
 	return respuesta;
-	}
+}
+	
+	
+
+	
+	
 	
 	public String colorInverso()
 	{

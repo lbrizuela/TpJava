@@ -6,13 +6,20 @@ public class Torre extends Pieza {
 		boolean respuesta =false;
 		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
-		if(c==d && a.substring(0, 1)!= b.substring(0, 1))
+		if(a.substring(0, 1)!= b.substring(0, 1))
 		{
+			if(c==d){
 			respuesta=true;
+			}
 		}
-		if(a.substring(0, 1)== b.substring(0, 1) && c!=d )
+		else
+		///////if(a.substring(0, 1)== b.substring(0, 1))
 		{
+			if( c!=d ){
+				
+			
 			respuesta= true;
+			}
 		}
 		return respuesta;
 	}

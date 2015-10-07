@@ -36,6 +36,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
 import java.awt.Color;
+import javax.swing.JScrollBar;
 
 
 public class Escritorio extends JFrame {
@@ -49,8 +50,9 @@ public class Escritorio extends JFrame {
 	private JTextField text_dniN;
 	private JTextField text_origen;
 	private JTextField text_Destino;
-	private JTextField text_b;
-	private JTextField text_n;
+	JTextArea textAreaN;
+	JTextArea textAreaB;
+
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -146,17 +148,7 @@ public class Escritorio extends JFrame {
 			text_Destino.setFont(new Font("Arial", Font.ITALIC, 10));
 			contentPane.add(text_Destino);
 			text_Destino.setColumns(10);
-			
-			text_b = new JTextField();
-			text_b.setBounds(22, 247, 208, 162);
-			text_b.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			contentPane.add(text_b);
-			text_b.setColumns(10);
-			
-			text_n = new JTextField();
-			text_n.setBounds(22, 445, 208, 192);
-			contentPane.add(text_n);
-			text_n.setColumns(10);
+		
 			
 			JPanel panel = new JPanel();
 			panel.setBounds(22, 11, 705, 116);
@@ -206,9 +198,21 @@ public class Escritorio extends JFrame {
 			bnt_Guardar.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(bnt_Guardar);
 			
-			JTextArea textArea = new JTextArea();
-			textArea.setBounds(22, 247, 208, 162);
-			contentPane.add(textArea);
+			JTextArea textAreaB = new JTextArea();
+			textAreaB.setBounds(22, 247, 208, 162);
+			contentPane.add(textAreaB);
+			
+			JTextArea textAreaN = new JTextArea();
+			textAreaN.setBounds(22, 445, 208, 162);
+			contentPane.add(textAreaN);
+			
+			JScrollBar scrollBar = new JScrollBar();
+			scrollBar.setBounds(213, 247, 17, 162);
+			contentPane.add(scrollBar);
+			
+			JScrollBar scrollBar_1 = new JScrollBar();
+			scrollBar_1.setBounds(213, 445, 17, 162);
+			contentPane.add(scrollBar_1);
 	
 	}
 
@@ -263,9 +267,9 @@ public void validarPartida() {
 			  }  
 			
 			}
-			
-			text_b.setText(blancas);
-			text_n.setText(negras);
+			System.out.println("blancas");
+		textAreaB.setText(blancas);
+		textAreaN.setText(negras);
 			text_Turno.setText(turno);
 			
 		}

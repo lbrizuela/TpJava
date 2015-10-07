@@ -51,7 +51,7 @@ public Partida validarPartida(String dni_b, String dni_n){
 	        if (codigo==JOptionPane.YES_OPTION){   /// Esto estaba al revez.
 	            System.out.println("Has pulsado en SI");
 	            borrarPartida();/// debe borar la partida anterior para inicializar otra.
-	            IniciarJuego(dni_b, dni_n);
+	            IniciarJuego(partida.getJ_b(), partida.getJ_n());
 	  	
 	        }
 	        else if(codigo==JOptionPane.NO_OPTION){
@@ -68,17 +68,12 @@ public Partida validarPartida(String dni_b, String dni_n){
 }
 
 
-public Partida IniciarJuego(String dni_b, String dni_n) {
+public Partida IniciarJuego(Jugador jug_b, Jugador jug_n) {
 		/// Este metodo busca a los jugadores si existen y lo agregan a una nueva partida
 
-	Jugador jug_b= new Jugador();
-	Jugador jug_n= new Jugador();
-    jug_b=catJugador.buscarExistencia(dni_b);
-	jug_n= catJugador.buscarExistencia(dni_n);
+
 			
-	setPartida(catPartida.agregarPartida(jug_b, jug_n));
-	
-		
+	setPartida(catPartida.agregarPartida(jug_b, jug_n));	
 	return partida;
 }
 
@@ -96,6 +91,7 @@ public boolean validarMovimiento(String text, String text2) {
 			{
 			resp= false;
 			}
+	
 		return resp;
 }
 

@@ -3,16 +3,18 @@ package capaEntidad;
 public class Torre extends Pieza {
 
 	public  boolean validarMovimiento(String a, String b, String color) {
+		boolean respuesta =false;
 		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
-		if(a.substring(0,1).equals(b.substring(0,1)) | c==d )
+		if(c==d && a.substring(0, 1)!= b.substring(0, 1))
 		{
-			return true;
+			respuesta=true;
 		}
-		else
+		if(a.substring(0, 1)== b.substring(0, 1) && c!=d )
 		{
-			return false;
+			respuesta= true;
 		}
+		return respuesta;
 	}
 
 	public  void inicializarPiezas(String id, String col)

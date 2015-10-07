@@ -224,27 +224,31 @@ public void validarPartida() {
 				
 				Jugador ju_b= new Jugador();
 				Jugador ju_n= new Jugador();
-				ju_b=ctrol.existeJugador(text_dniB.getText());
-				if(ju_b==null)
-				{
-					JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse");
-					CrearJugador cjn=new CrearJugador(this,true);
-					cjn.setVisible(true);
-				}
-				ju_n=ctrol.existeJugador(text_dniN.getText());
-				if(ju_n==null)
-				{
-					JOptionPane.showMessageDialog(null, "Jugador negro debe registrarse");
-					CrearJugador cjn=new CrearJugador(this,true);
-					cjn.setVisible(true);
-				}
-				p=ctrol.IniciarJuego(text_dniB.getText(),text_dniN.getText());
+				ju_b=buscarJugador();
+				ju_n=buscarJugador();
+				p=ctrol.IniciarJuego(ju_b,ju_n);
 			}
 			mostrarPiezas(p.getPiezas());
 }
 		
 		
 		
+		private Jugador buscarJugador() {
+			
+	// TODO Auto-generated method stub
+			Jugador jugador=new Jugador();
+			jugador=ctrol.existeJugador(text_dniB.getText());
+			if(jugador==null)
+			{
+				JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse");
+				CrearJugador cjn=new CrearJugador(this,true);
+				cjn.setVisible(true);
+				jugador=ctrol.existeJugador(text_dniB.getText());
+				
+			}
+	return jugador;
+}
+
 		private void mostrarPiezas(ArrayList<Pieza>  pieza) {
 			// Este metodo muestra las Piezas por patalla
 			String blancas="";
@@ -272,26 +276,45 @@ public void validarPartida() {
 
 		
 
+		/**
+		 * 
+		 */
 		public void mover()
 		
 		{
 			//Este metodo mueve la ficha
 			
 			ArrayList<Pieza> p= new ArrayList<Pieza>();
-			boolean respuesta=false;
+			boolean respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText());
 			while(respuesta==false)   // Hace una iteracion hasta que no ingrese un movimiento valido
 			{
-				respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText()); // Llama a realizarmoviemito para que lo valide
+				JOptionPane.showMessageDialog(null, "Movimiento Incorrecto");
+				text_origen.setText(JOptionPane.showInputDialog(null, "Ingrese el origen de la pieza"));
+				text_Destino.setText(JOptionPane.showInputDialog(null, "Ingrese el detino de dicha pieza"));
+				respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText());
+				
+				
+				
+			/*	
 				if(respuesta) {
 				JOptionPane.showMessageDialog(null,"Movimiento Correcto");
 				}
 				else {
-				JOptionPane.showMessageDialog(null, "Movimiento Incorrecto");
-				limpiar();//// tengo que borrar los text sino entra en un bucle y no me deja ingresar 
+				JOptionPane.(null, "Movimiento Incorrecto");
+				
+				//// tengo que borrar los text sino entra en un bucle y no me deja ingresar 
                 /// o modificar nada por el las ventanas DIALOGAl... Y hay que dejarlo aca addentro sino dsps da error
 				}
+				limpiar();
+				if(respuesta){
+					
+				
+				respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText());
+				// Llama a realizarmoviemito para que lo valide
+				}*/
 				
 			}
+			JOptionPane.showMessageDialog(null,"Movimiento Correcto");
 			p.addAll(ctrol.realizarMovimiento(text_origen.getText(), text_Destino.getText())); //// este metodo realiza el movimiento
 			if(p==null)
 				finalizarJugo();
@@ -305,8 +328,8 @@ public void validarPartida() {
 
 	private void limpiar() {
 		//Este metodo limpia la interfaz
-			text_origen.setText(null);
-			text_Destino.setText(null);
+			text_origen.setText("");
+			text_Destino.setText("");
 			
 			
 			

@@ -15,7 +15,7 @@ public class Peon extends Pieza {
 		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
 		int distanciaLetra=Math.abs(a.charAt(0)-b.charAt(0));
-		int distanciaNumero = color.equals("negro")? (c-d) : (d-c);  //Hago la pregunta de que color es
+		int distanciaNumero = color.equals("negro")? (d-c) : (c-d);  //Hago la pregunta de que color es
 	
 		switch (distanciaNumero) {                                        
 		case 1:
@@ -33,6 +33,10 @@ public class Peon extends Pieza {
 					respuesta=true;
 				}
 			}
+			if(primerMovimiento)
+			{
+				primerMovimiento=false;
+			}
 			break;
 		}
 		case 2:
@@ -42,16 +46,14 @@ public class Peon extends Pieza {
 				if(distanciaLetra==0)
 				{
 					respuesta=true;
+					primerMovimiento=false;
 				}
 			}	
 		break;
 		}
 	}
 		
-	if(primerMovimiento)
-	{
-		primerMovimiento=false;
-	}
+	
 	
 	return respuesta;
 }

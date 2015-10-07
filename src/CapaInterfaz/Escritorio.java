@@ -250,7 +250,7 @@ public void validarPartida() {
 	
 		private void mostrarPiezas(ArrayList<Pieza>  pieza) {
 			// Este metodo muestra las Piezas por patalla
-			JTextArea tarea= new JTextArea();
+		
 			String blancas="";
 			String negras="";
 			String turno=ctrol.getPartida().getTurno();

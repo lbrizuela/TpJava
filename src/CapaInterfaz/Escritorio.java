@@ -55,6 +55,7 @@ public class Escritorio extends JFrame {
 	private JTextField text_origen;
 	private JTextField text_Destino;
 	private JTextField textField;
+	private JTextField textFieldn;
 
 	
 	public static void main(String[] args) {
@@ -121,7 +122,7 @@ public class Escritorio extends JFrame {
 			contentPane.add(btnMover);
 			
 			JLabel lblNewLabel = new JLabel("");
-			lblNewLabel.setBounds(449, 187, 278, 297);
+			lblNewLabel.setBounds(438, 187, 289, 288);
 			lblNewLabel.setIcon(new ImageIcon(Escritorio.class.getResource("/Imagenes/ajedrez.jpg")));
 			contentPane.add(lblNewLabel);
 			
@@ -206,6 +207,11 @@ public class Escritorio extends JFrame {
 			contentPane.add(textField);
 			textField.setColumns(10);
 			
+			textFieldn = new JTextField();
+			textFieldn.setBounds(10, 522, 211, 132);
+			contentPane.add(textFieldn);
+			textFieldn.setColumns(10);
+			
 			
 	
 	}
@@ -254,9 +260,14 @@ public void validarPartida() {
 			String blancas="";
 			String negras="";
 			String turno=ctrol.getPartida().getTurno();
+
+		System.out.println("\nEL turno es de:"+turno+"\n");
+		System.out.println("Nombre:"+ ctrol.getPartida().getJ_b().getNombre());
+		System.out.println("Ubicacione piezas Blancas:"+"\n");
+			
+
 		
 			for (Pieza p : pieza) {
-
 				  if(p.getColor().equals("blanco")){     
 					  if(p.getPosicion()!="")
 						  System.out.println("Posicion:"+p.getPosicion()+"->"+"Nombre:"+p.getNombre()+""  );
@@ -264,23 +275,29 @@ public void validarPartida() {
 					  
 					  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
 				  }
-				  else{
-					  if(p.getPosicion()!="")
-					  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n";
-					  //// Aca no se por que mierda no me hace el salto de linea 
-				  }  
-				 
-				}
-			
-				
-			
-			System.out.println(blancas);
-			textField.setText(blancas);
-			text_Turno.setText(turno);
+
+
+				  System.out.println("Ubicacione piezas Negras:"+"\n");
+				  for (Pieza p1 : pieza) {
+					  if(p1.getColor().equals("negro")){
+						  if(p1.getPosicion()!="")
+							  System.out.println("Posicion:"+p1.getPosicion()+"->"+"Nombre:"+p1.getNombre()+""  );
+						  negras=negras+p1.getPosicion()+"-"+p1.getNombre()+" \n"; 
+					  }
+					
+				  }
+					System.out.println(blancas);
+					textField.setText(blancas);
+					textFieldn.setText(negras);
+					text_Turno.setText(turno);
+				  }
+		}
 
 			
-			}
+
+		
 			
+
 		
 
 		

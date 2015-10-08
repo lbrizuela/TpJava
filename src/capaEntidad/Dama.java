@@ -37,7 +37,7 @@ public class Dama extends Pieza {
 		id_pieza=id;
 		nombre="Dama";
 		color=col;
-		if(pos==null){
+		if(pos.equals("")){
 			if(color=="blanco")
 			{
 				posicion= "d8";

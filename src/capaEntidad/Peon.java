@@ -86,7 +86,7 @@ public class Peon extends Pieza {
 	
 		nombre="Peon";
 		color=col;
-		if(pos==null)
+		if(pos.equals(""))
 		{
 			if(color.equals("blanco"))
 			{
@@ -151,11 +151,12 @@ public class Peon extends Pieza {
 		primerMovimiento=false;
 		while(i<=f && primerMovimiento==false)
 		{
-			String p=String.valueOf(i+a);
+			String p=String.valueOf(i)+a;
 			if(p.equals(pos))
 			{
 				primerMovimiento=true;
 			}
+			i++;
 		}
 	
 			

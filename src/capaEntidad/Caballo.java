@@ -37,7 +37,7 @@ public class Caballo extends Pieza{
 		id_pieza=id;
 		nombre="Caballo";
 		color=col;
-		if(pos==null)
+		if(pos.equals(""))
 		{
 			if(color=="blanco" )
 			{

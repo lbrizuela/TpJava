@@ -42,41 +42,41 @@ public ArrayList<Pieza>  crearPiezas(String a){
   ArrayList<Pieza> piezas = new ArrayList<Pieza>();
   Pieza p;
   p= new Rey();
-  p.inicializarPiezas("r1",a,null);
+  p.inicializarPiezas("r1",a,"");
  
   piezas.add(p);
   p=new Dama();
-  p.inicializarPiezas("d1",a,null);
+  p.inicializarPiezas("d1",a,"");
   piezas.add(p);
   
   p=new Alfil();
-  p.inicializarPiezas("a1",a,null);
+  p.inicializarPiezas("a1",a,"");
   piezas.add(p);
   
   p=new Alfil();
-  p.inicializarPiezas("a2",a,null);
+  p.inicializarPiezas("a2",a,"");
   piezas.add(p);
   
   p=new Caballo();
-  p.inicializarPiezas("c1",a,null);
+  p.inicializarPiezas("c1",a,"");
   piezas.add(p);
   
   p=new Caballo();
-  p.inicializarPiezas("c2",a,null);
+  p.inicializarPiezas("c2",a,"");
   piezas.add(p);
   
   p=new Torre();
-  p.inicializarPiezas("t1",a,null);
+  p.inicializarPiezas("t1",a,"");
   piezas.add(p);
   
   p=new Torre();
-  p.inicializarPiezas("t2",a,null);
+  p.inicializarPiezas("t2",a,"");
   piezas.add(p);
   
   for(int i=1; i<9;i++)
   {
 	  p=new Peon();
-	  p.inicializarPiezas("p"+ Integer.toString(i),a,null);	  
+	  p.inicializarPiezas("p"+ Integer.toString(i),a,"");	  
 	  piezas.add(p);
   }
   return piezas;

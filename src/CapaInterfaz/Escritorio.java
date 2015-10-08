@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,6 +38,10 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 
 import java.awt.Color;
 
+import javax.swing.JScrollBar;
+
+import java.awt.TextArea;
+
 
 public class Escritorio extends JFrame {
 	
@@ -49,8 +54,8 @@ public class Escritorio extends JFrame {
 	private JTextField text_dniN;
 	private JTextField text_origen;
 	private JTextField text_Destino;
-	private JTextField text_b;
-	private JTextField text_n;
+	private JTextField textField;
+
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -127,7 +132,7 @@ public class Escritorio extends JFrame {
 			text_Turno.setColumns(10);
 			
 			JLabel lblNewLabel_1 = new JLabel("Negras");
-			lblNewLabel_1.setBounds(22, 420, 46, 14);
+			lblNewLabel_1.setBounds(22, 495, 46, 14);
 			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(lblNewLabel_1);
 			
@@ -146,17 +151,7 @@ public class Escritorio extends JFrame {
 			text_Destino.setFont(new Font("Arial", Font.ITALIC, 10));
 			contentPane.add(text_Destino);
 			text_Destino.setColumns(10);
-			
-			text_b = new JTextField();
-			text_b.setBounds(22, 247, 208, 162);
-			text_b.setFont(new Font("Tahoma", Font.PLAIN, 11));
-			contentPane.add(text_b);
-			text_b.setColumns(10);
-			
-			text_n = new JTextField();
-			text_n.setBounds(22, 445, 208, 192);
-			contentPane.add(text_n);
-			text_n.setColumns(10);
+		
 			
 			JPanel panel = new JPanel();
 			panel.setBounds(22, 11, 705, 116);
@@ -206,9 +201,12 @@ public class Escritorio extends JFrame {
 			bnt_Guardar.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(bnt_Guardar);
 			
-			JTextArea textArea = new JTextArea();
-			textArea.setBounds(22, 247, 208, 162);
-			contentPane.add(textArea);
+			textField = new JTextField();
+			textField.setBounds(10, 247, 211, 218);
+			contentPane.add(textField);
+			textField.setColumns(10);
+			
+			
 	
 	}
 
@@ -249,36 +247,44 @@ public void validarPartida() {
 	return jugador;
 }
 
+	
 		private void mostrarPiezas(ArrayList<Pieza>  pieza) {
 			// Este metodo muestra las Piezas por patalla
+		
 			String blancas="";
 			String negras="";
 			String turno=ctrol.getPartida().getTurno();
+		
 			for (Pieza p : pieza) {
-			  if(p.getColor().equals("blanco")){     
-				  if(!p.getPosicion().equals(""))
-				  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre();
-				  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
-			  }
-			  else{
-				  if(!p.getPosicion().equals(""))
-				  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n";
-				  //// Aca no se por que mierda no me hace el salto de linea 
-			  }  
+
+				  if(p.getColor().equals("blanco")){     
+					  if(p.getPosicion()!=null)
+						  System.out.println("Posicion:"+p.getPosicion()+"->"+"Nombre:"+p.getNombre()+""  );
+					  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre();
+					  
+					  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
+				  }
+				  else{
+					  if(p.getPosicion()!=null)
+					  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n";
+					  //// Aca no se por que mierda no me hace el salto de linea 
+				  }  
+				 
+				}
+			
+				
+			
+			System.out.println(blancas);
+			textField.setText(blancas);
+			text_Turno.setText(turno);
+
 			
 			}
 			
-			text_b.setText(blancas);
-			text_n.setText(negras);
-			text_Turno.setText(turno);
-			
-		}
-
 		
 
-		/**
-		 * 
-		 */
+		
+		
 		public void mover()
 		
 		{
@@ -336,8 +342,9 @@ public void validarPartida() {
 		//Este metodo limpia la interfaz
 			text_origen.setText(null);
 			text_Destino.setText(null);
-			text_b.setText(null);
-			text_n.setText(null);
+			//text_b.setText(null);
+			//text_n.setText(null);
+			textField.setText(null);
 			text_dniB.setText(null);
 			text_dniN.setText(null);
 			text_Turno.setText(null);

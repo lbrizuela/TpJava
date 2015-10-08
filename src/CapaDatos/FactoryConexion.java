@@ -10,7 +10,7 @@ public class FactoryConexion {
 		private String host="localhost";
 		private String port="3306";
 		private String user="root";
-		private String pass="7394luisina";
+		private String pass="Mariuchi1920";
 		private String db="juegoajedrez";
 		
 		private Connection conn;

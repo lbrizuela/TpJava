@@ -39,27 +39,21 @@ public Partida validarPartida(String dni_b, String dni_n){
 			JOptionPane.showMessageDialog(null, "No existe la partida");
 			
 		}
-		/* ACA ESTARIA LA PREGUNTA DE QUE SI LA PARTIDA NO ES NULA PREGUNTA SI 
-		 * QYUERE HACER UNA NUEVA O CONTINUAR CON LA ANTERIOR
-		 
-		 */
-		//Si la partida existe la muestra 
+	 
 		else
 		{
 			partida.setPiezas(catPieza.buscarPiezas(dni_b,dni_n));
 			int codigo=JOptionPane.showConfirmDialog(null, "¿Quieres realizar una nueva partida?", "Existe partida pendiente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 	        if (codigo==JOptionPane.YES_OPTION){   /// Esto estaba al revez.
-	            System.out.println("Has pulsado en SI");
+   
 	            borrarPartida();/// debe borar la partida anterior para inicializar otra.
 	            IniciarJuego(partida.getJ_b(), partida.getJ_n());
 	  	
 	        }
 	        else if(codigo==JOptionPane.NO_OPTION){
-	        	// esto esta de mas, por que tiene que buscar las piezas por si quiere borrar la partida anterior, entonces debe
-	        	// crear una nueva partida con sus nuevas piezas, lo deje para que lo vean.
-	            System.out.println("Has pulsado en NO");
-	            
-	          
+	        	return partida;          
+	          // aca devuelvo la partida que encontro. 
+	        	//para mi no esta de mas porque le esta diciendo que existe partida, si no la quiere inciializar le devuelve la anterior 
 		}
 		  
         }
@@ -69,8 +63,7 @@ public Partida validarPartida(String dni_b, String dni_n){
 
 
 public Partida IniciarJuego(Jugador jug_b, Jugador jug_n) {
-		/// Este metodo inicializa el juego
-	
+
 	setPartida(catPartida.agregarPartida(jug_b, jug_n));	
 	return partida;
 }

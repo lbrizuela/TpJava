@@ -224,8 +224,8 @@ public void validarPartida() {
 				
 				Jugador ju_b= new Jugador();
 				Jugador ju_n= new Jugador();
-				ju_b=buscarJugador();
-				ju_n=buscarJugador();
+				ju_b=buscarJugador(text_dniB.getText());
+				ju_n=buscarJugador(text_dniN.getText());
 				p=ctrol.IniciarJuego(ju_b,ju_n);
 			}
 			mostrarPiezas(p.getPiezas());
@@ -233,17 +233,17 @@ public void validarPartida() {
 		
 		
 		
-		private Jugador buscarJugador() {
+		private Jugador buscarJugador(String a) {
 			
 	// TODO Auto-generated method stub
 			Jugador jugador=new Jugador();
-			jugador=ctrol.existeJugador(text_dniB.getText());
+			jugador=ctrol.existeJugador(a);
 			if(jugador==null)
 			{
 				JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse");
 				CrearJugador cjn=new CrearJugador(this,true);
 				cjn.setVisible(true);
-				jugador=ctrol.existeJugador(text_dniB.getText());
+				jugador=ctrol.existeJugador(a);
 				
 			}
 	return jugador;
@@ -256,12 +256,12 @@ public void validarPartida() {
 			String turno=ctrol.getPartida().getTurno();
 			for (Pieza p : pieza) {
 			  if(p.getColor().equals("blanco")){     
-				  if(p.getPosicion()!=null)
+				  if(!p.getPosicion().equals(""))
 				  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre();
 				  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
 			  }
 			  else{
-				  if(p.getPosicion()!=null)
+				  if(!p.getPosicion().equals(""))
 				  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n";
 				  //// Aca no se por que mierda no me hace el salto de linea 
 			  }  
@@ -284,7 +284,7 @@ public void validarPartida() {
 		{
 			//Este metodo mueve la ficha
 			
-			ArrayList<Pieza> p= new ArrayList<Pieza>();
+			Partida p=new Partida();
 			boolean respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText());
 			while(respuesta==false)   // Hace una iteracion hasta que no ingrese un movimiento valido
 			{
@@ -315,12 +315,18 @@ public void validarPartida() {
 				
 			}
 			JOptionPane.showMessageDialog(null,"Movimiento Correcto");
-			p.addAll(ctrol.realizarMovimiento(text_origen.getText(), text_Destino.getText())); //// este metodo realiza el movimiento
-			if(p==null)
+			p=ctrol.realizarMovimiento(text_origen.getText(), text_Destino.getText()); //// este metodo realiza el movimiento
+			if(p.isJuegoGanado())
+			{
 				finalizarJugo();
+			}
 			else
-				mostrarPiezas(p);
-			limpiar();
+			{
+				ctrol.cambiarTurno();
+				mostrarPiezas(p.getPiezas());
+			}
+			text_origen.setText(null);
+			text_Destino.setText(null);
 			
 			
 			
@@ -328,8 +334,13 @@ public void validarPartida() {
 
 	private void limpiar() {
 		//Este metodo limpia la interfaz
-			text_origen.setText("");
-			text_Destino.setText("");
+			text_origen.setText(null);
+			text_Destino.setText(null);
+			text_b.setText(null);
+			text_n.setText(null);
+			text_dniB.setText(null);
+			text_dniN.setText(null);
+			text_Turno.setText(null);
 			
 			
 			
@@ -347,6 +358,9 @@ public void validarPartida() {
 private void guardarPartida() {
 	//Este metodo llama al controlador para Guardar todos los datos.
 	ctrol.UpPartida();
+	JOptionPane.showMessageDialog(null,"Se ha guardado con exito");
+	limpiar();
+	
 	
 	
 }

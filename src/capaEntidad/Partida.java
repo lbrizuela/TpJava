@@ -4,7 +4,18 @@ import java.util.ArrayList;
 
 public class Partida {
 	Jugador j_b, j_n;
+	
+	boolean juegoGanado= false;
 	ArrayList<Pieza> piezas= new ArrayList<Pieza>();
+	
+
+	
+	public boolean isJuegoGanado() {
+	return juegoGanado;
+	}
+	public void setJuegoGanado(boolean juegoGanado) {
+		this.juegoGanado = juegoGanado;
+	}
 	public ArrayList<Pieza> getPiezas() {
 		return piezas;
 	}

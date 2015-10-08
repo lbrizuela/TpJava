@@ -31,62 +31,40 @@ public class Caballo extends Pieza{
         return respuesta;
 	}
         
-	public  void inicializarPiezas(String id, String col)
+	public  void inicializarPiezas(String id, String col,String pos)
 	{
 	
 		id_pieza=id;
 		nombre="Caballo";
 		color=col;
-		if(color=="blanco" )
+		if(pos==null)
 		{
-			if(id=="c1"){
-				posicion="b8";
-				}
-			else
+			if(color=="blanco" )
 			{
-				posicion="g8";
+				if(id=="c1"){
+					posicion="b8";
+					}
+				else
+				{
+					posicion="g8";
+				}
 			}
+			else 
+				if(id=="c1"){
+					posicion="b1";
+					}
+				else
+				{
+					posicion="g1";
+				}
+		}else
+		{
+			posicion=pos;
 		}
-		else 
-			if(id=="c1"){
-				posicion="b1";
-				}
-			else
-			{
-				posicion="g1";
-			}
-		String pos=posicion;
-		System.out.print(pos);
+		
 	}
 
 }
 
 
 
-/*
- package Clases;
-
-public class Caballo extends Pieza {
-
-	public Caballo(String posicion, String color) {
-		super(posicion, color);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public boolean esvalidoMovimiento(String a, String b, String color) {
-		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
-		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
-        int distancia=Math.abs(c-d);
-        if(!a.substring(0,1).equals(b.substring(0,1))& distancia==2)
-        {
-        	return true;
-        }
-        else
-        {
-        	return false;
-        }
-	}
-
-}
- */

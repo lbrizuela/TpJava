@@ -42,41 +42,41 @@ public ArrayList<Pieza>  crearPiezas(String a){
   ArrayList<Pieza> piezas = new ArrayList<Pieza>();
   Pieza p;
   p= new Rey();
-  p.inicializarPiezas("r1",a);
+  p.inicializarPiezas("r1",a,null);
  
   piezas.add(p);
   p=new Dama();
-  p.inicializarPiezas("d1",a);
+  p.inicializarPiezas("d1",a,null);
   piezas.add(p);
   
   p=new Alfil();
-  p.inicializarPiezas("a1",a);
+  p.inicializarPiezas("a1",a,null);
   piezas.add(p);
   
   p=new Alfil();
-  p.inicializarPiezas("a2",a);
+  p.inicializarPiezas("a2",a,null);
   piezas.add(p);
   
   p=new Caballo();
-  p.inicializarPiezas("c1",a);
+  p.inicializarPiezas("c1",a,null);
   piezas.add(p);
   
   p=new Caballo();
-  p.inicializarPiezas("c2",a);
+  p.inicializarPiezas("c2",a,null);
   piezas.add(p);
   
   p=new Torre();
-  p.inicializarPiezas("t1",a);
+  p.inicializarPiezas("t1",a,null);
   piezas.add(p);
   
   p=new Torre();
-  p.inicializarPiezas("t2",a);
+  p.inicializarPiezas("t2",a,null);
   piezas.add(p);
   
   for(int i=1; i<9;i++)
   {
 	  p=new Peon();
-	  p.inicializarPiezas("p"+ Integer.toString(i),a);	  
+	  p.inicializarPiezas("p"+ Integer.toString(i),a,null);	  
 	  piezas.add(p);
   }
   return piezas;
@@ -154,44 +154,42 @@ public ArrayList<Pieza> buscarPiezas(String dni_b, String dni_n)
 		case "r":
 		{ 
 			p=new Rey();
-			p.setNombre("Rey");
+	
 			break;
 		}
 		case "d":
 		{
 			p=new Dama();
-			p.setNombre("Dama");
+		
 			break;
 		}
 		case "t":
 		{
 			p=new Torre();
-			p.setNombre("Torre");
+		
 			break;
 		}
 		case "p":
 		{
 			p= new Peon();
-			p.setNombre("Peon");
+			
+
 			break;
 		}
 		case "c":
 		{
 			p= new Caballo();
-			p.setNombre("Caballo");
+		
 			break;
 		}
 		case "a":
 		{
 			p=new Alfil();
-			p.setNombre("Alfil");
+			
 			break;
 		}
 		}
-		p.setId_pieza(rst.getString("Pieza"));
-		p.setPosicion(rst.getString("colYfila"));
-		p.setColor(rst.getString("color"));
-		p.setId_pieza(rst.getString("Pieza"));
+		p.inicializarPiezas(rst.getString("Pieza"),rst.getString("color"), rst.getString("colYfila"));		
 		piezas.add(p);
 	
 		
@@ -243,13 +241,13 @@ public void borrarFicha(ArrayList<Pieza> piezas,String color,String destino)
 		{
 		p=buscarFicha(piezas,"negro", destino);
 		if(p!=null){
-		p.setPosicion(null);}
+		p.setPosicion("");}
 		}
 	else
 		{
 		p=buscarFicha(piezas,"blanco", destino);
 		if(p!=null){
-		p.setPosicion(null);}
+		p.setPosicion("");}
 		}
 	
 
@@ -267,7 +265,7 @@ public boolean reyNulo(ArrayList<Pieza> piezas){
 
 	for (Pieza pieza : piezas) {
 		if(pieza.getNombre().equals("Rey"))
-			if(pieza.getPosicion()== null)
+			if(pieza.getPosicion().equals(""))
 			{
 				return true;
 			}

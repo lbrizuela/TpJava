@@ -1,5 +1,7 @@
 package capaEntidad;
 
+import java.io.StringWriter;
+
 import CapaDatos.CatalogoPiezas;
 
 
@@ -78,19 +80,34 @@ public class Peon extends Pieza {
 	
 
 
-	public  void inicializarPiezas(String id, String col)
+	public  void inicializarPiezas(String id, String col, String pos)
 	{
 		id_pieza=id;
-		primerMovimiento=true;
+	
 		nombre="Peon";
 		color=col;
-		if(color=="blanco")
+		if(pos==null)
 		{
-			ponerPosicion(7, id.substring(1));
+			if(color.equals("blanco"))
+			{
+				ponerPosicion(7, id.substring(1));
+			}
+			else
+			{ 
+			    ponerPosicion(2,id.substring(1));	
+			}
 		}
 		else
-		{ 
-		    ponerPosicion(2,id.substring(1));	
+		{
+			posicion=pos;
+		}
+		if(color.equals("blanco"))
+		{
+			buscarPosicion(7,posicion);
+		}
+		else
+		{
+			buscarPosicion(2,posicion);
 		}
 	}
 	private void ponerPosicion(int i, String indexOf) {
@@ -125,42 +142,28 @@ public class Peon extends Pieza {
 		
 	}
 	}
-}
-
-/*
- * public class Peon extends Pieza {
-private boolean esPeon=true;
-	public Peon(String posicion, String color) {
-		super(posicion, color);
-		// TODO Auto-generated constructor stub
-	}
-public boolean esPeon()
-{
-	return esPeon;
-}
-	@Override
-	public boolean esvalidoMovimiento(String a, String b,String color) {
-		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
-		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
-	
-	int distancia = color.contentEquals("negra")? (c-d) : (d-c);  //Hago la pregunta de que color es
-	if(distancia==1)                                               //el calculo de la distancia dependera de que color sea,esto se debe
-		                                                             // a como avanzan las fichas blancas y las negras entonces sera 
-		                                                             // un movimiento valido si la distancia entre que recorre es 1 
-		                                                             // si la distancia es negativa recorreria hacia atras y no es valido
+	public void buscarPosicion(int a, String pos)
 	{
-		return true;
-	}
-	else
-	{
-	return false;
-	}
-	}
+		String inicio="a";
+		String fin="h";
+		char i=inicio.charAt(0);
+		char f=fin.charAt(0);
+		primerMovimiento=false;
+		while(i<=f && primerMovimiento==false)
+		{
+			String p=String.valueOf(i+a);
+			if(p.equals(pos))
+			{
+				primerMovimiento=true;
+			}
+		}
 	
-
+			
+		
+	}
 }
 
- */
+
  
 
 

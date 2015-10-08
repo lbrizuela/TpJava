@@ -69,10 +69,8 @@ public Partida validarPartida(String dni_b, String dni_n){
 
 
 public Partida IniciarJuego(Jugador jug_b, Jugador jug_n) {
-		/// Este metodo busca a los jugadores si existen y lo agregan a una nueva partida
-
-
-			
+		/// Este metodo inicializa el juego
+	
 	setPartida(catPartida.agregarPartida(jug_b, jug_n));	
 	return partida;
 }
@@ -125,7 +123,7 @@ public void setPartida(Partida partida) {
 
 
 
-public ArrayList<Pieza> realizarMovimiento(String text, String text2) {
+public Partida realizarMovimiento(String text, String text2) {
 
 	     //Este metodo realiza el movimiento si ya fue correcto
 	    
@@ -133,33 +131,29 @@ public ArrayList<Pieza> realizarMovimiento(String text, String text2) {
 	                                                                         /// cuando querramos borrar va a encontrar 2 fichas en la misma posicion.. Este esta OK
 	     catPieza.moverFicha(partida.getPiezas(),partida.getTurno(),text, text2);//// Este metodo esta mal.. no me enceuntra la ficha, y no encuentro cual es el error.
 	     boolean resp= catPieza.reyNulo(partida.getPiezas());
-	     if(resp)
-	     {
-	    	 partida.setPiezas(null);
-	     }
-	      
-	     else
-	     {
-	    	 if(partida.getTurno().equals("blanco"))
-	    	 {
-	    		 partida.setTurno("negro");
-	    	 }
-	    	 else
-	    	 {
-	    		 partida.setTurno("blanco");
-	    	 }
-	    }
-	     
-	     return partida.getPiezas();		
+	     partida.setJuegoGanado(resp);
+	     return partida;		
 }
 
-
+public Partida cambiarTurno()
+{
+	 if(partida.getTurno().equals("blanco"))
+	 {
+		 partida.setTurno("negro");
+	 }
+	 else
+	 {
+		 partida.setTurno("blanco");
+	 }
+	 return partida;
+}
 
 
 public void UpPartida() {
 	///Este metodo actualiza los datos en la base 
-		catPartida.UpPatida(getPartida());
+		
 		catPieza.UpFichas(getPartida().getPiezas(), getPartida().getJ_b().getDni(), getPartida().getJ_n().getDni());
+		catPartida.UpPatida(getPartida());
 	
 		
 }

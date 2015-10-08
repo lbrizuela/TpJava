@@ -309,51 +309,39 @@ public void validarPartida() {
 			
 			Partida p=new Partida();
 			boolean respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText());
-			while(respuesta==false)   // Hace una iteracion hasta que no ingrese un movimiento valido
-			{
+			if (respuesta==false){
 				JOptionPane.showMessageDialog(null, "Movimiento Incorrecto");
-				text_origen.setText(JOptionPane.showInputDialog(null, "Ingrese el origen de la pieza"));
-				text_Destino.setText(JOptionPane.showInputDialog(null, "Ingrese el detino de dicha pieza"));
-				respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText());
-				
-				
-				
-			/*	
-				if(respuesta) {
-				JOptionPane.showMessageDialog(null,"Movimiento Correcto");
-				}
-				else {
-				JOptionPane.(null, "Movimiento Incorrecto");
-				
-				//// tengo que borrar los text sino entra en un bucle y no me deja ingresar 
-                /// o modificar nada por el las ventanas DIALOGAl... Y hay que dejarlo aca addentro sino dsps da error
-				}
-				limpiar();
-				if(respuesta){
-					
-				
-				respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText());
-				// Llama a realizarmoviemito para que lo valide
-				}*/
-				
-			}
-			JOptionPane.showMessageDialog(null,"Movimiento Correcto");
-			p=ctrol.realizarMovimiento(text_origen.getText(), text_Destino.getText()); //// este metodo realiza el movimiento
-			if(p.isJuegoGanado())
-			{
-				finalizarJugo();
-			}
-			else
-			{
-				ctrol.cambiarTurno();
+				text_origen.setText(null);
+				text_Destino.setText(null);
 				mostrarPiezas(p.getPiezas());
-			}
-			text_origen.setText(null);
-			text_Destino.setText(null);
+				
+				}else{
+					JOptionPane.showMessageDialog(null,"Movimiento Correcto");
+					p=ctrol.realizarMovimiento(text_origen.getText(), text_Destino.getText()); //// este metodo realiza el movimiento
+					if(p.isJuegoGanado())
+					{
+						finalizarJugo();
+					}
+					else
+					{
+						ctrol.cambiarTurno();
+						mostrarPiezas(p.getPiezas());
+					}
+					text_origen.setText(null);
+					text_Destino.setText(null);
+					
+					
+					
+				}
+				}
 			
 			
 			
-		}
+			
+		
+				
+			
+			
 
 	private void limpiar() {
 		//Este metodo limpia la interfaz

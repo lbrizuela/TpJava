@@ -33,18 +33,25 @@ public class Rey extends Pieza {
 		
 		
 	}
-	public  void inicializarPiezas(String id, String col)
+	public  void inicializarPiezas(String id, String col, String pos)
 	{
 		id_pieza=id;
 		nombre="Rey";
 		color=col;
-		if(color=="blanco")
+		if(pos==null)
 		{
-			posicion= "e8";
+			if(color=="blanco")
+			{
+				posicion= "e8";
+			}
+			else
+			{
+				posicion="e1";
+			}
 		}
 		else
 		{
-			posicion="e1";
+			posicion=pos;
 		}
 	}
 

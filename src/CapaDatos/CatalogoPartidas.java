@@ -127,7 +127,7 @@ public void UpPatida(Partida p){
 		PreparedStatement stmt=null;
 		
 		try {
-			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE Partida SET Turno= ? where dniB=? and dniN=?");
+			stmt= FactoryConexion.getInstancia().getConn().prepareStatement("UPDATE partida SET Turno= ? where dniB=? and dniN=?");
 			stmt.setString(1, p.getTurno());
 			stmt.setString(2, p.getJ_b().getDni());
 			stmt.setString(3, p.getJ_n().getDni());

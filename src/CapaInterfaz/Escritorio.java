@@ -55,6 +55,7 @@ public class Escritorio extends JFrame {
 	private JTextField text_origen;
 	private JTextField text_Destino;
 	private JTextField textField;
+	private JTextField textFieldn;
 
 	
 	public static void main(String[] args) {
@@ -121,8 +122,8 @@ public class Escritorio extends JFrame {
 			contentPane.add(btnMover);
 			
 			JLabel lblNewLabel = new JLabel("");
-			lblNewLabel.setBounds(449, 187, 278, 297);
-			lblNewLabel.setIcon(new ImageIcon(Escritorio.class.getResource("/Imagenes/ajedrez.jpg")));
+			lblNewLabel.setBounds(449, 199, 252, 256);
+			lblNewLabel.setIcon(new ImageIcon(Escritorio.class.getResource("/Imagenes/board.png")));
 			contentPane.add(lblNewLabel);
 			
 			text_Turno = new JTextField();
@@ -206,6 +207,11 @@ public class Escritorio extends JFrame {
 			contentPane.add(textField);
 			textField.setColumns(10);
 			
+			textFieldn = new JTextField();
+			textFieldn.setBounds(10, 522, 211, 132);
+			contentPane.add(textFieldn);
+			textFieldn.setColumns(10);
+			
 			
 	
 	}
@@ -282,6 +288,7 @@ public void validarPartida() {
 				  }
 					System.out.println(blancas);
 					textField.setText(blancas);
+					textFieldn.setText(negras);
 					text_Turno.setText(turno);
 				  }
 

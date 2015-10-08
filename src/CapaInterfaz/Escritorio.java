@@ -64,6 +64,7 @@ public class Escritorio extends JFrame {
 				try {
 					Escritorio frame = new Escritorio();
 					frame.setVisible(true);
+					 frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

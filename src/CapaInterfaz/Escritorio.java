@@ -362,6 +362,7 @@ public void validarPartida() {
 			//text_b.setText(null);
 			//text_n.setText(null);
 			textField.setText(null);
+			textFieldn.setText(null);
 			text_dniB.setText(null);
 			text_dniN.setText(null);
 			text_Turno.setText(null);

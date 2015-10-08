@@ -122,8 +122,8 @@ public class Escritorio extends JFrame {
 			contentPane.add(btnMover);
 			
 			JLabel lblNewLabel = new JLabel("");
-			lblNewLabel.setBounds(449, 199, 252, 256);
-			lblNewLabel.setIcon(new ImageIcon(Escritorio.class.getResource("/Imagenes/board.png")));
+			lblNewLabel.setBounds(438, 187, 289, 288);
+			lblNewLabel.setIcon(new ImageIcon(Escritorio.class.getResource("/Imagenes/ajedrez.jpg")));
 			contentPane.add(lblNewLabel);
 			
 			text_Turno = new JTextField();

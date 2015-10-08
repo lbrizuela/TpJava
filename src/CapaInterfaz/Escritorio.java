@@ -254,8 +254,10 @@ public void validarPartida() {
 			String blancas="";
 			String negras="";
 			String turno=ctrol.getPartida().getTurno();
-		
-			for (Pieza p : pieza) {
+		System.out.println("\nEL turno es de:"+turno+"\n");
+		System.out.println("Nombre:"+ ctrol.getPartida().getJ_b().getNombre());
+		System.out.println("Ubicacione piezas Blancas:"+"\n");
+				for (Pieza p : pieza) {
 				  if(p.getColor().equals("blanco")){     
 					  if(p.getPosicion()!=null)
 						  System.out.println("Posicion:"+p.getPosicion()+"->"+"Nombre:"+p.getNombre()+""  );
@@ -263,22 +265,20 @@ public void validarPartida() {
 					  
 					  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
 				  }
-				  else{
-					  if(p.getPosicion()!=null)
-					  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n";
-					  //// Aca no se por que mierda no me hace el salto de linea 
-				  }  
-				 
 				}
-			
-				
-			
-			System.out.println(blancas);
-			textField.setText(blancas);
-			text_Turno.setText(turno);
-			
-			}
-			
+				  System.out.println("Ubicacione piezas Negras:"+"\n");
+				  for (Pieza p1 : pieza) {
+					  if(p1.getColor().equals("negro")){
+						  if(p1.getPosicion()!=null)
+							  System.out.println("Posicion:"+p1.getPosicion()+"->"+"Nombre:"+p1.getNombre()+""  );
+						  negras=negras+p1.getPosicion()+"-"+p1.getNombre()+" \n"; 
+					  }
+					
+				  }
+					System.out.println(blancas);
+					textField.setText(blancas);
+					text_Turno.setText(turno);
+				  }
 		
 
 		

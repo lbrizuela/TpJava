@@ -17,7 +17,7 @@ public class Torre extends Pieza {
 			
 		}
 		else
-		///////if(a.substring(0, 1)== b.substring(0, 1))
+		
 		{
 			if(c==d){
 				respuesta=true;
@@ -26,6 +26,7 @@ public class Torre extends Pieza {
 		return respuesta;
 	}
 
+	
 	public  void inicializarPiezas(String id, String col, String pos)
 	{
 		id_pieza=id;
@@ -62,28 +63,3 @@ public class Torre extends Pieza {
 }
 
 
-/*
- public class Torre extends Pieza {
-
-	public Torre(String posicion, String color) {
-		super(posicion, color);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public boolean esvalidoMovimiento(String a, String b, String color) {
-		int c=Integer.parseInt(a.substring(1));  //analizo la parte numerica de la posicion(cadena)
-		int d=Integer.parseInt(b.substring(1));  //analizo la parte numerica de la posicion(cadena)
-		if(a.substring(0,1).equals(b.substring(0,1)) | c==d )
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-
-}
-
- */

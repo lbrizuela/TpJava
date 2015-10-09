@@ -54,8 +54,8 @@ public class Escritorio extends JFrame {
 	private JTextField text_dniN;
 	private JTextField text_origen;
 	private JTextField text_Destino;
-	private JTextField textField;
-	private JTextField textFieldn;
+	private JTextArea textArea_b;
+	private JTextArea textArea_n;
 
 	
 	public static void main(String[] args) {
@@ -96,7 +96,7 @@ public class Escritorio extends JFrame {
 			contentPane.add(lblTurno);
 			
 			JLabel Blancas = new JLabel("Blancas");
-			Blancas.setBounds(22, 222, 81, 14);
+			Blancas.setBounds(10, 216, 81, 14);
 			Blancas.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(Blancas);
 			
@@ -133,13 +133,12 @@ public class Escritorio extends JFrame {
 			text_Turno.setColumns(10);
 			
 			JLabel lblNewLabel_1 = new JLabel("Negras");
-			lblNewLabel_1.setBounds(22, 495, 46, 14);
+			lblNewLabel_1.setBounds(113, 216, 46, 14);
 			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(lblNewLabel_1);
 			
 			text_origen = new JTextField();
 			text_origen.setBounds(252, 263, 147, 20);
-			text_origen.setText("Posici\u00F3n origen");
 			text_origen.setHorizontalAlignment(SwingConstants.CENTER);
 			text_origen.setFont(new Font("Arial", Font.ITALIC, 10));
 			contentPane.add(text_origen);
@@ -148,7 +147,6 @@ public class Escritorio extends JFrame {
 			text_Destino = new JTextField();
 			text_Destino.setBounds(252, 319, 147, 20);
 			text_Destino.setHorizontalAlignment(SwingConstants.CENTER);
-			text_Destino.setText("Posici\u00F3n destino");
 			text_Destino.setFont(new Font("Arial", Font.ITALIC, 10));
 			contentPane.add(text_Destino);
 			text_Destino.setColumns(10);
@@ -202,15 +200,19 @@ public class Escritorio extends JFrame {
 			bnt_Guardar.setFont(new Font("Arial", Font.BOLD, 12));
 			contentPane.add(bnt_Guardar);
 			
-			textField = new JTextField();
-			textField.setBounds(10, 247, 211, 218);
-			contentPane.add(textField);
-			textField.setColumns(10);
+			JScrollPane scrollPane_2 = new JScrollPane();
+			scrollPane_2.setBounds(10, 234, 93, 229);
+			contentPane.add(scrollPane_2);
 			
-			textFieldn = new JTextField();
-			textFieldn.setBounds(10, 522, 211, 132);
-			contentPane.add(textFieldn);
-			textFieldn.setColumns(10);
+			textArea_b = new JTextArea();
+			scrollPane_2.setViewportView(textArea_b);
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(113, 234, 89, 227);
+			contentPane.add(scrollPane);
+			
+			textArea_n = new JTextArea();
+			scrollPane.setViewportView(textArea_n);
 			
 			
 	
@@ -260,37 +262,27 @@ public void validarPartida() {
 			String blancas="";
 			String negras="";
 			String turno=ctrol.getPartida().getTurno();
-
-		System.out.println("\nEL turno es de:"+turno+"\n");
-		System.out.println("Nombre:"+ ctrol.getPartida().getJ_b().getNombre());
-		System.out.println("Ubicacione piezas Blancas:"+"\n");
-			
-
-		
+				
 			for (Pieza p : pieza) {
 				  if(p.getColor().equals("blanco")){     
 					  if(p.getPosicion()!="")
 						  System.out.println("Posicion:"+p.getPosicion()+"->"+"Nombre:"+p.getNombre()+""  );
-					  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre();
-					  
-					  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
+					  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre()+"\n";
+		
 				  }
-
-
-				  System.out.println("Ubicacione piezas Negras:"+"\n");
-				  for (Pieza p1 : pieza) {
-					  if(p1.getColor().equals("negro")){
-						  if(p1.getPosicion()!="")
-							  System.out.println("Posicion:"+p1.getPosicion()+"->"+"Nombre:"+p1.getNombre()+""  );
-						  negras=negras+p1.getPosicion()+"-"+p1.getNombre()+" \n"; 
+				  else
+				  {
+						  if(p.getPosicion()!="")
+						  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n"; 
 					  }
 					
+				  
+					
+					
 				  }
-					System.out.println(blancas);
-					textField.setText(blancas);
-					textFieldn.setText(negras);
-					text_Turno.setText(turno);
-				  }
+			textArea_b .setText(blancas);
+			textArea_n.setText(negras);
+			text_Turno.setText(turno);
 		}
 
 			
@@ -307,28 +299,29 @@ public void validarPartida() {
 		{
 			//Este metodo mueve la ficha
 			
-			Partida p=new Partida();
+			
 			boolean respuesta=ctrol.validarMovimiento( text_origen.getText(), text_Destino.getText());
 			if (respuesta==false){
 				JOptionPane.showMessageDialog(null, "Movimiento Incorrecto");
 				text_origen.setText(null);
 				text_Destino.setText(null);
-				mostrarPiezas(p.getPiezas());
+				mostrarPiezas(ctrol.getPartida().getPiezas());
 				
 				}else{
 					JOptionPane.showMessageDialog(null,"Movimiento Correcto");
-					p=ctrol.realizarMovimiento(text_origen.getText(), text_Destino.getText()); //// este metodo realiza el movimiento
-					if(p.isJuegoGanado())
+					ctrol.realizarMovimiento(text_origen.getText(), text_Destino.getText()); //// este metodo realiza el movimiento
+					if(ctrol.getPartida().isJuegoGanado())
 					{
 						finalizarJugo();
 					}
 					else
 					{
 						ctrol.cambiarTurno();
-						mostrarPiezas(p.getPiezas());
+						text_origen.setText(null);
+						text_Destino.setText(null);
+						mostrarPiezas(ctrol.getPartida().getPiezas());
 					}
-					text_origen.setText(null);
-					text_Destino.setText(null);
+					
 					
 					
 					
@@ -343,14 +336,13 @@ public void validarPartida() {
 			
 			
 
-	private void limpiar() {
+	private void limpiar () {
 		//Este metodo limpia la interfaz
-			text_origen.setText(null);
+			
+	    	text_origen.setText(null);
 			text_Destino.setText(null);
-			//text_b.setText(null);
-			//text_n.setText(null);
-			textField.setText(null);
-			textFieldn.setText(null);
+			textArea_b .setText(null);
+			textArea_n.setText(null);
 			text_dniB.setText(null);
 			text_dniN.setText(null);
 			text_Turno.setText(null);
@@ -360,7 +352,8 @@ public void validarPartida() {
 		}
 
 	private void finalizarJugo() {
-		//Este metodo muestra que un jugador gano, y borra la partida llamando al controlador
+		//Este metodo muestra que un jugador gano, y borra la partida llamando al controlador.
+		
 		    JOptionPane.showMessageDialog(null, "Gano el jugador: "+ctrol.getPartida().getTurno());
 		    limpiar();
 			ctrol.borrarPartida();
@@ -370,6 +363,7 @@ public void validarPartida() {
 	
 private void guardarPartida() {
 	//Este metodo llama al controlador para Guardar todos los datos.
+	
 	ctrol.UpPartida();
 	JOptionPane.showMessageDialog(null,"Se ha guardado con exito");
 	limpiar();

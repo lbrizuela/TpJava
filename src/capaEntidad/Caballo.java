@@ -30,6 +30,7 @@ public class Caballo extends Pieza{
         }
         return respuesta;
 	}
+	
         
 	public  void inicializarPiezas(String id, String col,String pos)
 	{

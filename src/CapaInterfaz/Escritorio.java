@@ -55,7 +55,7 @@ public class Escritorio extends JFrame {
 	private JTextField text_origen;
 	private JTextField text_Destino;
 	private JTextField textField;
-	private JTextField textFieldn;
+	private JTextArea txaB;
 
 	
 	public static void main(String[] args) {
@@ -204,14 +204,28 @@ public class Escritorio extends JFrame {
 			contentPane.add(bnt_Guardar);
 			
 			textField = new JTextField();
-			textField.setBounds(10, 247, 211, 218);
+			textField.setBounds(10, 247, 211, 23);
 			contentPane.add(textField);
 			textField.setColumns(10);
 			
-			textFieldn = new JTextField();
-			textFieldn.setBounds(10, 522, 211, 132);
-			contentPane.add(textFieldn);
-			textFieldn.setColumns(10);
+			
+			JTextArea textArea = new JTextArea();
+			textArea.setBounds(217, 590, -183, -1);
+			contentPane.add(textArea);
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(10, 290, 211, 170);
+			contentPane.add(scrollPane);
+		
+			txaB = new JTextArea();
+			scrollPane.setViewportView(txaB);
+			
+			JScrollPane scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(10, 511, 211, 154);
+			contentPane.add(scrollPane_1);
+			
+			JTextArea txaN = new JTextArea();
+			scrollPane_1.setViewportView(txaN);
 			
 			
 	
@@ -272,7 +286,7 @@ public void validarPartida() {
 				  if(p.getColor().equals("blanco")){     
 					  if(p.getPosicion()!="")
 						  System.out.println("Posicion:"+p.getPosicion()+"->"+"Nombre:"+p.getNombre()+""  );
-					  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre();
+					  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre()+"\n";
 					  
 					  ///Aca tampoco me hace el salto de linea, no se si sera por el formato de donde lo muestra, no entiendo mucho 
 				  }
@@ -289,7 +303,9 @@ public void validarPartida() {
 				  }
 					System.out.println(blancas);
 					textField.setText(blancas);
-					textFieldn.setText(negras);
+					txaB.setText(blancas);
+					txaN.
+					//textFieldn.setText(negras);
 					text_Turno.setText(turno);
 				  }
 		}
@@ -351,7 +367,7 @@ public void validarPartida() {
 			//text_b.setText(null);
 			//text_n.setText(null);
 			textField.setText(null);
-			textFieldn.setText(null);
+			//textFieldn.setText(null);
 			text_dniB.setText(null);
 			text_dniN.setText(null);
 			text_Turno.setText(null);

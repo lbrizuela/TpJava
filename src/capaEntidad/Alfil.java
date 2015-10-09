@@ -25,7 +25,7 @@ public class Alfil extends Pieza{
 		id_pieza=id;
 		nombre="Alfil";
 		color=col;
-		if(pos.equals(""))
+		if(pos.equals("inicio"))
 		{
 			if(color=="blanco" )
 			{

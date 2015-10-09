@@ -42,41 +42,41 @@ public ArrayList<Pieza>  crearPiezas(String a){
   ArrayList<Pieza> piezas = new ArrayList<Pieza>();
   Pieza p;
   p= new Rey();
-  p.inicializarPiezas("r1",a,"");
+  p.inicializarPiezas("r1",a,"inicio");
  
   piezas.add(p);
   p=new Dama();
-  p.inicializarPiezas("d1",a,"");
+  p.inicializarPiezas("d1",a,"inicio");
   piezas.add(p);
   
   p=new Alfil();
-  p.inicializarPiezas("a1",a,"");
+  p.inicializarPiezas("a1",a,"inicio");
   piezas.add(p);
   
   p=new Alfil();
-  p.inicializarPiezas("a2",a,"");
+  p.inicializarPiezas("a2",a,"inicio");
   piezas.add(p);
   
   p=new Caballo();
-  p.inicializarPiezas("c1",a,"");
+  p.inicializarPiezas("c1",a,"inicio");
   piezas.add(p);
   
   p=new Caballo();
-  p.inicializarPiezas("c2",a,"");
+  p.inicializarPiezas("c2",a,"inicio");
   piezas.add(p);
   
   p=new Torre();
-  p.inicializarPiezas("t1",a,"");
+  p.inicializarPiezas("t1",a,"inicio");
   piezas.add(p);
   
   p=new Torre();
-  p.inicializarPiezas("t2",a,"");
+  p.inicializarPiezas("t2",a,"inicio");
   piezas.add(p);
   
   for(int i=1; i<9;i++)
   {
 	  p=new Peon();
-	  p.inicializarPiezas("p"+ Integer.toString(i),a,"");	  
+	  p.inicializarPiezas("p"+ Integer.toString(i),a,"inicio");	  
 	  piezas.add(p);
   }
   return piezas;
@@ -241,13 +241,13 @@ public void borrarFicha(ArrayList<Pieza> piezas,String color,String destino)
 		{
 		p=buscarFicha(piezas,"negro", destino);
 		if(p!=null){
-		p.setPosicion("");}
+		p.setPosicion("comido");}
 		}
 	else
 		{
 		p=buscarFicha(piezas,"blanco", destino);
 		if(p!=null){
-		p.setPosicion("");
+		p.setPosicion("comido");
 		}
 		}
 	
@@ -266,7 +266,7 @@ public boolean reyNulo(ArrayList<Pieza> piezas){
 
 	for (Pieza pieza : piezas) {
 		if(pieza.getNombre().equals("Rey"))
-			if(pieza.getPosicion().equals(""))
+			if(pieza.getPosicion().equals("comido"))
 			{
 				return true;
 			}

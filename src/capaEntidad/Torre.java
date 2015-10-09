@@ -32,7 +32,7 @@ public class Torre extends Pieza {
 		id_pieza=id;
 		nombre="Torre";
 		color=col;
-		if(pos.equals(""))
+		if(pos.equals("inicio"))
 		{
 			if(color=="blanco")
 			{

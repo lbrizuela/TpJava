@@ -37,7 +37,7 @@ public class Rey extends Pieza {
 		id_pieza=id;
 		nombre="Rey";
 		color=col;
-		if(pos.equals(""))
+		if(pos.equals("inicio"))
 		{
 			if(color=="blanco")
 			{

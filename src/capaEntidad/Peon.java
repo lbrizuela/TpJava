@@ -86,7 +86,7 @@ public class Peon extends Pieza {
 	
 		nombre="Peon";
 		color=col;
-		if(pos.equals(""))
+		if(pos.equals("inicio"))
 		{
 			if(color.equals("blanco"))
 			{
@@ -110,6 +110,8 @@ public class Peon extends Pieza {
 			buscarPosicion(2,posicion);
 		}
 	}
+	
+	
 	private void ponerPosicion(int i, String indexOf) {
 		
 		

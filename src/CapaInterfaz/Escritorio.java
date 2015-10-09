@@ -317,14 +317,13 @@ public void validarPartida() {
 				
 			for (Pieza p : pieza) {
 				  if(p.getColor().equals("blanco")){     
-					  if(p.getPosicion()!="")
-						  System.out.println("Posicion:"+p.getPosicion()+"->"+"Nombre:"+p.getNombre()+""  );
+					  if(p.getPosicion()!="comido")
 					  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre()+"\n";
 
 				  }
 				  else
 				  {
-						  if(p.getPosicion()!="")
+						  if(p.getPosicion()!="comido")
 						  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n"; 
 					  }
 					
@@ -334,7 +333,7 @@ public void validarPartida() {
 				  }			
 					textArea_b.setText(blancas);
 					text_Turno.setText(turno);
-					if (turno=="blanco") {
+					if (turno.equals("blanco")) {
 						txtNombreJugador.setText(jugadorB);
 						
 					}else {

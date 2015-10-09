@@ -54,8 +54,14 @@ public class Escritorio extends JFrame {
 	private JTextField text_dniN;
 	private JTextField text_origen;
 	private JTextField text_Destino;
+
 	private JTextArea textArea_b;
 	private JTextArea textArea_n;
+	private JTextArea txajuego;
+	private JTextField txtNombreJugador;
+	private JTextField txtNombreB;
+	private JTextField txtNombreN;
+
 
 	
 	public static void main(String[] args) {
@@ -64,6 +70,7 @@ public class Escritorio extends JFrame {
 				try {
 					Escritorio frame = new Escritorio();
 					frame.setVisible(true);
+					 frame.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -84,72 +91,11 @@ public class Escritorio extends JFrame {
 			setIconImage(Toolkit.getDefaultToolkit().getImage(Escritorio.class.getResource("/Imagenes/icon.jpg")));
 			setTitle("Juego Ajedrez UTN");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			setBounds(100, 100, 760, 714);
+			setBounds(100, 100, 760, 575);
 			contentPane = new JPanel();
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
 			contentPane.setLayout(null);
-			
-			JLabel lblTurno = new JLabel("Turno ");
-			lblTurno.setBounds(22, 187, 46, 14);
-			lblTurno.setFont(new Font("Arial", Font.BOLD, 12));
-			contentPane.add(lblTurno);
-			
-			JLabel Blancas = new JLabel("Blancas");
-			Blancas.setBounds(10, 216, 81, 14);
-			Blancas.setFont(new Font("Arial", Font.BOLD, 12));
-			contentPane.add(Blancas);
-			
-			JLabel lblOrigen = new JLabel("Origen");
-			lblOrigen.setBounds(252, 238, 46, 14);
-			lblOrigen.setFont(new Font("Arial", Font.BOLD, 12));
-			contentPane.add(lblOrigen);
-			
-			JLabel lblDestino = new JLabel("Destino");
-			lblDestino.setBounds(252, 294, 46, 14);
-			lblDestino.setFont(new Font("Arial", Font.BOLD, 12));
-			contentPane.add(lblDestino);
-			
-			JButton btnMover = new JButton("Mover");
-			btnMover.setBounds(252, 359, 147, 23);
-			btnMover.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					mover();
-				}
-			});
-			btnMover.setFont(new Font("Arial", Font.BOLD, 12));
-			contentPane.add(btnMover);
-			
-			JLabel lblNewLabel = new JLabel("");
-			lblNewLabel.setBounds(438, 187, 289, 288);
-			lblNewLabel.setIcon(new ImageIcon(Escritorio.class.getResource("/Imagenes/ajedrez.jpg")));
-			contentPane.add(lblNewLabel);
-			
-			text_Turno = new JTextField();
-			text_Turno.setBounds(73, 185, 128, 20);
-			text_Turno.setEnabled(false);
-			contentPane.add(text_Turno);
-			text_Turno.setColumns(10);
-			
-			JLabel lblNewLabel_1 = new JLabel("Negras");
-			lblNewLabel_1.setBounds(113, 216, 46, 14);
-			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
-			contentPane.add(lblNewLabel_1);
-			
-			text_origen = new JTextField();
-			text_origen.setBounds(252, 263, 147, 20);
-			text_origen.setHorizontalAlignment(SwingConstants.CENTER);
-			text_origen.setFont(new Font("Arial", Font.ITALIC, 10));
-			contentPane.add(text_origen);
-			text_origen.setColumns(10);
-			
-			text_Destino = new JTextField();
-			text_Destino.setBounds(252, 319, 147, 20);
-			text_Destino.setHorizontalAlignment(SwingConstants.CENTER);
-			text_Destino.setFont(new Font("Arial", Font.ITALIC, 10));
-			contentPane.add(text_Destino);
-			text_Destino.setColumns(10);
 		
 			
 			JPanel panel = new JPanel();
@@ -189,8 +135,90 @@ public class Escritorio extends JFrame {
 			btnJugar.setBounds(544, 45, 107, 23);
 			panel.add(btnJugar);
 			
+			JPanel panel_1 = new JPanel();
+			panel_1.setBorder(new TitledBorder(null, "Juego", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_1.setBounds(22, 138, 705, 391);
+			contentPane.add(panel_1);
+			panel_1.setLayout(null);
+			
+			JLabel lblTurno = new JLabel("Turno ");
+			lblTurno.setBounds(289, 31, 46, 14);
+			panel_1.add(lblTurno);
+			lblTurno.setFont(new Font("Arial", Font.BOLD, 12));
+			
+			text_Turno = new JTextField();
+			text_Turno.setBounds(262, 56, 106, 20);
+			panel_1.add(text_Turno);
+			text_Turno.setEnabled(false);
+			text_Turno.setColumns(10);
+			
+			JLabel Blancas = new JLabel("Blancas");
+			Blancas.setBounds(39, 31, 61, 14);
+			panel_1.add(Blancas);
+			Blancas.setFont(new Font("Arial", Font.BOLD, 12));
+			
+			JScrollPane scrollPane_2 = new JScrollPane();
+			scrollPane_2.setBounds(20, 82, 93, 267);
+			panel_1.add(scrollPane_2);
+			
+			textArea_b = new JTextArea();
+			scrollPane_2.setViewportView(textArea_b);
+			
+			JLabel lblNewLabel_1 = new JLabel("Negras");
+			lblNewLabel_1.setBounds(142, 31, 46, 14);
+			panel_1.add(lblNewLabel_1);
+			lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 12));
+			
+			JScrollPane scrollPane = new JScrollPane();
+			scrollPane.setBounds(124, 83, 89, 266);
+			panel_1.add(scrollPane);
+			
+			textArea_n = new JTextArea();
+			scrollPane.setViewportView(textArea_n);
+			
+			JLabel lblOrigen = new JLabel("Origen");
+			lblOrigen.setBounds(289, 138, 46, 14);
+			panel_1.add(lblOrigen);
+			lblOrigen.setFont(new Font("Arial", Font.BOLD, 12));
+			
+			text_origen = new JTextField();
+			text_origen.setBounds(262, 163, 106, 20);
+			panel_1.add(text_origen);
+			text_origen.setHorizontalAlignment(SwingConstants.CENTER);
+			text_origen.setFont(new Font("Arial", Font.ITALIC, 10));
+			text_origen.setColumns(10);
+			
+			JLabel lblDestino = new JLabel("Destino");
+			lblDestino.setBounds(289, 196, 46, 14);
+			panel_1.add(lblDestino);
+			lblDestino.setFont(new Font("Arial", Font.BOLD, 12));
+			
+			text_Destino = new JTextField();
+			text_Destino.setBounds(262, 221, 106, 20);
+			panel_1.add(text_Destino);
+			text_Destino.setHorizontalAlignment(SwingConstants.CENTER);
+			text_Destino.setFont(new Font("Arial", Font.ITALIC, 10));
+			text_Destino.setColumns(10);
+			
+			JLabel lblNewLabel = new JLabel("");
+			lblNewLabel.setBounds(406, 32, 276, 288);
+			panel_1.add(lblNewLabel);
+			lblNewLabel.setIcon(new ImageIcon(Escritorio.class.getResource("/Imagenes/ajedrez.jpg")));
+			
+			JButton btnMover = new JButton("Mover");
+			btnMover.setBounds(262, 252, 106, 23);
+			panel_1.add(btnMover);
+			btnMover.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					mover();
+				}
+			});
+			btnMover.setFont(new Font("Arial", Font.BOLD, 12));
+			
 			JButton bnt_Guardar = new JButton("Guardar Partida");
-			bnt_Guardar.setBounds(252, 402, 147, 23);
+			bnt_Guardar.setBounds(406, 346, 129, 23);
+			panel_1.add(bnt_Guardar);
 			bnt_Guardar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -198,27 +226,48 @@ public class Escritorio extends JFrame {
 				}
 			});
 			bnt_Guardar.setFont(new Font("Arial", Font.BOLD, 12));
-			contentPane.add(bnt_Guardar);
 			
-			JScrollPane scrollPane_2 = new JScrollPane();
-			scrollPane_2.setBounds(10, 234, 93, 229);
-			contentPane.add(scrollPane_2);
+			txtNombreJugador = new JTextField();
+			txtNombreJugador.setBounds(262, 107, 108, 20);
+			panel_1.add(txtNombreJugador);
+			txtNombreJugador.setColumns(10);
 			
-			textArea_b = new JTextArea();
-			scrollPane_2.setViewportView(textArea_b);
+			JLabel lblNombre = new JLabel("Nombre");
+			lblNombre.setFont(new Font("Arial", Font.BOLD, 12));
+			lblNombre.setBounds(289, 82, 61, 14);
+			panel_1.add(lblNombre);
 			
-			JScrollPane scrollPane = new JScrollPane();
-			scrollPane.setBounds(113, 234, 89, 227);
-			contentPane.add(scrollPane);
+			JButton btnSalir = new JButton("Salir");
+			btnSalir.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					salir();
+				}
+			});
+			btnSalir.setFont(new Font("Arial", Font.BOLD, 12));
+			btnSalir.setBounds(553, 346, 129, 23);
+			panel_1.add(btnSalir);
 			
-			textArea_n = new JTextArea();
-			scrollPane.setViewportView(textArea_n);
+			txtNombreB = new JTextField();
+			txtNombreB.setBounds(20, 56, 93, 20);
+			panel_1.add(txtNombreB);
+			txtNombreB.setColumns(10);
 			
-			
+			txtNombreN = new JTextField();
+			txtNombreN.setColumns(10);
+			txtNombreN.setBounds(128, 56, 85, 20);
+			panel_1.add(txtNombreN);
+	}
 	
+
+protected void salir() {
+		// TODO Auto-generated method stub
+	   if (JOptionPane.showConfirmDialog(rootPane, "¿Desea realmente salir del Juego?",
+               "Salir del sistema", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+           System.exit(0);
+	   guardarPartida();
+		
 	}
 
-	
 public void validarPartida() {
 	
 	///Valida si existe una partida, si no existe la agrega
@@ -262,13 +311,16 @@ public void validarPartida() {
 			String blancas="";
 			String negras="";
 			String turno=ctrol.getPartida().getTurno();
+			String jugadorB= ctrol.getPartida().getJ_b().getNombre();
+			String jugadorN=ctrol.getPartida().getJ_n().getNombre();
+			
 				
 			for (Pieza p : pieza) {
 				  if(p.getColor().equals("blanco")){     
 					  if(p.getPosicion()!="")
 						  System.out.println("Posicion:"+p.getPosicion()+"->"+"Nombre:"+p.getNombre()+""  );
 					  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre()+"\n";
-		
+
 				  }
 				  else
 				  {
@@ -279,21 +331,25 @@ public void validarPartida() {
 				  
 					
 					
+				  }			
+					textArea_b.setText(blancas);
+					text_Turno.setText(turno);
+					if (turno=="blanco") {
+						txtNombreJugador.setText(jugadorB);
+						
+					}else {
+						txtNombreJugador.setText(jugadorN);
+					}
+					
+					textArea_b .setText(blancas);
+					textArea_n.setText(negras);
+					text_Turno.setText(turno);
+					txtNombreB.setText(jugadorB);
+					txtNombreN.setText(jugadorN);
+
 				  }
-			textArea_b .setText(blancas);
-			textArea_n.setText(negras);
-			text_Turno.setText(turno);
-		}
 
 			
-
-		
-			
-
-		
-
-		
-		
 		public void mover()
 		
 		{
@@ -328,27 +384,26 @@ public void validarPartida() {
 				}
 				}
 			
-			
-			
-			
-		
-				
-			
-			
 
 	private void limpiar () {
 		//Este metodo limpia la interfaz
 			
 	    	text_origen.setText(null);
 			text_Destino.setText(null);
+
+			//text_b.setText(null);
+			//text_n.setText(null);
+			
+			//textFieldn.setText(null);
+
 			textArea_b .setText(null);
 			textArea_n.setText(null);
+
 			text_dniB.setText(null);
 			text_dniN.setText(null);
 			text_Turno.setText(null);
-			
-			
-			
+			txtNombreJugador.setText(null);
+	
 		}
 
 	private void finalizarJugo() {
@@ -365,8 +420,8 @@ private void guardarPartida() {
 	//Este metodo llama al controlador para Guardar todos los datos.
 	
 	ctrol.UpPartida();
-	JOptionPane.showMessageDialog(null,"Se ha guardado con exito");
-	limpiar();
+	JOptionPane.showMessageDialog(null,"La partida se ha guardado con Éxito");
+	//limpiar(); aca capaz que no la limpie y que solo la guarde por las dudas si qyieren seguir jugaando
 	
 	
 	

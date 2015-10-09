@@ -230,8 +230,8 @@ public void validarPartida() {
 				
 				Jugador ju_b= new Jugador();
 				Jugador ju_n= new Jugador();
-				ju_b=buscarJugador(text_dniB.getText());
-				ju_n=buscarJugador(text_dniN.getText());
+				ju_b=buscarJugador(text_dniB.getText(), "Blanco");
+				ju_n=buscarJugador(text_dniN.getText(),"Negro");
 				p=ctrol.IniciarJuego(ju_b,ju_n);
 			}
 			mostrarPiezas(p.getPiezas());
@@ -239,14 +239,14 @@ public void validarPartida() {
 		
 		
 		
-		private Jugador buscarJugador(String a) {
+		private Jugador buscarJugador(String a, String b) {
 			
 	// TODO Auto-generated method stub
 			Jugador jugador=new Jugador();
 			jugador=ctrol.existeJugador(a);
 			if(jugador==null)
 			{
-				JOptionPane.showMessageDialog(null, "Jugador blanco debe registrarse");
+				JOptionPane.showMessageDialog(null, "Jugador"+ b +" debe registrarse");
 				CrearJugador cjn=new CrearJugador(this,true);
 				cjn.setVisible(true);
 				jugador=ctrol.existeJugador(a);

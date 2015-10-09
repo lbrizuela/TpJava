@@ -82,9 +82,6 @@ public boolean validarMovimiento(String origen, String destino) {
 				resp=p.validarMovimiento(origen, destino,partida.getTurno());
 				
 					}
-			
-			
-			
 			}
 	
 		return resp;

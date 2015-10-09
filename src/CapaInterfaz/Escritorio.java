@@ -317,13 +317,13 @@ public void validarPartida() {
 				
 			for (Pieza p : pieza) {
 				  if(p.getColor().equals("blanco")){     
-					  if(p.getPosicion()!="comido")
+					  if(!p.getPosicion().equals("comido"))
 					  blancas=blancas+p.getPosicion()+ "-"+  p.getNombre()+"\n";
 
 				  }
 				  else
 				  {
-						  if(p.getPosicion()!="comido")
+						  if(!p.getPosicion().equals("comido"))
 						  negras=negras+p.getPosicion()+"-"+p.getNombre()+" \n"; 
 					  }
 					

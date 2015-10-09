@@ -69,18 +69,22 @@ public Partida IniciarJuego(Jugador jug_b, Jugador jug_n) {
 }
 
 
-public boolean validarMovimiento(String text, String text2) {
+public boolean validarMovimiento(String origen, String destino) {
 		// Este metodo valida si el moviento es valido, si lo es devuelve un true
-		Pieza p;
-		boolean resp;
-		p=catPieza.buscarFicha(partida.getPiezas(),partida.getTurno(),text);
+		Pieza p,p2;
+		boolean resp=false;
+		p=catPieza.buscarFicha(partida.getPiezas(),partida.getTurno(),origen);
 		if(p!=null)
+			
 			{
-			resp=p.validarMovimiento(text, text2,partida.getTurno());
-			}
-		else
-			{
-			resp= false;
+			if(catPieza.buscarFicha(partida.getPiezas(),p.getColor(), destino)==null)
+					{
+				resp=p.validarMovimiento(origen, destino,partida.getTurno());
+				
+					}
+			
+			
+			
 			}
 	
 		return resp;
@@ -92,6 +96,7 @@ public boolean validarMovimiento(String text, String text2) {
 
 public void borrarPartida() {
 		//Este metodo borra la partida al finalizar el juego cuando fue ganado
+	
 	catPieza.borrarPiezas(partida.getJ_b().getDni(), partida.getJ_n().getDni());
 	catPartida.borrarPartida(partida.getJ_b().getDni(), partida.getJ_n().getDni());
 
@@ -116,16 +121,16 @@ public void setPartida(Partida partida) {
 
 
 
-public Partida realizarMovimiento(String text, String text2) {
+public void realizarMovimiento(String text, String text2) {
 
 	     //Este metodo realiza el movimiento si ya fue correcto
 	    
 	     catPieza.borrarFicha(partida.getPiezas(),partida.getTurno(), text2);/// Primero tengo que borrar la ficha que come, por si primero hacemos el moviento y dsps borramos
 	                                                                         /// cuando querramos borrar va a encontrar 2 fichas en la misma posicion.. Este esta OK
 	     catPieza.moverFicha(partida.getPiezas(),partida.getTurno(),text, text2);//// Este metodo esta mal.. no me enceuntra la ficha, y no encuentro cual es el error.
-	     boolean resp= catPieza.reyNulo(partida.getPiezas());
-	     partida.setJuegoGanado(resp);
-	     return partida;		
+	    
+	     partida.setJuegoGanado(catPieza.reyNulo(partida.getPiezas()));
+	    		
 }
 
 public Partida cambiarTurno()

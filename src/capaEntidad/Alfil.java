@@ -16,13 +16,16 @@ public class Alfil extends Pieza{
     return respuesta; 
 		
 	}
+	
+	
+	
 	public  void inicializarPiezas(String id, String col, String pos)
 
 	{ 
 		id_pieza=id;
 		nombre="Alfil";
 		color=col;
-		if(pos==null)
+		if(pos.equals(""))
 		{
 			if(color=="blanco" )
 			{

@@ -247,7 +247,8 @@ public void borrarFicha(ArrayList<Pieza> piezas,String color,String destino)
 		{
 		p=buscarFicha(piezas,"blanco", destino);
 		if(p!=null){
-		p.setPosicion("");}
+		p.setPosicion("");
+		}
 		}
 	
 

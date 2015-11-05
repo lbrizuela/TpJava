@@ -52,14 +52,14 @@ public class loginPartida extends HttpServlet {
 			Jugador jug_blanco;
 			Jugador jug_negro;
 			jug_blanco=crolJuego.existeJugador(request.getParameter("dni_blanco"));
+			jug_negro=crolJuego.existeJugador(request.getParameter("dni_negro"));
 			if(jug_blanco==null)
 			{
-				response.sendRedirect("/crearUsuario");
-			}
-			jug_negro=crolJuego.existeJugador(request.getParameter("dni_negro"));
-			
-			if(jug_negro==null){
 				response.sendRedirect("/crearUsuario.jsp");
+			}else{
+				if(jug_negro==null){
+				response.sendRedirect("/crearUsuario.jsp");
+				}
 			}
 			partida=crolJuego.IniciarJuego(jug_blanco, jug_negro);
 			}

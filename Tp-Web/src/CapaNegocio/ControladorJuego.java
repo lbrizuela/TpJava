@@ -35,8 +35,8 @@ public Partida validarPartida(String dni_b, String dni_n){
 		partida=catPartida.buscarPartida(dni_b, dni_n);
 		if(partida==null)// Si la partida no existe la inicializa\
 		{
-			JOptionPane.showMessageDialog(null, "No existe la partida");
-			
+			//JOptionPane.showMessageDialog(null, "No existe la partida");
+			System.out.println("Partida nula");
 		}
 	 
 		else

@@ -44,7 +44,7 @@ public class loginUsuario extends HttpServlet {
 			ju.setNombre(request.getParameter("nombre"));
 			ControladorJuego crolJuego= new ControladorJuego();
 			crolJuego.save(ju);
-			///response.sendRedirect("/juego");
+			response.sendRedirect("/loginPartida.java");
 			
 			
 		}

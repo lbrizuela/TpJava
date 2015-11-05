@@ -57,8 +57,8 @@ public class loginPartida extends HttpServlet {
 			jug_negro=crolJuego.existeJugador(String.valueOf(session.getAttribute("dni_negro")));
 			if(jug_blanco==null)
 			{
-				request.getRequestDispatcher("crearUsuario.jsp").forward(request, response);
-				//response.sendRedirect("crearUsuario.jsp");
+				//request.getRequestDispatcher("crearUsuario.jsp").forward(request, response);  // Bueno no funciona ninguno.. Ambos siguen de largo
+				response.sendRedirect("crearUsuario.jsp");
 			}
 			else{
 				if(jug_negro==null){

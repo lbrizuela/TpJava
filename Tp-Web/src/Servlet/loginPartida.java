@@ -42,8 +42,8 @@ public class loginPartida extends HttpServlet {
 		String accion= request.getParameter("accion");
 		ControladorJuego crolJuego=new ControladorJuego();;
 		HttpSession session= request.getSession(true);
-		session.setAttribute("dni_blanco",request.getAttribute("dni_blanco") );
-		session.setAttribute("dni_negro",request.getAttribute("dni_negro") );
+		session.setAttribute("dni_blanco",request.getParameter("dni_blanco") );
+		session.setAttribute("dni_negro",request.getParameter("dni_negro") );
 		Partida partida= new Partida();
 		if(accion.equals("jugar"))
 		{ 
@@ -57,11 +57,12 @@ public class loginPartida extends HttpServlet {
 			jug_negro=crolJuego.existeJugador(String.valueOf(session.getAttribute("dni_negro")));
 			if(jug_blanco==null)
 			{
-				response.sendRedirect("/crearUsuario.jrs");
+				request.getRequestDispatcher("crearUsuario.jsp").forward(request, response);
+				//response.sendRedirect("crearUsuario.jsp");
 			}
 			else{
 				if(jug_negro==null){
-				response.sendRedirect("/crearUsuario.jrs");
+				response.sendRedirect("/crearUsuario.jsp");
 				}
 			}
 			partida=crolJuego.IniciarJuego(jug_blanco, jug_negro);

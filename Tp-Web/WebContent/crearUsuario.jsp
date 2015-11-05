@@ -37,7 +37,7 @@ function cargar() {
 </script>
 
 <body>
-<form action="" method="POST" id="loginUsuario"">
+<form action="" method="POST" id="crearUsuario"">
 <center>
 <input type="hidden" name="accion" id="accion">
 <p style="height: 22px; ">

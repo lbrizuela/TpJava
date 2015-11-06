@@ -42,7 +42,7 @@ public Partida validarPartida(String dni_b, String dni_n){
 		else
 		{
 			partida.setPiezas(catPieza.buscarPiezas(dni_b,dni_n));
-			int codigo=JOptionPane.showConfirmDialog(null, "¿Quieres realizar una nueva partida?", "Existe partida pendiente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+			/*int codigo=JOptionPane.showConfirmDialog(null, "¿Quieres realizar una nueva partida?", "Existe partida pendiente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 	        if (codigo==JOptionPane.YES_OPTION){   /// Esto estaba al revez.
    
 	            borrarPartida();/// debe borar la partida anterior para inicializar otra.
@@ -50,12 +50,12 @@ public Partida validarPartida(String dni_b, String dni_n){
 	  	
 	        }
 	        else if(codigo==JOptionPane.NO_OPTION){
-	        	return partida;          
+	        	return partida;  */        
 	          // aca devuelvo la partida que encontro. 
 	        	//para mi no esta de mas porque le esta diciendo que existe partida, si no la quiere inciializar le devuelve la anterior 
 		}
 		  
-        }
+        
 		
         return partida;
 }

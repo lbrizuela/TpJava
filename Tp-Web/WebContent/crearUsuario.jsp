@@ -34,7 +34,7 @@ function cargar() {
 }
 
 
-</script>
+</script onload="cargar();">
 
 <body>
 <form action="" method="POST" id="crearUsuario"">

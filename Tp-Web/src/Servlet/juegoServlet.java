@@ -50,13 +50,14 @@ public class juegoServlet extends HttpServlet {
 			}
 			else {
 				/// mandar un msj no se como chota se hace
+				response.sendRedirect("/juego.jsp");
 			}
 		}
 		else 
 		{
 			if(accion.equals("guardar"))
 			{
-				////falta hacer el guardar
+				crol.UpPartida();
 				
 			}
 		}

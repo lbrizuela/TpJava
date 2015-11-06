@@ -1,6 +1,5 @@
 package CapaDatos;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,8 +9,8 @@ public class FactoryConexion {
 		private String host="localhost";
 		private String port="3306";
 		private String user="root";
-		private String pass="7394luisina";
-		private String db="juegoajedrez";
+		private String pass="Mariuchi1920";
+		private String db="ajedrez";
 		
 		private Connection conn;
 		private int cantCon;

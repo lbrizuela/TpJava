@@ -69,7 +69,7 @@ public class loginPartida extends HttpServlet {
 			}
 			
 		
-			
+		//// que pasa si la partida existe, por si 	quiere modificar o no la existente
 		
 		}
 		session.setAttribute("controlador", crolJuego);/// No estoy muy segura pero para tener smp el controlador en estado original y la partida.

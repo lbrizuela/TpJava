@@ -46,6 +46,7 @@ public class juegoServlet extends HttpServlet {
 			if(crol.validarMovimiento(request.getParameter("origen"),request.getParameter( "destino")))
 			{
 				crol.realizarMovimiento(request.getParameter("origen"),request.getParameter( "destino"));
+				/// otro msj movimiwnro okey
 			}
 			else {
 				/// mandar un msj no se como chota se hace

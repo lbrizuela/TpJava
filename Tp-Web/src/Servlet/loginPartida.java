@@ -52,7 +52,7 @@ public class loginPartida extends HttpServlet {
 			session.setAttribute("dni_negro",request.getParameter("dni_negro") );
 		}
 		Partida partida= new Partida();
-		if(accion.equals("jugar"))
+		if(accion.equals("jugar") || accion.equals("aceptar"))
 		{ 
 			
 		
@@ -70,7 +70,7 @@ public class loginPartida extends HttpServlet {
 			}
 			else{
 				if(jug_negro==null){
-				response.sendRedirect("/crearUsuario.jsp");
+					request.getRequestDispatcher("crearUsuario.jsp").forward(request, response);
 				}else{
 					partida=crolJuego.IniciarJuego(jug_blanco, jug_negro);
 					session.setAttribute("controlador", crolJuego);/// No estoy muy segura pero para tener smp el controlador en estado original y la partida.

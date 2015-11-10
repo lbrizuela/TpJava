@@ -16,7 +16,7 @@ function mover() {
 	///forma.accion= "guardar"; no se hace asi
 	forma.action="adminJuego";
 	var accion = document.getElementById("accion");
-	accion.value="jugar";
+	accion.value="mover";
 	forma.submit();
 	
 }
@@ -26,7 +26,7 @@ function guardar() {
 	///forma.accion= "guardar"; no se hace asi
 	forma.action="adminJuego";
 	var accion = document.getElementById("accion");
-	accion.value="jugar";
+	accion.value="guardar";
 	forma.submit();
 	
 }

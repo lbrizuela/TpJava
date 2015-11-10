@@ -42,7 +42,7 @@ function cargar() {
 <input type="hidden" name="accion" id="accion">
 <p style="height: 22px; ">
 
-Por favor,Logueese</p>
+DEBE REGISTRARSE PARA PODER JUGAR</p>
 <table>
 <tr>
 <td style="font-weight: bold ;" align="center">DNI :</td> 

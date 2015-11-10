@@ -46,11 +46,12 @@ public class juegoServlet extends HttpServlet {
 			if(crol.validarMovimiento(request.getParameter("origen"),request.getParameter( "destino")))
 			{
 				crol.realizarMovimiento(request.getParameter("origen"),request.getParameter( "destino"));
+				request.getRequestDispatcher("juego.jsp").forward(request, response);
 				/// otro msj movimiwnro okey
 			}
 			else {
 				/// mandar un msj no se como chota se hace
-				response.sendRedirect("/juego.jsp");
+				request.getRequestDispatcher("juego.jsp").forward(request, response);;
 			}
 		}
 		else 

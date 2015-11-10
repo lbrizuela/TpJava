@@ -1,6 +1,7 @@
 
 
-<%@page import="CapaNegocio.ControladorJuego"%>
+<%@page import="CapaNegocio.*"%>
+<%@page import="Imagenes.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
@@ -42,62 +43,71 @@ function cargar() {
 <title>Juego</title>
 </head>
 <body>
-
+<center>
 <form action="" method="POST" id="juego">
 <input type="hidden" name="accion" id="accion">
-<table>
-<table style=" frot-weight; align: right">
-<tr>
-<td style="font-weight: bold ;" align="center">Turno :</td> 
-</td>
-</tr>
-
-<tr>
-<th>Fichas Blancas</th><th>Fichas Negras</th>
-</tr>
-
-
 
 
 <%
 ControladorJuego crol= (ControladorJuego)session.getAttribute("controlador");
-Partida partida=crol.getPartida(); 
+String blancas= "";
+String negras= "";
 
-%>
-<tr>
-<td><%=partida.getTurno()%></td>
-</tr>
+for(Pieza pieza : crol.getPartida().getPiezas()){ 
+if(pieza.getColor().equals("blanco"))
+{
 
-<% 
-for(Pieza obj: partida.getPiezas()) {
-	if(obj.getColor().equals("blanco")){
-%>
-	<tr>
-	<td><%=obj.getPosicion()%></td>
-	</tr>
-	<%} else{  %>
-	<tr>
-	<td><%=obj.getPosicion() %></td>
-	</tr>
-<%	
-	}
+ blancas= blancas+"\n"+ pieza.getPosicion();}
+ 
+else  {
+ negras = negras + "\n"+  pieza.getPosicion(); 
 }
+
+}	
+
+ 
+
 %>
 
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 500px;">
+
+	<tbody>
+		<tr>
+			<td><font><font>Blancas </font></font></td>
+			
+			
+			<td><font><font>Negras</font></font></td>
+			<td><font>Turno </font></td>
+			<td><%=crol.getPartida().getTurno()%></td>
+			
+		
+			
+			
+
+
+
+		<tr>
+		    
+			
+			<td colspan="1" rowspan="4"><%= blancas %></td>
+			<td colspan="1" rowspan="4"><%= negras %></td>
+
+		</tr>
+		<tr>	
+			<td style="font-weight: bold ;" align="center">Origen :</td> 
+            <td><input type="text" name="origen" id="origen"></td>
+		</tr>
+		<tr>
+       <td style="font-weight: bold ;" align="center">Destino :</td> 
+       <td><input type="text" name="destino" id="destino"></td>
+		</tr>
+		<tr>
+		<td><img alt="" src="src/Imagenes/ajedrez.jpg"/></td>
+		</tr>
+	</tbody>
 </table>
 
-<table style=" frot-weight; align: left" >
-<tr>
-<td style="font-weight: bold ;" align="center">Origen :</td> 
-<td><input type="text" name="origen" id="origen">
-</td>
-</tr>
-
-<tr>
-<td style="font-weight: bold ;" align="center">Destino :</td> 
-<td><input type="text" name="destino" id="destino">
-</td>
-</tr>
 <tr>
 <td colspan="2" >
 <input type="button" value="Mover" style="font-size: 14px; color: black;"
@@ -106,8 +116,15 @@ onclick="mover();">
 onclick="guardar();">
 </td>
 </tr>
-</table>
-</table>
+
+
+
+
+	
+
+
+
 </form>
+</center>
 </body>
 </html>

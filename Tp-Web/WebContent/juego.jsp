@@ -40,7 +40,7 @@ function cargar() {
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Juego</title>
+<title>VENTANA JUEGO</title>
 </head>
 <body>
 <center>
@@ -70,16 +70,18 @@ else  {
 %>
 
 
-<table border="1" cellpadding="1" cellspacing="1" style="width: 500px;">
-
+<!-- <table border="1" cellpadding="1" cellspacing="1" style="width: 500px;"> -->
+<table width="575" border="2" align="center" cellspacing="2" bordercolor="#000000" >
 	<tbody>
-		<tr>
-			<td><font><font>Blancas </font></font></td>
+	<tr align="center" valign="middle" ><td colspan="4" >"Ventana Juego"</td></tr>
+	<tr align= "center"><td>Jugador Blanco:</td><td>Jugador Negro:</td> <td colspan="3"><font>Turno: </font></td></tr> <!--  <--FILAS--> 
+	<tr><td><%=crol.getPartida().getJ_b().getNombre()%></td><td><%=crol.getPartida().getJ_n().getNombre()%></td><td colspan="3"><%=crol.getPartida().getTurno()%></td></tr>
+	<tr><td><font><font> Piezas Blancas </font></font></td><td><font><font>Piezas Negras</font></font></td></tr>
 			
 			
-			<td><font><font>Negras</font></font></td>
-			<td><font>Turno </font></td>
-			<td><%=crol.getPartida().getTurno()%></td>
+			
+			
+			
 			
 		
 			

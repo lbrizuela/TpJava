@@ -47,6 +47,7 @@ public class juegoServlet extends HttpServlet {
 			if(crol.validarMovimiento(request.getParameter("origen"),request.getParameter( "destino")))
 			{
 				crol.realizarMovimiento(request.getParameter("origen"),request.getParameter( "destino"));
+				crol.cambiarTurno();
 				request.getRequestDispatcher("juego.jsp").forward(request, response);
 				/// otro msj movimiwnro okey
 			}
@@ -62,7 +63,7 @@ public class juegoServlet extends HttpServlet {
 			{
 				System.out.println("accionanntesd del contrp:"+ accion);
 				crol.UpPartida();
-				request.getRequestDispatcher("juego.jsp").forward(request, response);
+				request.getRequestDispatcher("MensajeGuardar.jsp").forward(request, response);
 			}
 		}
 	}

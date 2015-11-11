@@ -44,7 +44,7 @@ public class loginPartida extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String accion= request.getParameter("accion");
-		ControladorJuego crolJuego=new ControladorJuego();;
+		ControladorJuego crolJuego=new ControladorJuego();
 		HttpSession session= request.getSession(true);
 		if(request.getParameter("dni_blanco")!=null && request.getParameter("dni_negro")!=null)
 		{

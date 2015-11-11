@@ -41,6 +41,7 @@ public class juegoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String accion= request.getParameter("accion");
 		ControladorJuego crol= (ControladorJuego)request.getSession().getAttribute("controlador");
+		System.out.println("ACCION:" + accion);
 		if(accion.equals("mover"))
 		{
 			if(crol.validarMovimiento(request.getParameter("origen"),request.getParameter( "destino")))
@@ -51,15 +52,17 @@ public class juegoServlet extends HttpServlet {
 			}
 			else {
 				/// mandar un msj no se como chota se hace
-				request.getRequestDispatcher("juego.jsp").forward(request, response);;
+				request.getRequestDispatcher("juego.jsp").forward(request, response);
 			}
 		}
 		else 
 		{
-			if(accion.equals("guardar"))
+			
+			if(accion.equals("Guardar"))
 			{
+				System.out.println("accionanntesd del contrp:"+ accion);
 				crol.UpPartida();
-				
+				request.getRequestDispatcher("juego.jsp").forward(request, response);
 			}
 		}
 	}

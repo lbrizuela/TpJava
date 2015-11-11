@@ -13,7 +13,6 @@
 function mover() {
 	
 	var forma= document.getElementById("juego");
-	///forma.accion= "guardar"; no se hace asi
 	forma.action="adminJuego";
 	var accion = document.getElementById("accion");
 	accion.value="mover";
@@ -23,10 +22,9 @@ function mover() {
 function guardar() {
 	
 	var forma= document.getElementById("juego");
-	///forma.accion= "guardar"; no se hace asi
 	forma.action="adminJuego";
 	var accion = document.getElementById("accion");
-	accion.value="guardar";
+	accion.value="Guardar";
 	forma.submit();
 	
 }
@@ -90,7 +88,7 @@ else  {
 		</tr>
 		<tr align="center" valign="middle" ><td colspan="4" ><input type="button" value="Mover" style="font-size: 14px; color: black;"
 onclick="mover();">
-<input align="right" type="button" value="Guardar Partida" style="font-size: 14px; color= black ;"
+<input align="right" type="button" value="Guardar" style="font-size: 14px; color= black ;"
 onclick="guardar();"></td></tr>
 	</tbody>
 </table>

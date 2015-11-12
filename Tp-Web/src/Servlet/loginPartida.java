@@ -65,7 +65,7 @@ public class loginPartida extends HttpServlet {
 			if(jug_blanco==null)
 			{
 				
-			//
+			
 				request.getRequestDispatcher("crearUsuario.jsp").forward(request, response);
 			}
 			else{
@@ -73,7 +73,7 @@ public class loginPartida extends HttpServlet {
 					request.getRequestDispatcher("crearUsuario.jsp").forward(request, response);
 				}else{
 					partida=crolJuego.IniciarJuego(jug_blanco, jug_negro);
-					session.setAttribute("controlador", crolJuego);/// No estoy muy segura pero para tener smp el controlador en estado original y la partida.
+					session.setAttribute("controlador", crolJuego);
 					
 					request.getRequestDispatcher("juego.jsp").forward(request, response);
 					
@@ -81,7 +81,7 @@ public class loginPartida extends HttpServlet {
 			}
 			
 			}else{
-			session.setAttribute("controlador", crolJuego);/// No estoy muy segura pero para tener smp el controlador en estado original y la partida.
+			session.setAttribute("controlador", crolJuego);
 			
 			request.getRequestDispatcher("juego.jsp").forward(request, response);
 			}

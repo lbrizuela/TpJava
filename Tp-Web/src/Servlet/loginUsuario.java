@@ -54,7 +54,7 @@ public class loginUsuario extends HttpServlet {
 			if(accion.equals("cancelar"))
 			{
 				request.getRequestDispatcher("Mensaje.jsp").forward(request, response);
-				/////response.sendRedirect("/salir"); algo asi deberia ser..
+				
 			}
 		}
 	}

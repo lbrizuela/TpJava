@@ -35,24 +35,14 @@ public Partida validarPartida(String dni_b, String dni_n){
 		partida=catPartida.buscarPartida(dni_b, dni_n);
 		if(partida==null)// Si la partida no existe la inicializa\
 		{
-			//JOptionPane.showMessageDialog(null, "No existe la partida");
+			
 			System.out.println("Partida nula");
 		}
 	 
 		else
 		{
 			partida.setPiezas(catPieza.buscarPiezas(dni_b,dni_n));
-			/*int codigo=JOptionPane.showConfirmDialog(null, "¿Quieres realizar una nueva partida?", "Existe partida pendiente", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-	        if (codigo==JOptionPane.YES_OPTION){   /// Esto estaba al revez.
-   
-	            borrarPartida();/// debe borar la partida anterior para inicializar otra.
-	            IniciarJuego(partida.getJ_b(), partida.getJ_n());
-	  	
-	        }
-	        else if(codigo==JOptionPane.NO_OPTION){
-	        	return partida;  */        
-	          // aca devuelvo la partida que encontro. 
-	        	//para mi no esta de mas porque le esta diciendo que existe partida, si no la quiere inciializar le devuelve la anterior 
+			
 		}
 		  
         

@@ -8,17 +8,16 @@
 </head>
 <body>
 <center>
-<table border="2px">
 
- <caption>ATENCION</caption>
 
- <tr>
-              <td> LA PARTIDA SE HA GUARDADO CON ÉXITO</td>
-</tr>
-<tr>
-              <td> <a href="javascript:window.history.back();">&laquo; VOLVER A LA VENTANA JUEGO</a></td>
-</tr>
-</table>
+
+
+
+              <h1 style="font-weight: bold ; color: blue;" align="center"> LA PARTIDA SE HA GUARDADO CON ÉXITO </h1>
+
+
+              <p align="right"> <a href="bienvenido.jsp">&laquo; VOLVER A LA VENTANA JUEGO</a></p>
+
 </center>
 </body>
 </html>

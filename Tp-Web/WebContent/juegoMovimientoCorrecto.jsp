@@ -42,7 +42,7 @@ function cargar() {
 </head>
 <body>
 <center>
-<p style="font-weight: bold ; color: black"> Bienvenido al Juego</p>
+<p style="font-weight: bold; size: 12px; color: blue;" align="center" >El Movimiento Fue Correcto</p>
 <form action="" method="POST" id="juego">
 <input type="hidden" name="accion" id="accion">
 
@@ -53,16 +53,17 @@ String blancas= "";
 String negras= "";
 
 for(Pieza pieza : crol.getPartida().getPiezas()){ 
-if(pieza.getColor().equals("blanco"))
-{
+	if(pieza.getColor().equals("blanco"))
+	{
 
- blancas= blancas+"\n"+pieza.getNombre()+"-"+ pieza.getPosicion();}
- 
-else  {
- negras = negras + "\n"+pieza.getNombre()+"-"+  pieza.getPosicion(); 
-}
+	 blancas= blancas+"\n"+pieza.getNombre()+"-"+ pieza.getPosicion();}
+	 
+	else  {
+	 negras = negras + "\n"+pieza.getNombre()+"-"+  pieza.getPosicion(); 
+	}
 
-}	
+	}	
+	
 
  
 
@@ -72,7 +73,6 @@ else  {
 <!-- <table border="1" cellpadding="1" cellspacing="1" style="width: 500px;"> -->
 <table width="575" border="2" align="center" cellspacing="2" bordercolor="#000000" >
 	<tbody>
-	
 	<tr align= "center"><td style="font-weight: bold ;" align="center">Jugador Blanco:</td><td style="font-weight: bold ;" align="center">Jugador Negro:</td> <td colspan="3" style="font-weight: bold ;" align="center" ><font>Turno: </font></td></tr> <!--  <--FILAS--> 
 	<tr align= "center"><td><%=crol.getPartida().getJ_b().getNombre()%></td><td><%=crol.getPartida().getJ_n().getNombre()%></td><td colspan="3" rowspan="3"><%=crol.getPartida().getTurno()%></td></tr>
 	<tr><td style="font-weight: bold ;" align="center"><font><font> Piezas Blancas </font></font></td><td style="font-weight: bold ;" align="center"><font><font>Piezas Negras</font></font></td></tr>

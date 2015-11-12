@@ -86,15 +86,7 @@ public class loginPartida extends HttpServlet {
 			request.getRequestDispatcher("juego.jsp").forward(request, response);
 			}
 			
-			/*else{
-			
-				PrintWriter out = response.getWriter(); 
-				response.setContentType("text/html"); 
-				out.println("<script> alert(""); </script>");
-			
-			}*/
-		//// que pasa si la partida existe, por si 	quiere modificar o no la existente
-		
+	
 		}
 		
 	}

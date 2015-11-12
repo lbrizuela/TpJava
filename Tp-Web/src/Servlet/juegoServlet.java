@@ -1,6 +1,7 @@
 package Servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,13 +48,20 @@ public class juegoServlet extends HttpServlet {
 			if(crol.validarMovimiento(request.getParameter("origen"),request.getParameter( "destino")))
 			{
 				crol.realizarMovimiento(request.getParameter("origen"),request.getParameter( "destino"));
+				if(crol.getPartida().isJuegoGanado())
+				{
+					crol.borrarPartida();
+					request.getRequestDispatcher("MensajeMovimientos.jsp").forward(request, response);
+				}
+				else{
 				crol.cambiarTurno();
-				request.getRequestDispatcher("juego.jsp").forward(request, response);
-				/// otro msj movimiwnro okey
+				request.getRequestDispatcher("juegoMovimientoCorrecto.jsp").forward(request, response);
+				}
+				
 			}
 			else {
 				/// mandar un msj no se como chota se hace
-				request.getRequestDispatcher("juego.jsp").forward(request, response);
+				request.getRequestDispatcher("juegoMovimientoIncorrecto.jsp").forward(request, response);
 			}
 		}
 		else 

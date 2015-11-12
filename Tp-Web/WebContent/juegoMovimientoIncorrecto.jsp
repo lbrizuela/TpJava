@@ -42,7 +42,7 @@ function cargar() {
 </head>
 <body>
 <center>
-<p style="font-weight: bold ; color: black"> Bienvenido al Juego</p>
+<p style="font-weight: bold; size: 12px; color: red;" align="center" >El Movimiento Fue Incorrecto</p>
 <form action="" method="POST" id="juego">
 <input type="hidden" name="accion" id="accion">
 
@@ -53,16 +53,17 @@ String blancas= "";
 String negras= "";
 
 for(Pieza pieza : crol.getPartida().getPiezas()){ 
-if(pieza.getColor().equals("blanco"))
-{
+	if(pieza.getColor().equals("blanco"))
+	{
 
- blancas= blancas+"\n"+pieza.getNombre()+"-"+ pieza.getPosicion();}
- 
-else  {
- negras = negras + "\n"+pieza.getNombre()+"-"+  pieza.getPosicion(); 
-}
+	 blancas= blancas+"\n"+pieza.getNombre()+"-"+ pieza.getPosicion();}
+	 
+	else  {
+	 negras = negras + "\n"+pieza.getNombre()+"-"+  pieza.getPosicion(); 
+	}
 
-}	
+	}	
+
 
  
 
@@ -73,21 +74,21 @@ else  {
 <table width="575" border="2" align="center" cellspacing="2" bordercolor="#000000" >
 	<tbody>
 	
-	<tr align= "center"><td style="font-weight: bold ;" align="center">Jugador Blanco:</td><td style="font-weight: bold ;" align="center">Jugador Negro:</td> <td colspan="3" style="font-weight: bold ;" align="center" ><font>Turno: </font></td></tr> <!--  <--FILAS--> 
+	<tr align= "center"><td style="font-weight: bold ;" align="center">Jugador Blanco:</td><td style="font-weight: bold ;" align="center">Jugador Negro:</td> <td style="font-weight: bold ;" align="center" colspan="3" ><font>Turno: </font></td></tr> <!--  <--FILAS--> 
 	<tr align= "center"><td><%=crol.getPartida().getJ_b().getNombre()%></td><td><%=crol.getPartida().getJ_n().getNombre()%></td><td colspan="3" rowspan="3"><%=crol.getPartida().getTurno()%></td></tr>
 	<tr><td style="font-weight: bold ;" align="center"><font><font> Piezas Blancas </font></font></td><td style="font-weight: bold ;" align="center"><font><font>Piezas Negras</font></font></td></tr>
 	
 	<tr><td colspan="1" rowspan="4"><%= blancas %></td><td colspan="1" rowspan="4"><%= negras %></td></tr>
 	
-	<tr><td style="font-weight: bold ;" align="center"> Origen</td><td><input type="text" name="origen" id="origen" ></td></tr>	
+	<tr><td style="font-weight: bold ;" align="center"> Origen </td><td><input type="text" name="origen" id="origen" ></td></tr>	
 			 
             
 		
 		<tr>
-       <td style="font-weight: bold ;" align="center"> Destino</td> 
+       <td style="font-weight: bold ;" align="center"> Destino </td> 
        <td><input type="text" name="destino" id="destino"></td>
 		</tr>
-		<tr align="center" valign="middle" ><td colspan="4" ><input type="button" value="Mover" style="font-weight: bold; font-size: 14px; color: black ;"
+		<tr align="center" valign="middle" ><td colspan="4" ><input type="button" value="Mover" style="font-weight: bold ;font-size: 14px; color: black;"
 onclick="mover();">
 <input align="right" type="button" value="Guardar" style="font-weight: bold; font-size: 14px; color: black ;"
 onclick="guardar();"></td></tr>

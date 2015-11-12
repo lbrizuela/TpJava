@@ -1,3 +1,7 @@
+<%@page import="java.nio.channels.SeekableByteChannel"%>
+<%@page import="java.awt.image.CropImageFilter"%>
+<%@page import="CapaNegocio.*"%>
+<%@page import="capaEntidad.*"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,17 +12,29 @@
 </head>
 <body>
 <center>
-<table border="2px">
 
- <caption>ATENCION</caption>
 
- <tr>
-              <td>requestScope.MOVIMIENTO INCORRECTO</td>
-</tr>
-<tr>
-              <td> <a href="javascript:window.history.back();">&laquo; VOLVER A LA VENTANA JUEGO</a></td>
-</tr>
-</table>
+<% ControladorJuego crol = (ControladorJuego)session.getAttribute("controlador") ;
+Jugador ganador= new Jugador();
+if( crol.getPartida().getTurno().equals("blanco"))
+{
+	ganador=crol.getPartida().getJ_b();
+}
+else
+{
+	ganador=crol.getPartida().getJ_n();
+
+}
+%>
+
+              <h1 style="font-weight: bold ; color: red;" align="center">FELICITACIONES...!!!!!!!!!!!</h1>
+
+
+        <h3 style="font-weight: bold ; color: red;" align="center">GANO JUGADOR <%=ganador.getNombre() +" "+ ganador.getApellido() %> </h3>
+
+
+              <p align="right"> <a href="bienvenido.jsp">&laquo; VOLVER </a></p>
+
 </center>
 </body>
 </html>
